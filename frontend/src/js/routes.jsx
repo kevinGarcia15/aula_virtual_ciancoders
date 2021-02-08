@@ -20,6 +20,9 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import Grids from "./common/components/Examples/Grids";
 import Notificaciones from './common/components/Examples/Notificaciones';
 import ExampleTabs from './common/components/Examples/Tabs/Tabs';
+
+import EmpresaListContainer from './common/components/empresa/EmpresaListContainer'
+import EmpresaCrearContainer from './common/components/empresa/EmpresaCrearContainer';
 require('../style/index.css');
 
 module.exports = (
@@ -34,6 +37,11 @@ module.exports = (
                 <ProtectedRoute exact path="/grids" component={Grids} />
                 <ProtectedRoute exact path="/notifications" component={Notificaciones} />
                 <ProtectedRoute exact path="/tabs" component={ExampleTabs} />
+
+                <ProtectedRoute exact path="/empresa/create" component={EmpresaCrearContainer} />
+                <ProtectedRoute exact path="/empresa/:id" component={EmpresaCrearContainer} />
+                <ProtectedRoute exact path="/empresa" component={EmpresaListContainer} />
+                <ProtectedRoute exact path="/empresa/:id/editar" component={EmpresaCrearContainer} />
                 <Route component={NotFound} />
             </Switch>
         </div>
