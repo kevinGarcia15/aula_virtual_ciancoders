@@ -17,7 +17,7 @@ class SideBar extends Component {
                             <div className="d-table m-auto">
                                 <img id="main-logo"
                                     className="d-inline-block align-top mr-1"
-                                    src={require('assets/img/logo.png')}
+                                    src={require('assets/img/aulavirtual.png')}
                                     alt="Logo" />
                             </div>
                         </a>

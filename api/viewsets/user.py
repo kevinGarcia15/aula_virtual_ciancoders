@@ -3,7 +3,7 @@ import json
 from django.core.files import File
 from django_filters.rest_framework import DjangoFilterBackend
 from rest_framework import status, filters, viewsets
-from django.contrib.auth.models import User
+from api.models import User
 from rest_framework.authtoken.models import Token
 from rest_framework.decorators import action
 from rest_framework.permissions import AllowAny, IsAuthenticated
