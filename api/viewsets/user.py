@@ -100,7 +100,7 @@ class UserViewset(viewsets.ModelViewSet):
     def token(self, request, *args, **kwargs):
         data = request.data
         try:
-            user = User.objects.get(username=data["username"])
+            user = User.objects.get(email=data["username"])
             if user.check_password(data["password"]):
                 token, created = Token.objects.get_or_create(user=user)
                 serializer = UserReadSerializer(user)
