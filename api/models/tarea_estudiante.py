@@ -12,7 +12,7 @@ class Tarea_Estudinate(models.Model):
     tarea = models.ForeignKey(Tarea, related_name='tareas', on_delete=models.CASCADE)
 
     texto = models.CharField(max_length=250, blank=True, null=True)
-    archivo = models.FileField(upload_to='tarea_alumnos')
+    archivo = models.FileField(upload_to='tarea_alumnos', null=True, blank=True)
     punteo = models.FloatField(default=0)
     fecha_entregado = models.DateTimeField(auto_now=True)     
 

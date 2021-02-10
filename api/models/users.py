@@ -27,7 +27,7 @@ class User(AbstractUser):
         """
         Return Username
         """
-        return self.username
+        return self.email
 
     
     def __get_short_name(self):

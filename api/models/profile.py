@@ -32,6 +32,9 @@ class Profile(models.Model):
     def __unicode__(self):
         return self.user.email
 
+    def __str__(self):
+            return self.user.email
+
     def delete(self, *args):
         self.activo = False
         self.save()

@@ -20,7 +20,8 @@ class UserSerializer(serializers.ModelSerializer):
             'first_name',
             'last_name',
             'profile',
-            'password'
+            'password',
+            'email'
         )
 
 
@@ -38,3 +39,10 @@ class UserReadSerializer(serializers.ModelSerializer):
             'email',
             'profile',
         )
+
+class ProfileAndUserSerializer(serializers.ModelSerializer):
+    user = UserReadSerializer(read_only=True)
+    rol = serializers.StringRelatedField()
+    class Meta:
+        model = Profile
+        fields = ('phone', 'address', 'is_first_login','rol','user')

@@ -16,9 +16,6 @@ class Maestro(models.Model):
     creado = models.DateTimeField(auto_now_add=True)
     modificado = models.DateTimeField(auto_now=True)
 
-    def __unicode__(self):
-        return self.maestro_profile.user.email
-
     def delete(self, *args):
         self.activo = False
         self.save()
