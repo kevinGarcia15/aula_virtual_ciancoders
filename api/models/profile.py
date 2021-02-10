@@ -5,11 +5,12 @@ from django.core.validators import RegexValidator
 
 #models
 from api.models.users import User
-
+from api.models.rol import Rol
 
 class Profile(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE, related_name="profiles")
-
+    rol = models.ForeignKey(Rol, related_name='roles', on_delete=models.CASCADE)
+  
     phone_regex =  RegexValidator(
         regex = r'\+?1?d{8,15}$',
         message="El numero de telefono tiene que tener el siguiete formato +50277668444"
