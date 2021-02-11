@@ -19,9 +19,9 @@ class UserSerializer(serializers.ModelSerializer):
             'username',
             'first_name',
             'last_name',
-            'profile',
             'password',
-            'email'
+            'email',
+            'profile',
         )
 
 
@@ -45,4 +45,9 @@ class ProfileAndUserSerializer(serializers.ModelSerializer):
     rol = serializers.StringRelatedField()
     class Meta:
         model = Profile
-        fields = ('phone', 'address', 'is_first_login','rol','user')
+        fields = ('phone', 'address', 'is_first_login','rol','user', 'avatar')    
+
+class CreateProfileSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Profile
+        fields = ('phone', 'address', 'is_first_login','rol','user', 'avatar')        

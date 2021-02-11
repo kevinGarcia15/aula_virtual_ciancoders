@@ -15,7 +15,7 @@ import Grids from "./common/components/Examples/Grids";
 import Notificaciones from './common/components/Examples/Notificaciones';
 import ExampleTabs from './common/components/Examples/Tabs/Tabs';
 import MaestrosListContainer from './common/components/maestro/MaestroListContainer'
-import MaestroCrear from './common/components/maestro/MaestroCrear'
+import MaestroCrearContainer from './common/components/maestro/MaestroCrearContainer'
 
 import 'bootstrap/dist/css/bootstrap.min.css';
 import '../assets/fonts/fonts.css';
@@ -36,7 +36,7 @@ module.exports = (
                 <ProtectedRoute exact path="/notifications" component={Notificaciones} />
 
                 <ProtectedRoute exact path="/maestros" component={MaestrosListContainer} />
-                <ProtectedRoute exact path="/maestros/crear" component={MaestroCrear} />
+                <ProtectedRoute exact path="/maestros/crear" component={MaestroCrearContainer} />
 
                 <ProtectedRoute exact path="/tabs" component={ExampleTabs} />
                 <Route component={NotFound} />

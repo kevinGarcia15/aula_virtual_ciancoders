@@ -28,14 +28,35 @@ export class MaestroList extends Component {
                     //onPageChange={onPageChange}
                     //onSortChange={onSortChange}
                 >
-                    <TableHeaderColumn isKey dataField="id" dataSort>
-                        ID
+                    <TableHeaderColumn 
+                        isKey dataField="maestro_profile" 
+                        dataSort
+                        dataFormat={(cell, row)=>{
+                            return `${cell.user.first_name}`;
+                        }}
+                        >
+                        Nombre
                     </TableHeaderColumn>
                     <TableHeaderColumn dataField="profesion" dataSort>
                         Profesion
                     </TableHeaderColumn>
-                    <TableHeaderColumn dataField="maestro_profile" dataSort>
+                    <TableHeaderColumn 
+                        dataField="maestro_profile" 
+                        dataSort
+                        dataFormat={(cell, row)=>{
+                            return cell.address;
+                        }}
+                    >
                         Direccion
+                    </TableHeaderColumn>
+                    <TableHeaderColumn 
+                        dataField="maestro_profile" 
+                        dataSort
+                        dataFormat={(cell, row)=>{
+                            return cell.user.email;
+                        }}
+                        >
+                        Correo
                     </TableHeaderColumn>
                     <TableHeaderColumn
                         dataField="id"

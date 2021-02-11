@@ -4,8 +4,9 @@ import { initialize as initializeForm } from "redux-form";
 import { NotificationManager } from "react-notifications";
 import { api } from "api";
 
-
 const GUARDAR_LISTADO_MAESTRO = "GUARDAR_LISTADO_MAESTRO";
+const GUARDAR_REGISTRO_MAESTRO = "GUARDAR_REGISTRO_MAESTRO";
+
 export const listar = () => (dispach) => {
     api.get("/maestro")
         .then((response) => {
@@ -13,7 +14,28 @@ export const listar = () => (dispach) => {
         })
         .catch((error) => {
             NotificationManager.error(
-                "Ocurrio un error listar las empresa",
+                "Ocurrio un error listar el registro maestros",
+                "ERROR",
+                3000
+            );
+        });
+};
+
+export const registroMaestro = () => (dispatch, getStore) => {
+    console.log('entro aqui')
+    const formData = getStore().form.maestroForm.values;
+    api.post("/maestro", formData)
+        .then((response) => {
+            NotificationManager.success(
+                "Registro crado exitosamente",
+                "Exito",
+                3000
+            );
+            dispatch(push("/maestros"));
+        })
+        .catch((error) => {
+            NotificationManager.error(
+                "Ocurrio un error al registrar al maestro",
                 "ERROR",
                 3000
             );
@@ -22,6 +44,7 @@ export const listar = () => (dispach) => {
 
 export const actions = {
     listar,
+    registroMaestro,
 };
 
 export const reducers = {
@@ -29,6 +52,12 @@ export const reducers = {
         return {
             ...state,
             data,
+        };
+    },
+    [GUARDAR_REGISTRO_MAESTRO]: (state, { registro }) => {
+        return {
+            ...state,
+            registro,
         };
     },
 };
