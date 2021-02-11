@@ -37,6 +37,7 @@ module.exports = (
 
                 <ProtectedRoute exact path="/maestros" component={MaestrosListContainer} />
                 <ProtectedRoute exact path="/maestros/crear" component={MaestroCrearContainer} />
+                <ProtectedRoute exact path="/maestros/:id" component={MaestroCrearContainer} />
 
                 <ProtectedRoute exact path="/tabs" component={ExampleTabs} />
                 <Route component={NotFound} />

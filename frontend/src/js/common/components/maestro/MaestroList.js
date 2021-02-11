@@ -63,8 +63,8 @@ export class MaestroList extends Component {
                         dataAlign="center"
                         dataSort
                         dataFormat={standardActions({
-                            editar: "empresa",
-                            ver: "empresa",
+                            editar: "maestros",
+                            ver: "maestros",
                             eliminar: () => {},
                         })}
                     >

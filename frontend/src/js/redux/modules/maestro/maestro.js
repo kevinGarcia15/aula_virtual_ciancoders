@@ -42,9 +42,25 @@ export const registroMaestro = () => (dispatch, getStore) => {
         });
 };
 
+export const leer = (id) => (dispatch) => {
+    api.get(`/maestro/${id}`)
+        .then((response) => {
+            dispatch(initializeForm("maestroForm", response));
+        })
+        .catch((error) => {
+            console.log(error);
+            NotificationManager.error(
+                "Ocurrio un error al obtener los datos",
+                "ERROR",
+                3000
+            );
+        });
+};
+
 export const actions = {
     listar,
     registroMaestro,
+    leer,
 };
 
 export const reducers = {

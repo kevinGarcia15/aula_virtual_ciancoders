@@ -1,10 +1,21 @@
 import React, { Component } from "react";
-import Button from "reactstrap/lib/Button";
-import {reduxForm } from "redux-form";
-import { validate, validatorFromFunction, validators, combine } from 'validate-redux-form';
+//import Button from "reactstrap/lib/Button";
+//import {reduxForm } from "redux-form";
+//import { validate, validatorFromFunction, validators, combine } from 'validate-redux-form';
 import RegisterForm from "../layout/RegisterForm/RegisterForm";
 
 export class MaestroCrear extends Component {
+    state = {
+        crear:true,
+    }
+    componentWillMount() {
+        const { leer, match } = this.props;
+        const id = match.params.id;
+        if (id) {
+            leer(id);
+            this.setState({crear:false})
+        }
+    }
         render() {
         const { registroMaestro} = this.props;
         const funcionEnvio = registroMaestro;
