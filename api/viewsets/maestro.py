@@ -34,6 +34,8 @@ class MaestroViewset(viewsets.ModelViewSet):
         serializer = UserSerializer(data=dataUser)
         serializer.is_valid(raise_exception=True)
         user = serializer.save()
+        user.set_password(request.data["password"])
+        user.save()
         #        import pdb; pdb.set_trace()
         rol = Rol.objects.get(nombre="Maestro")
         dataProfile={

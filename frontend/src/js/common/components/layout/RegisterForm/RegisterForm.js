@@ -83,15 +83,19 @@ export class RegisterForm extends Component {
                                     <h5 className="card-title">Perfil</h5>
                                 </div>
                                 <div className="col-8">
-                                    <label htmlFor="select_field">
-                                        profesión
-                                    </label>
-                                    <Field
-                                        name="profesion"
-                                        options={Options}
-                                        component={SelectField}
-                                    />
-                                    <label>Teléfonos</label>
+                                    {this.props.estudiante ? null : (
+                                        <div>
+                                            <label htmlFor="select_field">
+                                                profesión
+                                            </label>
+                                            <Field
+                                                name="profesion"
+                                                options={Options}
+                                                component={SelectField}
+                                            />
+                                        </div>
+                                    )}
+                                    <label>Teléfono</label>
                                     <Field
                                         name="phone"
                                         decimalScale={2}
@@ -104,9 +108,23 @@ export class RegisterForm extends Component {
                                         name="address"
                                         component={renderField}
                                     />
-                                    <label htmlFor="file_field">
-                                        Imagen de perfil
-                                    </label>
+                                    {this.props.estudiante ? (
+                                        <div className="mt-3">
+                                            <label>Teléfono de contacto</label>
+                                            <Field
+                                                name="telefono_contacto"
+                                                decimalScale={2}
+                                                numberFormat="#### #### #### ####"
+                                                placeholder="5746 9663"
+                                                component={renderNumber}
+                                            />
+                                            <label>Dirección de contacto</label>
+                                            <Field
+                                                name="direccion_contacto"
+                                                component={renderField}
+                                            />
+                                        </div>
+                                    ) : null}
                                 </div>
                             </div>
                         </div>

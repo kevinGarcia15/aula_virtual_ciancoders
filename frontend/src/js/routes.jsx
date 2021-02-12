@@ -14,8 +14,12 @@ import NotFound from './common/components/layout/NotFound/NotFound';
 import Grids from "./common/components/Examples/Grids";
 import Notificaciones from './common/components/Examples/Notificaciones';
 import ExampleTabs from './common/components/Examples/Tabs/Tabs';
+
 import MaestrosListContainer from './common/components/maestro/MaestroListContainer'
 import MaestroCrearContainer from './common/components/maestro/MaestroCrearContainer'
+
+import EstudianteListContainer from './common/components/estudiante/EstudianteListContainer'
+import EstudianteCrearContainer from './common/components/estudiante/EstudianteCrearContainer'
 
 import 'bootstrap/dist/css/bootstrap.min.css';
 import '../assets/fonts/fonts.css';
@@ -38,6 +42,9 @@ module.exports = (
                 <ProtectedRoute exact path="/maestros" component={MaestrosListContainer} />
                 <ProtectedRoute exact path="/maestros/crear" component={MaestroCrearContainer} />
                 <ProtectedRoute exact path="/maestros/:id" component={MaestroCrearContainer} />
+
+                <ProtectedRoute exact path="/estudiantes" component={EstudianteListContainer} />
+                <ProtectedRoute exact path="/estudiantes/crear" component={EstudianteCrearContainer} />
 
                 <ProtectedRoute exact path="/tabs" component={ExampleTabs} />
                 <Route component={NotFound} />

@@ -1,7 +1,6 @@
 """profile model"""
 #django
 from django.db import models
-from django.core.validators import RegexValidator
 
 #models
 from api.models.users import User
@@ -11,11 +10,7 @@ class Profile(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE, related_name="profiles")
     rol = models.ForeignKey(Rol, related_name='roles', on_delete=models.CASCADE)
   
-    phone_regex =  RegexValidator(
-        regex = r'\+?1?d{8,15}$',
-        message="El numero de telefono tiene que tener el siguiete formato +50277668444"
-    ) 
-    phone = models.CharField(validators=[phone_regex], max_length=15, null=True, blank=True)
+    phone = models.CharField(max_length=15, null=True, blank=True)
 
     address = models.CharField(max_length=250, null=True, blank=True)
     avatar = models.ImageField(upload_to='Avatar', null=True, blank=True)

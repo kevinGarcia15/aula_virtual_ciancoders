@@ -8,6 +8,7 @@ import usuarios from './modules/usuarios/usuarios';
 import notificaciones from './modules/notificaciones/notificaciones';
 
 import maestro from './modules/maestro/maestro'
+import estudiante from './modules/estudiante/estudiante'
 
 export default combineReducers({
     form: formReducer,
@@ -18,4 +19,5 @@ export default combineReducers({
     routing,
     notificaciones,
     maestro,
+    estudiante,
 });
