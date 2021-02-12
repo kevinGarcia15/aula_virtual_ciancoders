@@ -6,7 +6,7 @@ from rest_framework import serializers
 from api.models import Maestro, User, Profile
 
 #serilizer
-from api.serializers import ProfileSerializer, ProfileAndUserSerializer
+from api.serializers import ProfileSerializer, ProfileAndUserSerializer, CreateProfileSerializer
 
 class MaestroSerializer(serializers.ModelSerializer):
     maestro_profile = ProfileAndUserSerializer(read_only=True)
@@ -21,11 +21,11 @@ class MaestroSerializer(serializers.ModelSerializer):
 
 class CrearMaestroSerializer(serializers.ModelSerializer):
     """Serializer para crear maestros"""
-
+    user = CreateProfileSerializer(required=True)
     class Meta:
         """Meta class"""
         model = Maestro
         fields = (
-            'profesion', 'maestro_profile'
+            'profesion','user'
         )
 

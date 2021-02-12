@@ -9,9 +9,8 @@ from rest_framework.permissions import AllowAny, IsAuthenticated
 from rest_framework.response import Response
 from rest_framework.settings import api_settings
 
-from api.models import User
-from api.models import Profile
-from api.serializers import UserSerializer, UserReadSerializer
+from api.models import User, Profile, Rol
+from api.serializers import UserSerializer, UserReadSerializer, TokenProfileSerializer
 
 
 class UserViewset(viewsets.ModelViewSet):
@@ -103,8 +102,15 @@ class UserViewset(viewsets.ModelViewSet):
             user = User.objects.get(email=data["username"])
             if user.check_password(data["password"]):
                 token, created = Token.objects.get_or_create(user=user)
-                serializer = UserReadSerializer(user)
-                return Response({"user": serializer.data, "token": token.key}, status=status.HTTP_200_OK)
+                try:
+                    profile = Profile.objects.get(user=user)
+                    profileSerializer = TokenProfileSerializer(profile)
+                    serializer = UserReadSerializer(user)
+                    return Response({"user": serializer.data, "token": token.key, "profile":profileSerializer.data}, status=status.HTTP_200_OK)
+                except: 
+                    profile = "Admin"
+                    serializer = UserReadSerializer(user)
+                    return Response({"user": serializer.data, "token": token.key, "rol":profile}, status=status.HTTP_200_OK)
             return Response({"detail": "Password does not match user password"}, status=status.HTTP_400_BAD_REQUEST)
         except User.DoesNotExist:
             return Response({"detail": "User not found"}, status=status.HTTP_404_NOT_FOUND)

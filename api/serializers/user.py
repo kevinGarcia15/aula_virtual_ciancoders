@@ -47,7 +47,32 @@ class ProfileAndUserSerializer(serializers.ModelSerializer):
         model = Profile
         fields = ('phone', 'address', 'is_first_login','rol','user', 'avatar')    
 
-class CreateProfileSerializer(serializers.ModelSerializer):
+
+class ProfileCreateSerializer(serializers.ModelSerializer):
+    """verifica los datos al crear un perfil"""
     class Meta:
         model = Profile
-        fields = ('phone', 'address', 'is_first_login','rol','user', 'avatar')        
+        fields = ('phone', 'address','avatar')
+
+class CreateProfileSerializer(serializers.ModelSerializer):
+    """verifica los datos al crear un usuario"""
+
+    profile = ProfileCreateSerializer(required=True)
+
+    class Meta:
+        model = User
+        fields = (
+            'username',
+            'first_name',
+            'last_name',
+            'password',
+            'email',
+            'profile',
+        )      
+
+class TokenProfileSerializer(serializers.ModelSerializer):
+    """retorna los datos del perfil para usarlo en la autenticacion"""
+    rol = serializers.StringRelatedField()
+    class Meta:
+        model = Profile
+        fields = ('is_first_login','rol', 'avatar') 

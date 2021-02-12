@@ -178,8 +178,6 @@ export default reduxForm({
             last_name: validators.exists()("Este campo es requerido"),
             password: validators.exists()("Este campo es requerido"),
             profesion: validators.exists()("Este campo es requerido"),
-            address: validators.exists()("Este campo es requerido"),
-            phone: validators.exists()("Este campo es requerido"),
         });
     },
 })(RegisterForm);

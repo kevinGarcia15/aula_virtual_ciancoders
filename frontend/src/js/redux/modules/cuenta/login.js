@@ -36,6 +36,7 @@ export const onSubmit = (data = {}) => (dispatch, getStore) => {
         localStorage.setItem('token', response.token);
         dispatch(initializeForm('profile', response.user));
         dispatch(setMe(response.user));
+        console.log(response)
         dispatch(push("/"));
     }).catch(() => {
         NotificationManager.error('Credenciales incorrectas, vuelva a intentar', 'ERROR', 0);
