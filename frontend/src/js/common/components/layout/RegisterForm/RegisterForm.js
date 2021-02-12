@@ -135,7 +135,6 @@ export class RegisterForm extends Component {
                                                 name="telefono_contacto"
                                                 decimalScale={2}
                                                 numberFormat="#### #### #### ####"
-                                                placeholder="5746 9663"
                                                 component={renderNumber}
                                             />
                                             <label>Dirección de contacto</label>

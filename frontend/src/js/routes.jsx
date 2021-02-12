@@ -45,6 +45,7 @@ module.exports = (
 
                 <ProtectedRoute exact path="/estudiantes" component={EstudianteListContainer} />
                 <ProtectedRoute exact path="/estudiantes/crear" component={EstudianteCrearContainer} />
+                <ProtectedRoute exact path="/estudiantes/:id" component={EstudianteCrearContainer} />
 
                 <ProtectedRoute exact path="/tabs" component={ExampleTabs} />
                 <Route component={NotFound} />

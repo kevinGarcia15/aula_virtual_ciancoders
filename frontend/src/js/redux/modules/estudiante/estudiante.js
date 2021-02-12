@@ -56,6 +56,35 @@ export const registroEstudiante = () => (dispatch, getStore) => {
         });
 };
 
+export const leer = (id) => (dispatch) => {
+    api.get(`/estudiante/${id}`)
+        .then((response) => {
+            console.log(response)
+            dispatch({type:GUARDAR_REGISTRO_ESTUDIANTE, registro:response})
+            const datosForm={
+                "id":response.id,
+                "address":response.estudiante_profile.address,
+                "phone":response.estudiante_profile.address,
+                "rol":response.estudiante_profile.rol,
+                "email":response.estudiante_profile.user.email,
+                "first_name":response.estudiante_profile.user.first_name,
+                "last_name":response.estudiante_profile.user.last_name,
+                "username":response.estudiante_profile.user.username,
+                "direccion_contacto":response.direccion_contacto,
+                "telefono_contacto":response.telefono_contacto
+            }
+            dispatch(initializeForm("maestroForm", datosForm));
+        })
+        .catch((error) => {
+            console.log(error);
+            NotificationManager.error(
+                "Ocurrio un error al obtener los datos",
+                "ERROR",
+                3000
+            );
+        });
+};
+
 export const eliminar = (id)=>(dispatch)=>{
     api.eliminar(`/estudiante/${id}`)
     .then((response) => {
@@ -77,6 +106,7 @@ export const eliminar = (id)=>(dispatch)=>{
 
 export const actions = {
     listar,
+    leer,
     registroEstudiante,
     eliminar
 };

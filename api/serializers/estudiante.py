@@ -15,7 +15,7 @@ class EstudianteSerializer(serializers.ModelSerializer):
         """Meta class"""
         model = Estudiante
         fields = (
-            'id', 'estudiante_profile'
+            'id','direccion_contacto','telefono_contacto', 'estudiante_profile'
         )
 
 class EstudianteCrearSerializer(serializers.ModelSerializer):
