@@ -16,13 +16,21 @@ import {
 
 export class RegisterForm extends Component {
     render() {
+        let editar = window.location.href.includes("editar");
+        let disabled = false;
+        const { handleSubmit, crear, url, titulo } = this.props;
+
+        crear==false && editar==false ? (disabled = true) : (disabled = false);
         const Options = [
             { label: "Perito Contador", value: "1" },
             { label: "Bachiller", value: "2" },
         ];
-        const { handleSubmit } = this.props;
         return (
             <form className="row" onSubmit={handleSubmit}>
+                <div className="col-12">
+                    <Link to={url} className="btn btn-primary btn-sm">Atras</Link>
+                    <h3 className="text-center">{titulo}</h3>
+                </div>
                 <div className="col-12">
                     <div className="card">
                         <div className="card-body">
@@ -35,40 +43,49 @@ export class RegisterForm extends Component {
                                     <Field
                                         name="first_name"
                                         component={renderField}
+                                        disabled={disabled}
                                     />
                                     <label>Apellidos</label>
                                     <Field
                                         name="last_name"
                                         component={renderField}
+                                        disabled={disabled}
                                     />
                                     <label>Correo</label>
                                     <Field
                                         name="email"
                                         component={renderField}
+                                        disabled={disabled}
                                     />
                                     <label>Usuario</label>
                                     <Field
                                         name="username"
                                         component={renderField}
+                                        disabled={disabled}
                                     />
-                                    <label htmlFor="password">Contraseña</label>
-                                    <Field
-                                        name="password"
-                                        label="Contraseña"
-                                        component={renderField}
-                                        type="password"
-                                        className="form-control"
-                                    />
-                                    <label htmlFor="confirmPassword">
-                                        Confirmar Contraseña
-                                    </label>
-                                    <Field
-                                        name="confirmPassword"
-                                        label="Confirmar Contraseña"
-                                        component={renderField}
-                                        type="password"
-                                        className="form-control"
-                                    />
+                                    {crear ? 
+                                        <div>
+                                            <label htmlFor="password">Contraseña</label>
+                                            <Field
+                                                name="password"
+                                                label="Contraseña"
+                                                component={renderField}
+                                                type="password"
+                                                className="form-control"
+                                            />
+                                            <label htmlFor="confirmPassword">
+                                                Confirmar Contraseña
+                                            </label>
+                                            <Field
+                                                name="confirmPassword"
+                                                label="Confirmar Contraseña"
+                                                component={renderField}
+                                                type="password"
+                                                className="form-control"
+                                                />
+                                        </div>:
+                                        null
+                                    }
                                 </div>
                             </div>
                         </div>
@@ -92,6 +109,8 @@ export class RegisterForm extends Component {
                                                 name="profesion"
                                                 options={Options}
                                                 component={SelectField}
+                                                disabled={disabled}
+
                                             />
                                         </div>
                                     )}
@@ -100,13 +119,14 @@ export class RegisterForm extends Component {
                                         name="phone"
                                         decimalScale={2}
                                         numberFormat="#### #### #### ####"
-                                        placeholder="5746 9663"
                                         component={renderNumber}
+                                        disabled={disabled}
                                     />
                                     <label>Dirección</label>
                                     <Field
                                         name="address"
                                         component={renderField}
+                                        disabled={disabled}
                                     />
                                     {this.props.estudiante ? (
                                         <div className="mt-3">
@@ -130,13 +150,14 @@ export class RegisterForm extends Component {
                         </div>
                     </div>
                 </div>
+                {crear||editar ?
                 <div className="col-12 mt-3">
                     <div className="card">
                         <div className="card-body">
                             <div className="row justify-content-end">
                                 <div className="col-3">
                                     <Link
-                                        to="/maestros"
+                                        to={url}
                                         className="btn btn-secondary mr-2"
                                     >
                                         Cancelar
@@ -145,13 +166,15 @@ export class RegisterForm extends Component {
                                         className="btn btn-primary"
                                         type="submit"
                                     >
-                                        Registrar
+                                        Guardar
                                     </button>
                                 </div>
                             </div>
                         </div>
                     </div>
-                </div>
+                </div>:
+                null
+                }
             </form>
         );
     }

@@ -10,7 +10,7 @@ import _ from "lodash";
 
 
 export const renderField = ({
-                                input, placeholder, type, meta: { touched, error }
+                                input, placeholder, type, meta: { touched, error },disabled=false
                             }) => {
     const invalid = touched && error;
     return (
@@ -19,6 +19,7 @@ export const renderField = ({
                 {...input}
                 placeholder={placeholder}
                 type={type}
+                disabled
                 className={classNames('form-control', { 'is-invalid': invalid })}
             />
             {invalid && (
@@ -53,7 +54,7 @@ export const renderTextArea = ({
 };
 
 export const renderNumber = ({
-                                 input, decimalScale, placeholder, meta: { touched, error }, prefix="", suffix="", numberFormat,
+                                 input, decimalScale, placeholder, meta: { touched, error }, prefix="", suffix="", numberFormat, disabled=false
                              }) => {
     const invalid = touched && error;
     return (
@@ -68,6 +69,7 @@ export const renderNumber = ({
                 thousandSeparator
                 prefix={prefix}
                 suffix={suffix}
+                disabled
                 onValueChange={(values) => {
                     input.onChange(values.value);
                 }}

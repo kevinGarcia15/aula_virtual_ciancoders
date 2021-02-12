@@ -6,24 +6,30 @@ import RegisterForm from "../layout/RegisterForm/RegisterForm";
 
 export class MaestroCrear extends Component {
     state = {
-        crear:true,
-    }
+        crear: true,
+        titulo: "Ingresar Maestro",
+    };
     componentWillMount() {
         const { leer, match } = this.props;
         const id = match.params.id;
         if (id) {
             leer(id);
-            this.setState({crear:false})
+            this.setState({ crear: false });
+            this.setState({ titulo: "Ver Maestro" });
         }
     }
-        render() {
-        const { registroMaestro} = this.props;
+    render() {
+        const { registroMaestro } = this.props;
         const funcionEnvio = registroMaestro;
         return (
             <React.Fragment>
                 <div className="container mt-3">
-                    <h3 className="text-center">Ingresar maestro</h3>
-                    <RegisterForm onSubmit={funcionEnvio}/>
+                    <RegisterForm
+                        onSubmit={funcionEnvio}
+                        crear={this.state.crear}
+                        url="/maestros"
+                        titulo={this.state.titulo}
+                    />
                 </div>
             </React.Fragment>
         );

@@ -58,7 +58,17 @@ export const leer = (id) => (dispatch) => {
     api.get(`/maestro/${id}`)
         .then((response) => {
             dispatch({type:GUARDAR_REGISTRO_MAESTRO, registro:response})
-            dispatch(initializeForm("maestroForm", response));
+            const datosForm={
+                "id":response.id,
+                "address":response.maestro_profile.address,
+                "phone":response.maestro_profile.address,
+                "rol":response.maestro_profile.rol,
+                "email":response.maestro_profile.user.email,
+                "first_name":response.maestro_profile.user.first_name,
+                "last_name":response.maestro_profile.user.last_name,
+                "username":response.maestro_profile.user.username,
+            }
+            dispatch(initializeForm("maestroForm", datosForm));
         })
         .catch((error) => {
             console.log(error);
