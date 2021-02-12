@@ -14,7 +14,7 @@ export class MaestroList extends Component {
         listar();
     }
     render() {
-        const { data, loader } = this.props;
+        const { data, loader, eliminar } = this.props;
         return (
             <React.Fragment>
                 <Link to="/maestros/crear" className="btn btn-primary mt-4 mb-4">
@@ -65,7 +65,7 @@ export class MaestroList extends Component {
                         dataFormat={standardActions({
                             editar: "maestros",
                             ver: "maestros",
-                            eliminar: () => {},
+                            eliminar: eliminar,
                         })}
                     >
                         Acciones

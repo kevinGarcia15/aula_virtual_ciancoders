@@ -45,6 +45,7 @@ export const registroMaestro = () => (dispatch, getStore) => {
 export const leer = (id) => (dispatch) => {
     api.get(`/maestro/${id}`)
         .then((response) => {
+            dispatch({type:GUARDAR_REGISTRO_MAESTRO, registro:response})
             dispatch(initializeForm("maestroForm", response));
         })
         .catch((error) => {
@@ -57,10 +58,30 @@ export const leer = (id) => (dispatch) => {
         });
 };
 
+export const eliminar = (id)=>(dispatch)=>{
+    api.eliminar(`/maestro/${id}`)
+    .then((response) => {
+        NotificationManager.success(
+            "Maestro eliminado exitosamente",
+            "Exito",
+            3000
+        );
+        dispatch(listar());
+    })
+    .catch((error) => {
+        NotificationManager.error(
+            "Ocurrio un error al eliminar el registro",
+            "ERROR",
+            3000
+        );
+    });
+}
+
 export const actions = {
     listar,
     registroMaestro,
     leer,
+    eliminar
 };
 
 export const reducers = {
@@ -81,6 +102,7 @@ export const reducers = {
 export const intialState = {
     loader: false,
     data: {},
+    registro:{},
 };
 
 export default handleActions(reducers, intialState);

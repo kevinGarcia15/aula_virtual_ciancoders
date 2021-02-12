@@ -41,9 +41,29 @@ export const registroEstudiante = () => (dispatch, getStore) => {
         });
 };
 
+export const eliminar = (id)=>(dispatch)=>{
+    api.eliminar(`/estudiante/${id}`)
+    .then((response) => {
+        NotificationManager.success(
+            "Estudiante eliminado exitosamente",
+            "Exito",
+            3000
+        );
+        dispatch(listar());
+    })
+    .catch((error) => {
+        NotificationManager.error(
+            "Ocurrio un error al eliminar el registro",
+            "ERROR",
+            3000
+        );
+    });
+}
+
 export const actions = {
     listar,
-    registroEstudiante
+    registroEstudiante,
+    eliminar
 };
 
 export const reducers = {

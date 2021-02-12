@@ -10,7 +10,7 @@ import _ from "lodash";
 
 
 export const renderField = ({
-                                input, placeholder, type, meta: { touched, error },
+                                input, placeholder, type, meta: { touched, error }
                             }) => {
     const invalid = touched && error;
     return (

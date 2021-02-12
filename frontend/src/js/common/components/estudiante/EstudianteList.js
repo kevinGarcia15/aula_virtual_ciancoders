@@ -14,7 +14,7 @@ export class EstudianteList extends Component {
         listar();
     }
     render() {
-        const { data, loader } = this.props;
+        const { data, loader, eliminar } = this.props;
         return (
             <React.Fragment>
                 <Link to="/estudiantes/crear" className="btn btn-primary mt-4 mb-4">
@@ -60,9 +60,9 @@ export class EstudianteList extends Component {
                         dataAlign="center"
                         dataSort
                         dataFormat={standardActions({
-                            editar: "maestros",
-                            ver: "maestros",
-                            eliminar: () => {},
+                            editar: "estudiantes",
+                            ver: "estudiantes",
+                            eliminar: eliminar,
                         })}
                     >
                         Acciones
