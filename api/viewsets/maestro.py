@@ -11,7 +11,7 @@ from rest_framework.settings import api_settings
 from django.db import transaction
 
 from api.models import Maestro, Profile, User, Rol, Profesion
-from api.serializers import MaestroSerializer, CreateProfileSerializer, UserSerializer ,CrearMaestroSerializer
+from api.serializers import MaestroSerializer ,CrearMaestroSerializer
 
 
 class MaestroViewset(viewsets.ModelViewSet):

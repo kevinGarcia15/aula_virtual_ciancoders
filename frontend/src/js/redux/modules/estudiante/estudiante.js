@@ -22,7 +22,22 @@ export const listar = () => (dispach) => {
 };
 
 export const registroEstudiante = () => (dispatch, getStore) => {
-    const formData = getStore().form.maestroForm.values;
+    const data = getStore().form.maestroForm.values;
+
+    const formData={
+        "telefono_contacto": data.telefono_contacto,
+        "direccion_contacto": data.direccion_contacto,
+        "user":{
+            "username":data.username,
+            "password": data.password,
+            "email":data.email,
+            "first_name": data.first_name,
+            "last_name":data.last_name,
+            "profile":{
+                "phone": data.phone,
+                "address":data.address                }
+        }
+    }
     api.post("/estudiante", formData)
         .then((response) => {
             NotificationManager.success(

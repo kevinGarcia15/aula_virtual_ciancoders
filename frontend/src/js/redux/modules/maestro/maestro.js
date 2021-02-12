@@ -20,18 +20,6 @@ export const listar = () => (dispach) => {
             );
         });
 };
-/*
-dataMaestro={
-    "profesion": 1,
-    "maestro_profile":{
-        "username":"kevin",
-        "password": "123",
-        "email":"gkevin@gmail.com",
-        "profile":{
-            "phone":"458795874",
-            "address":"as54sdafde"                }
-    }
-}*/
 
 export const registroMaestro = () => (dispatch, getStore) => {
     const data = getStore().form.maestroForm.values;
