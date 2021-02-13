@@ -9,7 +9,7 @@ router = DefaultRouter()
 router.register(r'user', viewsets.UserViewset)
 router.register(r'maestro', viewsets.MaestroViewset)
 router.register(r'estudiante', viewsets.EstudianteViewset)
-
+router.register(r'profesion', viewsets.ProfesionViewset)
 
 urlpatterns = [
     path('api/', include(router.urls)),

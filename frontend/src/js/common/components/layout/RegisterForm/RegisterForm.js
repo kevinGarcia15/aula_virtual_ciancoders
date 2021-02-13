@@ -18,13 +18,9 @@ export class RegisterForm extends Component {
     render() {
         let editar = window.location.href.includes("editar");
         let disabled = false;
-        const { handleSubmit, crear, url, titulo } = this.props;
+        const { handleSubmit, crear, url, titulo, selectOpcion } = this.props;
 
         crear==false && editar==false ? (disabled = true) : (disabled = false);
-        const Options = [
-            { label: "Perito Contador", value: "1" },
-            { label: "Bachiller", value: "2" },
-        ];
         return (
             <form className="row" onSubmit={handleSubmit}>
                 <div className="col-12">
@@ -101,13 +97,13 @@ export class RegisterForm extends Component {
                                 </div>
                                 <div className="col-8">
                                     {this.props.estudiante ? null : (
-                                        <div>
+                                        <div className="mb-3">
                                             <label htmlFor="select_field">
                                                 profesión
                                             </label>
                                             <Field
                                                 name="profesion"
-                                                options={Options}
+                                                options={selectOpcion}
                                                 component={SelectField}
                                                 disabled={disabled}
 

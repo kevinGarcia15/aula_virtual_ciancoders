@@ -6,6 +6,7 @@ import MaestroCrear from './MaestroCrear';
 const ms2p = (state) => {
   return {
     ...state.registro,
+    ...state.maestro,
   };
 };
 

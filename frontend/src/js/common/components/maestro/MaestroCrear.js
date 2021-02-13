@@ -10,16 +10,26 @@ export class MaestroCrear extends Component {
         titulo: "Ingresar Maestro",
     };
     componentWillMount() {
-        const { leer, match } = this.props;
+        const { leer, match, listarProfesion } = this.props;
         const id = match.params.id;
         if (id) {
             leer(id);
             this.setState({ crear: false });
             this.setState({ titulo: "Ver Maestro" });
         }
+
+        listarProfesion()
     }
     render() {
-        const { registroMaestro } = this.props;
+        const { registroMaestro, profesion } = this.props;
+        
+        const selectOpcion = profesion.results.map((obj)=>{
+            var retobj={};
+            retobj['label']=obj.nombre;
+            retobj['value']=obj.id;
+            return retobj;
+        })
+
         const funcionEnvio = registroMaestro;
         return (
             <React.Fragment>
@@ -29,6 +39,7 @@ export class MaestroCrear extends Component {
                         crear={this.state.crear}
                         url="/maestros"
                         titulo={this.state.titulo}
+                        selectOpcion={selectOpcion}
                     />
                 </div>
             </React.Fragment>

@@ -64,7 +64,7 @@ export const leer = (id) => (dispatch) => {
             const datosForm={
                 "id":response.id,
                 "address":response.estudiante_profile.address,
-                "phone":response.estudiante_profile.address,
+                "phone":response.estudiante_profile.phone,
                 "rol":response.estudiante_profile.rol,
                 "email":response.estudiante_profile.user.email,
                 "first_name":response.estudiante_profile.user.first_name,

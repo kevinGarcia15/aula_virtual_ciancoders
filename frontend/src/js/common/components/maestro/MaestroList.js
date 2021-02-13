@@ -9,7 +9,6 @@ export class MaestroList extends Component {
         super(props);
     }
     componentWillMount() {
-        console.log("compnentWillMount");
         const { listar } = this.props;
         listar();
     }
