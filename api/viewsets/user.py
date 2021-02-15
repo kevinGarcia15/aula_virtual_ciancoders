@@ -8,6 +8,7 @@ from rest_framework.decorators import action
 from rest_framework.permissions import AllowAny, IsAuthenticated
 from rest_framework.response import Response
 from rest_framework.settings import api_settings
+from django.db import transaction
 
 from api.models import User, Profile, Rol
 from api.serializers import UserSerializer, UserReadSerializer, TokenProfileSerializer
@@ -30,7 +31,7 @@ class UserViewset(viewsets.ModelViewSet):
 
     def get_permissions(self):
         """" Define permisos para este recurso """
-        if self.action == "create" or self.action == "token":
+        if self.action == "create" or self.action == "token" or self.action == "update_password":
             permission_classes = [AllowAny]
         else:
             permission_classes = [IsAuthenticated]
@@ -54,6 +55,23 @@ class UserViewset(viewsets.ModelViewSet):
             return {'Location': str(data[api_settings.URL_FIELD_NAME])}
         except (TypeError, KeyError):
             return {}
+
+    @action(methods=["put"], detail=False)
+    def update_password(self, request):
+        #import pdb; pdb.set_trace()
+        try:
+            with transaction.atomic():
+                usuario = request.user
+                usuario.set_password(request.data["password"])
+                usuario.save()
+                #import pdb; pdb.set_trace()
+                profile = Profile.objects.get(user=usuario)
+                profile.is_first_login = False
+                profile.save()
+                return Response({"password": "change success"}, status=status.HTTP_200_OK)
+        except:
+            return Response({"password": "the password is not changed"}, status=status.HTTP_400_BAD_REQUEST)
+
 
     @action(methods=["put"], detail=False)
     def update_me(self, request, *args, **kwargs):
@@ -92,8 +110,10 @@ class UserViewset(viewsets.ModelViewSet):
     @action(methods=["get"], detail=False)
     def me(self, request, *args, **kwargs):
         user = request.user
+        profile = Profile.objects.get(user=user)
+        profileSerializer = TokenProfileSerializer(profile)
         serializer = UserReadSerializer(user)
-        return Response(serializer.data, status=status.HTTP_200_OK)
+        return Response({"user":serializer.data, "profile":profileSerializer.data}, status=status.HTTP_200_OK)
 
     @action(methods=["post"], detail=False)
     def token(self, request, *args, **kwargs):

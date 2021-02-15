@@ -33,8 +33,22 @@ export const update = (data = {}, attachments=[]) => (dispatch, getStore) => {
     });
 };
 
+export const updatePassword = (data = {}) => (dispatch, getStore) => {
+    dispatch(setLoader(true));
+    api.put('/user/update_password', data).then((response) => {
+        localStorage.setItem('isFirstLogin', false);
+        NotificationManager.success('Datos actualizados exitosamente', 'SUCCESS', 3000);
+        dispatch(push("/"));
+    }).catch(() => {
+        NotificationManager.error('Credenciales incorrectas, vuelva a intentar', 'ERROR', 0);
+    }).finally(() => {
+        dispatch(setLoader(false));
+    });
+};
+
 export const actions = {
     update,
+    updatePassword,
 };
 
 export const reducers = {

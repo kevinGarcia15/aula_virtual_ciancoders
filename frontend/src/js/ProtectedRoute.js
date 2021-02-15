@@ -26,10 +26,11 @@ class PrivateRouteBase extends Component {
 
     isAuthenticated = () => {
         const token = localStorage.getItem("token");
-        const { getMe, login: { me } } = this.props;
+        const isFirstLogin = localStorage.getItem("is_first_login");
+        const { getMe, login: { me }} = this.props;
         if (!!token && !!me.username) {
             return true;
-        } else if(token) {
+        } else if(token && isFirstLogin == false) {
             getMe();
             return "Verifying"
         }

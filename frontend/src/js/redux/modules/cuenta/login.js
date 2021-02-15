@@ -7,6 +7,7 @@ import { api } from "api";
 const SUBMIT = 'LOGIN_SUBMIT';
 const LOADER = 'LOGIN_LOADER';
 const ME = 'LOGIN_ME';
+const USERPERMISSION = 'USERPERMISSION'
 
 export const constants = {
     SUBMIT,
@@ -26,6 +27,11 @@ export const setMe = me => ({
     me,
 });
 
+export const setUserPermision= userPermission => ({
+    type: USERPERMISSION,
+    userPermission,
+});
+
 // ------------------------------------
 // Actions
 // ------------------------------------
@@ -33,11 +39,21 @@ export const setMe = me => ({
 export const onSubmit = (data = {}) => (dispatch, getStore) => {
     dispatch(setLoader(true));
     api.post('user/token', data).then((response) => {
-        localStorage.setItem('token', response.token);
-        dispatch(initializeForm('profile', response.user));
-        dispatch(setMe(response.user));
-        console.log(response)
-        dispatch(push("/"));
+        if (response.profile.is_first_login) {
+            NotificationManager.warning('Debe de cambiar su contraseña', 'ATENCION', 5000);
+            localStorage.setItem('token', response.token);
+            localStorage.setItem('isFirstLogin', response.profile.is_first_login);
+            dispatch(setMe(response.user));
+            dispatch(setUserPermision(response.profile))
+            dispatch(push("/cambiocontrasenia"));
+        }else{
+            localStorage.setItem('token', response.token);
+            localStorage.setItem('isFirstLogin', response.profile.is_first_login);
+            dispatch(initializeForm('profile', response.user));
+            dispatch(setMe(response.user));
+            dispatch(setUserPermision(response.profile))
+            dispatch(push("/"));
+        }
     }).catch(() => {
         NotificationManager.error('Credenciales incorrectas, vuelva a intentar', 'ERROR', 0);
     }).finally(() => {
@@ -46,9 +62,10 @@ export const onSubmit = (data = {}) => (dispatch, getStore) => {
 };
 
 export const getMe = () => (dispatch) => {
-    api.get('/user/me').then(me => {
-        dispatch(initializeForm('profile', me));
-        dispatch(setMe(me));
+    api.get('/user/me').then((response) => {
+        dispatch(initializeForm('profile', response.user));
+        dispatch(setUserPermision(response.profile))
+        dispatch(setMe(response.user));
     })
         .catch(() => {
     }).finally(() => {});
@@ -56,6 +73,8 @@ export const getMe = () => (dispatch) => {
 
 export const logOut = () => (dispatch) => {
     api.post('/user/logout').then(() => {
+        dispatch(setMe({}));
+        dispatch(setUserPermision({}))
     }).catch(() => {
     }).finally(() => {});
     localStorage.removeItem('token');
@@ -80,11 +99,19 @@ export const reducers = {
             me,
         };
     },
+
+    [USERPERMISSION]: (state, { userPermission }) => {
+        return {
+            ...state,
+            userPermission,
+        };
+    },
 };
 
 export const initialState = {
     loader: false,
     me: {},
+    userPermission: {},
 };
 
 export default handleActions(reducers, initialState);

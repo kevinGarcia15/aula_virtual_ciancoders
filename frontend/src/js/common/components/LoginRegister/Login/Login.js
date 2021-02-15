@@ -16,7 +16,7 @@ class Login extends Component {
 
     render() {
         const { onSubmit, loader } = this.props;
-        if (localStorage.getItem('token')) {
+        if (localStorage.getItem('token') && localStorage.getItem('is_first_login') == false) {
             return (<Redirect to="/" />);
         }
         return (

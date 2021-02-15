@@ -14,6 +14,7 @@ import NotFound from './common/components/layout/NotFound/NotFound';
 import Grids from "./common/components/Examples/Grids";
 import Notificaciones from './common/components/Examples/Notificaciones';
 import ExampleTabs from './common/components/Examples/Tabs/Tabs';
+import CambioContraseniaContainer from './common/components/LoginRegister/Profile/CambioContraseniaContainer'
 
 import MaestrosListContainer from './common/components/maestro/MaestroListContainer'
 import MaestroCrearContainer from './common/components/maestro/MaestroCrearContainer'
@@ -38,6 +39,8 @@ module.exports = (
                 <ProtectedRoute exact path="/user-profile" component={Profile} />
                 <ProtectedRoute exact path="/grids" component={Grids} />
                 <ProtectedRoute exact path="/notifications" component={Notificaciones} />
+
+                <Route exact path="/cambiocontrasenia" component={CambioContraseniaContainer} />
 
                 <ProtectedRoute exact path="/maestros" component={MaestrosListContainer} />
                 <ProtectedRoute exact path="/maestros/crear" component={MaestroCrearContainer} />
