@@ -72,7 +72,9 @@ class MaestroViewset(viewsets.ModelViewSet):
     
     def destroy(self, request, pk=None):
         maestro = Maestro.objects.get(pk=pk)
+        maestro.activo=False
         profile = Profile.objects.get(id=maestro.maestro_profile_id)
         profile.activo = False
+        maestro.save()
         profile.save()
         return Response({"success":"user was deleted success"}, status=status.HTTP_201_CREATED)

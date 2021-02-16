@@ -70,3 +70,13 @@ class EstudianteViewset(viewsets.ModelViewSet):
             return Response(e, status=status.HTTP_400_BAD_REQUEST)
 
 
+    def destroy(self, request, pk=None):
+        estudiante = Estudiante.objects.get(pk=pk)
+        estudiante.activo = False
+        profile = Profile.objects.get(id=estudiante.estudiante_profile_id)
+        profile.activo = False
+        estudiante.save()
+        profile.save()
+        return Response({"success":"user was deleted success"}, status=status.HTTP_201_CREATED)
+
+
