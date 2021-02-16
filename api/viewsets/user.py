@@ -62,13 +62,15 @@ class UserViewset(viewsets.ModelViewSet):
         try:
             with transaction.atomic():
                 usuario = request.user
-                usuario.set_password(request.data["password"])
-                usuario.save()
-                #import pdb; pdb.set_trace()
-                profile = Profile.objects.get(user=usuario)
-                profile.is_first_login = False
-                profile.save()
-                return Response({"password": "change success"}, status=status.HTTP_200_OK)
+                if usuario.check_password(request.data["currentPassword"]):
+                    usuario.set_password(request.data["password"])
+                    usuario.save()
+                    #import pdb; pdb.set_trace()
+                    profile = Profile.objects.get(user=usuario)
+                    profile.is_first_login = False
+                    profile.save()
+                    return Response({"password": "change success"}, status=status.HTTP_200_OK)
+                return Response({"password": "La contrasenia actual es incorrecta"}, status=status.HTTP_400_BAD_REQUEST)                
         except:
             return Response({"password": "the password is not changed"}, status=status.HTTP_400_BAD_REQUEST)
 

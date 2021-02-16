@@ -11,6 +11,7 @@ import { renderField } from "../../Utils/renderField";
 
 const CambioContraseniaForm = (props) => {
     const { handleSubmit } = props;
+    const isFirstLogin = localStorage.getItem("isFirstLogin");
     return (
         <form
             name="contraseniaForm"
@@ -20,7 +21,17 @@ const CambioContraseniaForm = (props) => {
             <div className="card w-50 m-4 p-4">
                 <h3 className="text-center">Cambio de contraseña</h3>
                 <div className="form-group has-feedback">
-                    <label htmlFor="password">Contraseña</label>
+                    <div className="mb-4">
+                        <label htmlFor="password">Ingrese su contraseña actual</label>
+                        <Field
+                            name="currentPassword"
+                            label="ContraseñaActual"
+                            component={renderField}
+                            type="password"
+                            className="form-control"
+                        />
+                    </div>
+                    <label htmlFor="password">Nueva Contraseña</label>
                     <Field
                         name="password"
                         label="Contraseña"
@@ -74,6 +85,8 @@ export default reduxForm({
                     "Las contraseñas no coinciden"
                 )
             ),
+            password: validators.exists()("Este campo es requerido"),
+            currentPassword: validators.exists()("Este campo es requerido"),
         });
     },
 })(CambioContraseniaForm);

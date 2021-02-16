@@ -59,7 +59,6 @@ export const registroEstudiante = () => (dispatch, getStore) => {
 export const leer = (id) => (dispatch) => {
     api.get(`/estudiante/${id}`)
         .then((response) => {
-            console.log(response)
             dispatch({type:GUARDAR_REGISTRO_ESTUDIANTE, registro:response})
             const datosForm={
                 "id":response.id,

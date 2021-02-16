@@ -41,6 +41,13 @@ class Navbar extends Component {
                             </DropdownItem>
                             <DropdownItem>
                                 <Link tabIndex="0"
+                                   to="/cambiocontrasenia">
+                                    <i className="material-icons">vpn_key</i>
+                                    Contraseña
+                                </Link>
+                            </DropdownItem>
+                            <DropdownItem>
+                                <Link tabIndex="0"
                                    to="/edit-user-profile">
                                     <i className="material-icons"></i>
                                     Edit Profile

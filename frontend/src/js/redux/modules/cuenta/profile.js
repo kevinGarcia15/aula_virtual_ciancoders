@@ -1,6 +1,7 @@
 import { handleActions } from 'redux-actions';
 import { push } from "react-router-redux";
 import { NotificationManager } from "react-notifications";
+import { initialize as initializeForm } from 'redux-form';
 import { api } from "api";
 import {setMe} from "./login";
 
@@ -46,9 +47,19 @@ export const updatePassword = (data = {}) => (dispatch, getStore) => {
     });
 };
 
+export const getMe = () => (dispatch) => {
+    api.get('/user/me').then((response) => {
+        console.log({"getMe":response})
+        dispatch(initializeForm('profile', response));
+    })
+        .catch(() => {
+    }).finally(() => {});
+};
+
 export const actions = {
     update,
     updatePassword,
+    getMe
 };
 
 export const reducers = {

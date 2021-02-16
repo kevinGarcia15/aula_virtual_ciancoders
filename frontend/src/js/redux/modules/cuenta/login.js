@@ -7,6 +7,7 @@ import { api } from "api";
 const SUBMIT = 'LOGIN_SUBMIT';
 const LOADER = 'LOGIN_LOADER';
 const ME = 'LOGIN_ME';
+const GETME = 'GETME';
 const USERPERMISSION = 'USERPERMISSION'
 
 export const constants = {
@@ -51,7 +52,6 @@ export const onSubmit = (data = {}) => (dispatch, getStore) => {
             localStorage.setItem('token', response.token);
             localStorage.setItem('isFirstLogin', response.profile.is_first_login);
             localStorage.setItem('rol', response.profile.rol);
-            dispatch(initializeForm('profile', response.user));
             dispatch(setMe(response.user));
             dispatch(setUserPermision(response.profile))
             dispatch(push("/"));
@@ -65,7 +65,6 @@ export const onSubmit = (data = {}) => (dispatch, getStore) => {
 
 export const getMe = () => (dispatch) => {
     api.get('/user/me').then((response) => {
-        dispatch(initializeForm('profile', response));
         dispatch(setUserPermision(response.profile))
         dispatch(setMe(response.user));
     })
@@ -88,6 +87,7 @@ export const logOut = () => (dispatch) => {
 export const actions = {
     onSubmit,
     logOut,
+    getMe
 };
 
 export const reducers = {

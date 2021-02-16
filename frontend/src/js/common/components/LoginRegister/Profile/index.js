@@ -9,6 +9,6 @@ const ms2p = (state) => {
     };
 };
 
-const md2p = { ...actions };
+const md2p = { ...actions, };
 
 export default connect(ms2p, md2p)(Profile);
