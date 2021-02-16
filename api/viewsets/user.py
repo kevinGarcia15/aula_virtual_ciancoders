@@ -76,22 +76,13 @@ class UserViewset(viewsets.ModelViewSet):
     @action(methods=["put"], detail=False)
     def update_me(self, request, *args, **kwargs):
         data = request.data
+        #import pdb; pdb.set_trace()
         try:
             avatar = data.get("avatar")
             data = json.loads(data["data"])
             user = request.user
-            if user.username != data["username"]:
-                try:
-                    User.objects.get(username=data["username"])
-                    return Response(
-                        {"detail": "the chosen username in not available, please pick another"},
-                        status=status.HTTP_400_BAD_REQUEST
-                    )
-                except User.DoesNotExist:
-                    pass
-            user.username = data["username"]
-            user.first_name = data["first_name"]
-            user.last_name = data["last_name"]
+            user.first_name = data.get("user").get("first_name")
+            user.last_name = data.get("user").get("last_name")
             perfil, created = Profile.objects.get_or_create(user=user)
             if avatar is not None:
                 perfil.avatar = File(avatar)
@@ -99,7 +90,6 @@ class UserViewset(viewsets.ModelViewSet):
             if profile is not None:
                 perfil.phone = profile.get("phone", perfil.phone)
                 perfil.address = profile.get("address", perfil.address)
-                perfil.gender = profile.get("gender", perfil.gender)
             user.save()
             perfil.save()
             serializer = UserReadSerializer(user)
@@ -120,6 +110,9 @@ class UserViewset(viewsets.ModelViewSet):
         data = request.data
         try:
             user = User.objects.get(email=data["username"])
+            profile = Profile.objects.get(user=user)
+            if profile.activo == False:
+                return Response({"detail": "El usuario esta inactivo"}, status=status.HTTP_400_BAD_REQUEST)
             if user.check_password(data["password"]):
                 token, created = Token.objects.get_or_create(user=user)
                 try:
@@ -131,11 +124,11 @@ class UserViewset(viewsets.ModelViewSet):
                     profile = "Admin"
                     serializer = UserReadSerializer(user)
                     return Response({"user": serializer.data, "token": token.key, "rol":profile}, status=status.HTTP_200_OK)
-            return Response({"detail": "Password does not match user password"}, status=status.HTTP_400_BAD_REQUEST)
+            return Response({"detail": "Contrasenia incorrecta"}, status=status.HTTP_400_BAD_REQUEST)
         except User.DoesNotExist:
-            return Response({"detail": "User not found"}, status=status.HTTP_404_NOT_FOUND)
+            return Response({"detail": "Usuario no encontrado"}, status=status.HTTP_404_NOT_FOUND)
         except KeyError as e:
-            return Response({"detail": "{} is a required field".format(str(e))}, status=status.HTTP_400_BAD_REQUEST)
+            return Response({"detail": "{} es un campo obligatorio".format(str(e))}, status=status.HTTP_400_BAD_REQUEST)
 
     @action(methods=["post"], detail=False)
     def logout(self, request, *args, **kwargs):

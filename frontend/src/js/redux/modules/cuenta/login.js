@@ -43,19 +43,21 @@ export const onSubmit = (data = {}) => (dispatch, getStore) => {
             NotificationManager.warning('Debe de cambiar su contraseña', 'ATENCION', 5000);
             localStorage.setItem('token', response.token);
             localStorage.setItem('isFirstLogin', response.profile.is_first_login);
+            localStorage.setItem('rol', response.profile.rol);
             dispatch(setMe(response.user));
             dispatch(setUserPermision(response.profile))
             dispatch(push("/cambiocontrasenia"));
         }else{
             localStorage.setItem('token', response.token);
             localStorage.setItem('isFirstLogin', response.profile.is_first_login);
+            localStorage.setItem('rol', response.profile.rol);
             dispatch(initializeForm('profile', response.user));
             dispatch(setMe(response.user));
             dispatch(setUserPermision(response.profile))
             dispatch(push("/"));
         }
-    }).catch(() => {
-        NotificationManager.error('Credenciales incorrectas, vuelva a intentar', 'ERROR', 0);
+    }).catch((err) => {
+        NotificationManager.error(err.detail, 'ERROR', 0);
     }).finally(() => {
         dispatch(setLoader(false));
     });
@@ -63,7 +65,7 @@ export const onSubmit = (data = {}) => (dispatch, getStore) => {
 
 export const getMe = () => (dispatch) => {
     api.get('/user/me').then((response) => {
-        dispatch(initializeForm('profile', response.user));
+        dispatch(initializeForm('profile', response));
         dispatch(setUserPermision(response.profile))
         dispatch(setMe(response.user));
     })
@@ -78,6 +80,8 @@ export const logOut = () => (dispatch) => {
     }).catch(() => {
     }).finally(() => {});
     localStorage.removeItem('token');
+    localStorage.removeItem('isFirstLogin');
+    localStorage.removeItem('rol');
 };
 
 

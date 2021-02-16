@@ -75,4 +75,4 @@ class TokenProfileSerializer(serializers.ModelSerializer):
     rol = serializers.StringRelatedField()
     class Meta:
         model = Profile
-        fields = ('is_first_login','rol', 'avatar') 
+        fields = ('is_first_login','rol', 'avatar', 'phone', 'address','avatar') 

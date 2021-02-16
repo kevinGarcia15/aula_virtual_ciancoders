@@ -10,6 +10,8 @@ from rest_framework.response import Response
 from rest_framework.settings import api_settings
 from django.db import transaction
 
+#permission
+from api.permission.admin import IsAdminUser
 
 from api.models import Estudiante, Profile, User, Rol
 from api.serializers import EstudianteSerializer,EstudianteCrearSerializer
@@ -25,6 +27,8 @@ class EstudianteViewset(viewsets.ModelViewSet):
     def get_permissions(self):
         """" Define permisos para este recurso """
         permission_classes = [IsAuthenticated]
+        if self.action in ['create', 'list']:
+            permission_classes.append(IsAdminUser)
         return [permission() for permission in permission_classes]
 
     def create(self, request):

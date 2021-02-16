@@ -10,6 +10,9 @@ from rest_framework.response import Response
 from rest_framework.settings import api_settings
 from django.db import transaction
 
+#permission
+from api.permission.admin import IsAdminUser
+
 from api.models import Maestro, Profile, User, Rol, Profesion
 from api.serializers import MaestroSerializer ,CrearMaestroSerializer
 
@@ -24,6 +27,8 @@ class MaestroViewset(viewsets.ModelViewSet):
     def get_permissions(self):
         """" Define permisos para este recurso """
         permission_classes = [IsAuthenticated]
+        if self.action in ['create', 'list']:
+            permission_classes.append(IsAdminUser)
         return [permission() for permission in permission_classes]
 
     def create(self, request):
@@ -64,3 +69,10 @@ class MaestroViewset(viewsets.ModelViewSet):
 
         except TypeError as e:
             return Response(e, status=status.HTTP_400_BAD_REQUEST)
+    
+    def destroy(self, request, pk=None):
+        maestro = Maestro.objects.get(pk=pk)
+        profile = Profile.objects.get(id=maestro.maestro_profile_id)
+        profile.activo = False
+        profile.save()
+        return Response({"success":"user was deleted success"}, status=status.HTTP_201_CREATED)
