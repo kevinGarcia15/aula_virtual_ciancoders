@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import EstadisticoUsuarios from "./EstadisticoUsuarios";
-import EstadisticoCiclo from './EstadisticoCiclo';
+import EstadisticoCiclo from "./EstadisticoCiclo";
 
 export class dashboardAdmin extends Component {
     constructor(props) {
@@ -9,18 +9,18 @@ export class dashboardAdmin extends Component {
             usuariosTotales: 0,
         };
     }
-    componentWillMount() {
-        const { listar, listarCiclo } = this.props;
+    componentDidMount() {
+        const { listar, listarCiclo, listarNivel } = this.props;
         listar();
         listarCiclo();
-        console.log(this.props)
+        listarNivel();
     }
     render() {
-        const { userCount, cicloCount } = this.props;
+        const { userCount, cicloCount, niveles } = this.props;
         return (
             <div className="container">
                 <EstadisticoUsuarios totalUsuarios={userCount} />
-                <EstadisticoCiclo ciclo={cicloCount}/>
+                <EstadisticoCiclo ciclo={cicloCount} niveles={niveles} />
             </div>
         );
     }

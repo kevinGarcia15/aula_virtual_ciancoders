@@ -70,7 +70,5 @@ class AdminViewset(viewsets.ModelViewSet):
             "secciones": secciones,
             "estudiantesAsignados":estudiantes_asignados
         }
-        return Response(data, status=status.HTTP_201_CREATED)
-
-
+        return Response(data, status=status.HTTP_201_CREATED)        
 

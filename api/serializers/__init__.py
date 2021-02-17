@@ -5,3 +5,4 @@ from .user import (UserSerializer, UserReadSerializer,
 from .maestro import MaestroSerializer, CrearMaestroSerializer
 from .estudiante import EstudianteSerializer,EstudianteCrearSerializer
 from .profesion import ProfesionSerializer
+from .nivel import NivelSerializer

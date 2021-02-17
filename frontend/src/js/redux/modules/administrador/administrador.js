@@ -6,6 +6,7 @@ import { api } from "api";
 
 const DASHBOARD_USER_COUNT = "DASHBOARD_USER_COUNT";
 const DASHBOARD_CICLO_COUNT = "DASHBOARD_CICLO_COUNT"
+const DASHBOARD_NIVEL = "DASHBOARD_NIVEL"
 
 const listar = ()=>(dispach) => {
     api.get("/admin/count_user")
@@ -35,9 +36,24 @@ const listarCiclo = ()=>(dispach) => {
         });
 };
 
+const listarNivel = ()=>(dispach) => {
+    api.get("/nivel")
+        .then((response) => {
+            dispach({ type: DASHBOARD_NIVEL, niveles: response.results });
+        })
+        .catch((error) => {
+            NotificationManager.error(
+                "Ocurrio un error al obtener los datos",
+                "ERROR",
+                3000
+            );
+        });
+};
+
 export const actions = {
     listar,
     listarCiclo,
+    listarNivel,
 };
 
 export const reducers = {
@@ -53,13 +69,20 @@ export const reducers = {
             cicloCount,
         };
     },
+    [DASHBOARD_NIVEL]: (state, { niveles }) => {
+        return {
+            ...state,
+            niveles,
+        };
+    },
 
 };
 
 export const intialState = {
     loader: false,
     userCount:{},
-    cicloCount:{}
+    cicloCount:{},
+    niveles:{},
 };
 
 export default handleActions(reducers, intialState);
