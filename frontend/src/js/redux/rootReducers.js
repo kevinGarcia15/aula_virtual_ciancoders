@@ -9,6 +9,7 @@ import notificaciones from './modules/notificaciones/notificaciones';
 
 import maestro from './modules/maestro/maestro'
 import estudiante from './modules/estudiante/estudiante'
+import administrador from './modules/administrador/administrador'
 
 export default combineReducers({
     form: formReducer,
@@ -20,4 +21,5 @@ export default combineReducers({
     notificaciones,
     maestro,
     estudiante,
+    administrador,
 });

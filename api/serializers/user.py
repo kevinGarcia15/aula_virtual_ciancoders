@@ -45,7 +45,7 @@ class ProfileAndUserSerializer(serializers.ModelSerializer):
     rol = serializers.StringRelatedField()
     class Meta:
         model = Profile
-        fields = ('phone', 'address', 'is_first_login','rol','user', 'avatar')    
+        fields = ('phone', 'address', 'is_first_login','avatar','activo','rol','user',)    
 
 
 class ProfileCreateSerializer(serializers.ModelSerializer):
