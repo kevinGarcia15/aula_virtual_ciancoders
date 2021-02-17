@@ -13,7 +13,7 @@ from django.db import transaction
 #permission
 from api.permission.admin import IsAdminUser
 
-from api.models import Profile
+from api.models import Profile, Asignacion, Estudiante
 from api.serializers import ProfileAndUserSerializer
 
 class AdminViewset(viewsets.ModelViewSet):
@@ -44,9 +44,33 @@ class AdminViewset(viewsets.ModelViewSet):
             "totalEstudiantes":estudiantes_totales,
             "estudiantesActivos": estudiantes_activos,
             "estudiantesInactivos": estudiantes_inactivos,
-
-
         }
         return Response(data, status=status.HTTP_201_CREATED)
+    
+    @action(methods=["get"], detail=False)
+    def ciclo(self, request):
+        anio = "2021"
+        maestros_asignados = Asignacion.objects.filter(
+            asignacion_ciclo__anio=anio
+            ).values('maestro'
+            ).distinct().count()
+
+        grados = Asignacion.objects.filter(
+            asignacion_ciclo__anio=anio
+            ).values('grado').distinct().count()
+        secciones = Asignacion.objects.filter(
+            asignacion_ciclo__anio=anio
+            ).values('seccion').distinct().count()
+        estudiantes_asignados = Asignacion.objects.filter(asignacion_ciclo__anio=anio
+            ).values('estudiante_asignaciones').distinct().count()
+        data = {
+            "ciclo" : anio,
+            "maestrosAsignados" : maestros_asignados,
+            "grados":grados,
+            "secciones": secciones,
+            "estudiantesAsignados":estudiantes_asignados
+        }
+        return Response(data, status=status.HTTP_201_CREATED)
+
 
 

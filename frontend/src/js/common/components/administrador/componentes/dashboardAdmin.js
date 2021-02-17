@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import EstadisticoUsuarios from "./EstadisticoUsuarios";
+import EstadisticoCiclo from './EstadisticoCiclo';
 
 export class dashboardAdmin extends Component {
     constructor(props) {
@@ -9,30 +10,17 @@ export class dashboardAdmin extends Component {
         };
     }
     componentWillMount() {
-        const { listar } = this.props;
+        const { listar, listarCiclo } = this.props;
         listar();
+        listarCiclo();
+        console.log(this.props)
     }
     render() {
-        const { userCount } = this.props;
-/*
-        const totalMaestros = dashboard.results.filter(
-            (item) => item.rol == "Maestro"
-        ).length;
-        console.log(dashboard)
-        const totalEstudiante = dashboard.results.filter(
-            (item) => item.rol == "Estudiante"
-        ).length;
-        const maestrosActivos = dashboard.results.filter(
-            (item) => item.activo == true && item.rol == "Maestro"
-        ).length;
-        const maestrosInactivos = dashboard.results.filter(
-            (item) => item.activo == false && item.rol == "Maestro"
-        ).length;*/
+        const { userCount, cicloCount } = this.props;
         return (
             <div className="container">
-                <EstadisticoUsuarios
-                    totalUsuarios={userCount}
-                />
+                <EstadisticoUsuarios totalUsuarios={userCount} />
+                <EstadisticoCiclo ciclo={cicloCount}/>
             </div>
         );
     }

@@ -5,6 +5,7 @@ import { NotificationManager } from "react-notifications";
 import { api } from "api";
 
 const DASHBOARD_USER_COUNT = "DASHBOARD_USER_COUNT";
+const DASHBOARD_CICLO_COUNT = "DASHBOARD_CICLO_COUNT"
 
 const listar = ()=>(dispach) => {
     api.get("/admin/count_user")
@@ -20,8 +21,23 @@ const listar = ()=>(dispach) => {
         });
 };
 
+const listarCiclo = ()=>(dispach) => {
+    api.get("/admin/ciclo")
+        .then((response) => {
+            dispach({ type: DASHBOARD_CICLO_COUNT, cicloCount: response });
+        })
+        .catch((error) => {
+            NotificationManager.error(
+                "Ocurrio un error al obtener los datos",
+                "ERROR",
+                3000
+            );
+        });
+};
+
 export const actions = {
     listar,
+    listarCiclo,
 };
 
 export const reducers = {
@@ -31,11 +47,19 @@ export const reducers = {
             userCount,
         };
     },
+    [DASHBOARD_CICLO_COUNT]: (state, { cicloCount }) => {
+        return {
+            ...state,
+            cicloCount,
+        };
+    },
+
 };
 
 export const intialState = {
     loader: false,
-    userCount:{}
+    userCount:{},
+    cicloCount:{}
 };
 
 export default handleActions(reducers, intialState);

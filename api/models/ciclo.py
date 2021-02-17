@@ -16,8 +16,8 @@ class Ciclo(models.Model):
     creado = models.DateTimeField(auto_now_add=True)
     modificado = models.DateTimeField(auto_now=True)
 
-    def __unicode__(self):
-        return self.anio
+    def __str__(self):
+        return str(self.anio)
 
     def delete(self, *args):
         self.activo = False
