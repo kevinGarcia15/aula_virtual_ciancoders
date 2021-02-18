@@ -101,8 +101,8 @@ class MaestroViewset(viewsets.ModelViewSet):
         #codigo para mostrar las tareas totales que el maestro tiene pendientes tanto
         #por curso como el total
         tareas_sin_calificar = 0
-        tareas_por_curso = {}
-        for asignacion in asignacion_maestro: 
+        tareas_por_curso = []
+        for asignacion in asignacion_maestro:
             tarea = Tarea.objects.filter(asignacion=asignacion)
             for item in tarea:
                 tarea_estudiante = Tarea_Estudinate.objects.filter(tarea=item, punteo=0)
@@ -112,12 +112,15 @@ class MaestroViewset(viewsets.ModelViewSet):
                     tareas_sin_calificar+=1
                     count_flag +=1
                     if count_items == count_flag:
-                        tareas_por_curso[asignacion.curso.nombre] = count_flag
-        
+                        tareas={}
+                        tareas["pendiente"] = count_flag
+                        tareas["curso"] = asignacion.curso.nombre
+                        tareas_por_curso.append(tareas)
+
         print(tareas_por_curso)
         data = {
             "tareasSinCalificar":tareas_sin_calificar,
-            "tareasPorCurso":[tareas_por_curso]
+            "tareasPorCurso":tareas_por_curso
         }
         #cursos_asignados = AsignacionSerializer(cursos, many=True)
         return Response(data, status=status.HTTP_200_OK)

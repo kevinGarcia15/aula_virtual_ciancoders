@@ -24,6 +24,7 @@ import EstudianteListContainer from './common/components/estudiante/EstudianteLi
 import EstudianteCrearContainer from './common/components/estudiante/EstudianteCrearContainer'
 
 import DashboardAdminContainer from './common/components/administrador/dashboardAdminContainer'
+import DashboardMaestroContainer from './common/components/maestro/dashboard/dashboardMaestroContainer'
 
 import 'bootstrap/dist/css/bootstrap.min.css';
 import '../assets/fonts/fonts.css';
@@ -38,7 +39,7 @@ module.exports = (
                 <Route exact path="/login" component={Login} />
                 <Route exact path="/registro" component={Registro} />
                 <ProtectedRoute exact path="/admin" component={DashboardAdminContainer} />
-                <ProtectedRoute exact path="/maestro" component={Demo} />
+                <ProtectedRoute exact path="/maestro" component={DashboardMaestroContainer} />
                 <ProtectedRoute exact path="/page2" component={Examples} />
                 <ProtectedRoute exact path="/user-profile" component={Profile} />
                 <ProtectedRoute exact path="/grids" component={Grids} />

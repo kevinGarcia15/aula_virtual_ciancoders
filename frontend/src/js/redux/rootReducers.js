@@ -8,6 +8,7 @@ import usuarios from './modules/usuarios/usuarios';
 import notificaciones from './modules/notificaciones/notificaciones';
 
 import maestro from './modules/maestro/maestro'
+import rolMaestro from './modules/maestro/rolMaestro'
 import estudiante from './modules/estudiante/estudiante'
 import administrador from './modules/administrador/administrador'
 
@@ -20,6 +21,7 @@ export default combineReducers({
     routing,
     notificaciones,
     maestro,
+    rolMaestro,
     estudiante,
     administrador,
 });
