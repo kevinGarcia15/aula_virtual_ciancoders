@@ -24,6 +24,9 @@ class Tarea(models.Model):
     def __unicode__(self):
         return self.titulo
 
+    def __str__(self):
+        return self.titulo
+
     def delete(self, *args):
         self.activo = False
         self.save()

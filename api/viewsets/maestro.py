@@ -13,8 +13,8 @@ from django.db import transaction
 #permission
 from api.permission.admin import IsAdminUser
 
-from api.models import Maestro, Profile, User, Rol, Profesion
-from api.serializers import MaestroSerializer ,CrearMaestroSerializer
+from api.models import Maestro, Profile, User, Rol, Profesion, Asignacion, Tarea, Tarea_Estudinate
+from api.serializers import MaestroSerializer ,CrearMaestroSerializer, AsignacionSerializer
 
 
 class MaestroViewset(viewsets.ModelViewSet):
@@ -77,4 +77,47 @@ class MaestroViewset(viewsets.ModelViewSet):
         profile.activo = False
         maestro.save()
         profile.save()
-        return Response({"success":"user was deleted success"}, status=status.HTTP_201_CREATED)
+        return Response({"success":"user was deleted success"}, status=status.HTTP_200_OK)
+
+    @action(methods=["get"], detail=False)
+    def cursos_maestro(self, request):
+        anio = "2021"
+        user = request.user
+        profile = Profile.objects.get(user=user)
+        maestro = Maestro.objects.get(maestro_profile=profile)
+        cursos = Asignacion.objects.filter(maestro=maestro, asignacion_ciclo__anio=anio)
+        cursos_asignados = AsignacionSerializer(cursos, many=True)
+        return Response({"maestro":cursos_asignados.data}, status=status.HTTP_200_OK)
+
+
+    @action(methods=["get"], detail=False)
+    def total_tareas(self, request):
+        #import pdb; pdb.set_trace()
+        anio="2021"
+        user = request.user
+        profile = Profile.objects.get(user=user)
+        maestro = Maestro.objects.get(maestro_profile=profile)
+        asignacion_maestro = Asignacion.objects.filter(maestro=maestro, asignacion_ciclo__anio=anio)
+        #codigo para mostrar las tareas totales que el maestro tiene pendientes tanto
+        #por curso como el total
+        tareas_sin_calificar = 0
+        tareas_por_curso = {}
+        for asignacion in asignacion_maestro: 
+            tarea = Tarea.objects.filter(asignacion=asignacion)
+            for item in tarea:
+                tarea_estudiante = Tarea_Estudinate.objects.filter(tarea=item, punteo=0)
+                count_items = tarea_estudiante.count()
+                count_flag = 0
+                for item2 in tarea_estudiante:
+                    tareas_sin_calificar+=1
+                    count_flag +=1
+                    if count_items == count_flag:
+                        tareas_por_curso[asignacion.curso.nombre] = count_flag
+        
+        print(tareas_por_curso)
+        data = {
+            "tareasSinCalificar":tareas_sin_calificar,
+            "tareasPorCurso":[tareas_por_curso]
+        }
+        #cursos_asignados = AsignacionSerializer(cursos, many=True)
+        return Response(data, status=status.HTTP_200_OK)

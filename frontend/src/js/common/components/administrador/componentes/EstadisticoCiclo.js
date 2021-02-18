@@ -38,11 +38,11 @@ export class EstadisticoCiclo extends Component {
                     <div className="card-body">
                         <h6 className="card-title text-center">Niveles</h6>
                         <div className="d-flex flex-column">
-                            {niveles.map((item) => (
+                            {niveles ? niveles.map((item) => (
                                 <p className="m-0 text-sm-left text-dark" key={item.id}>
                                     {item.nombre}
                                 </p>
-                            ))}
+                            )):null}
                         </div>
                     </div>
                 </div>

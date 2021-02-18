@@ -54,7 +54,12 @@ export const onSubmit = (data = {}) => (dispatch, getStore) => {
             localStorage.setItem('rol', response.profile.rol);
             dispatch(setMe(response.user));
             dispatch(setUserPermision(response.profile))
-            dispatch(push("/"));
+
+            if (response.profile.rol == "Admin") {
+                dispatch(push("/admin"));                
+            }else if(response.profile.rol == "Maestro"){
+                dispatch(push("/maestro"));
+            }
         }
     }).catch((err) => {
         NotificationManager.error(err.detail, 'ERROR', 0);

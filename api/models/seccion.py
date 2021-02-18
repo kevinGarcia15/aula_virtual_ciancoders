@@ -13,6 +13,9 @@ class Seccion(models.Model):
     def __unicode__(self):
         return self.nombre
 
+    def __str__(self):
+        return self.nombre
+
     def delete(self, *args):
         self.activo = False
         self.save()

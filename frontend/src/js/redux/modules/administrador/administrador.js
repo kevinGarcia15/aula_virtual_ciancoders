@@ -82,7 +82,7 @@ export const intialState = {
     loader: false,
     userCount:{},
     cicloCount:{},
-    niveles:{},
+    niveles:null,
 };
 
 export default handleActions(reducers, intialState);

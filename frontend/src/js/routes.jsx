@@ -37,7 +37,8 @@ module.exports = (
             <Switch>
                 <Route exact path="/login" component={Login} />
                 <Route exact path="/registro" component={Registro} />
-                <ProtectedRoute exact path="/" component={DashboardAdminContainer} />
+                <ProtectedRoute exact path="/admin" component={DashboardAdminContainer} />
+                <ProtectedRoute exact path="/maestro" component={Demo} />
                 <ProtectedRoute exact path="/page2" component={Examples} />
                 <ProtectedRoute exact path="/user-profile" component={Profile} />
                 <ProtectedRoute exact path="/grids" component={Grids} />
