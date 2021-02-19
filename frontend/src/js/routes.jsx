@@ -25,7 +25,7 @@ import EstudianteCrearContainer from './common/components/estudiante/EstudianteC
 
 import DashboardAdminContainer from './common/components/administrador/dashboardAdminContainer'
 import DashboardMaestroContainer from './common/components/maestro/dashboard/dashboardMaestroContainer'
-
+import DashboardEstudianteContainer from './common/components/estudiante/dashboard/DashboardEstudianteContainer'
 import 'bootstrap/dist/css/bootstrap.min.css';
 import '../assets/fonts/fonts.css';
 require('../../node_modules/bootstrap/dist/css/bootstrap.css');
@@ -40,6 +40,7 @@ module.exports = (
                 <Route exact path="/registro" component={Registro} />
                 <ProtectedRoute exact path="/admin" component={DashboardAdminContainer} />
                 <ProtectedRoute exact path="/maestro" component={DashboardMaestroContainer} />
+                <ProtectedRoute exact path="/estudiante" component={DashboardEstudianteContainer} />
                 <ProtectedRoute exact path="/page2" component={Examples} />
                 <ProtectedRoute exact path="/user-profile" component={Profile} />
                 <ProtectedRoute exact path="/grids" component={Grids} />

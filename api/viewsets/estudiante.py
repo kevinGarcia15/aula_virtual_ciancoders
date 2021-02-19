@@ -9,12 +9,13 @@ from rest_framework.permissions import AllowAny, IsAuthenticated
 from rest_framework.response import Response
 from rest_framework.settings import api_settings
 from django.db import transaction
+from datetime import datetime
 
 #permission
 from api.permission.admin import IsAdminUser
 
-from api.models import Estudiante, Profile, User, Rol
-from api.serializers import EstudianteSerializer,EstudianteCrearSerializer
+from api.models import Estudiante, Profile, User, Rol,Asignacion,Tarea
+from api.serializers import EstudianteSerializer,EstudianteCrearSerializer,AsignacionSerializer,AsignacionTareaSerializer
 
 
 class EstudianteViewset(viewsets.ModelViewSet):
@@ -79,4 +80,38 @@ class EstudianteViewset(viewsets.ModelViewSet):
         profile.save()
         return Response({"success":"user was deleted success"}, status=status.HTTP_201_CREATED)
 
+    @action(methods=["get"], detail=False)
+    def cursos_estudiante(self, request):
+        anio = "2021"
+        user = request.user
+        profile = Profile.objects.get(user=user)
+        estudiante = Estudiante.objects.get(estudiante_profile=profile)
+
+        cursos = Asignacion.objects.filter(estudiante_asignaciones=estudiante, asignacion_ciclo__anio=anio).order_by('grado__nombre','seccion__nombre')
+        cursos_asignados = AsignacionSerializer(cursos, many=True)
+        return Response({"estudiante":cursos_asignados.data}, status=status.HTTP_200_OK)
+
+    @action(methods=["get"], detail=False)
+    def tareas_entregar(self, request):
+        now = datetime.now()
+        fechaActual = now.strftime("%Y-%m-%d")
+        anio = now.strftime("%Y")
+        user = request.user
+        profile = Profile.objects.get(user=user)
+        estudiante = Estudiante.objects.get(estudiante_profile=profile)
+
+        asignaciones = Asignacion.objects.filter(estudiante_asignaciones=estudiante, asignacion_ciclo__anio=anio)
+        tareas_enregar = []
+        for asignacion in asignaciones:
+            tareas = Tarea.objects.filter(asignacion=asignacion, fecha_entrega__gte=fechaActual).order_by("fecha_entrega")
+            for tarea in tareas:
+                tareas_asignacion={}
+                tareas_asignacion["id"]=tarea.id
+                tareas_asignacion["curso"] = asignacion.curso.nombre
+                tareas_asignacion["titulo"] = tarea.titulo
+                tareas_asignacion["fecha_entrega"]=tarea.fecha_entrega
+                tareas_asignacion["hora_entrega"]=tarea.hora_entrega
+                tareas_enregar.append(tareas_asignacion)
+
+        return Response({"tareas_entregar":tareas_enregar}, status=status.HTTP_200_OK)
 

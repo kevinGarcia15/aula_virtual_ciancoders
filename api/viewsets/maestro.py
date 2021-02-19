@@ -116,7 +116,6 @@ class MaestroViewset(viewsets.ModelViewSet):
                         tareas["curso"] = asignacion.curso.nombre
                         tareas_por_curso.append(tareas)
 
-        print(tareas_por_curso)
         data = {
             "tareasSinCalificar":tareas_sin_calificar,
             "tareasPorCurso":tareas_por_curso

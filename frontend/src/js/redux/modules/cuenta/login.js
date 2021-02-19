@@ -59,6 +59,8 @@ export const onSubmit = (data = {}) => (dispatch, getStore) => {
                 dispatch(push("/admin"));                
             }else if(response.profile.rol == "Maestro"){
                 dispatch(push("/maestro"));
+            }else if (response.profile.rol == "Estudiante"){
+                dispatch(push("/estudiante"));
             }
         }
     }).catch((err) => {

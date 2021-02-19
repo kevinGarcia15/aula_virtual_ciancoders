@@ -12,6 +12,7 @@ import rolMaestro from './modules/maestro/rolMaestro'
 import estudiante from './modules/estudiante/estudiante'
 import administrador from './modules/administrador/administrador'
 import evento from './modules/evento/evento'
+import RolEstudiante from './modules/estudiante/RolEstudiante'
 
 export default combineReducers({
     form: formReducer,
@@ -26,4 +27,5 @@ export default combineReducers({
     estudiante,
     administrador,
     evento,
+    RolEstudiante,
 });
