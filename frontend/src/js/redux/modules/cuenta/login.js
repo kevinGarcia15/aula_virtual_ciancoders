@@ -81,6 +81,7 @@ export const logOut = () => (dispatch) => {
     api.post('/user/logout').then(() => {
         dispatch(setMe({}));
         dispatch(setUserPermision({}))
+        dispatch(push("/login"));                
     }).catch(() => {
     }).finally(() => {});
     localStorage.removeItem('token');

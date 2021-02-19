@@ -92,7 +92,6 @@ class MaestroViewset(viewsets.ModelViewSet):
 
     @action(methods=["get"], detail=False)
     def total_tareas(self, request):
-        #import pdb; pdb.set_trace()
         anio="2021"
         user = request.user
         profile = Profile.objects.get(user=user)

@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import EventoListarContainer from "../../evento/eventoListarContainer";
 
 export class EstadisticoUsuarios extends Component {
     render() {
@@ -9,10 +10,13 @@ export class EstadisticoUsuarios extends Component {
             maestrosInactivos,
             totalEstudiantes,
             estudiantesActivos,
-            estudiantesInactivos
+            estudiantesInactivos,
         } = this.props.totalUsuarios;
         return (
             <div className="row">
+                <div className="card col-12 col-lg-9 p-2 m-3">
+                    <EventoListarContainer />
+                </div>
                 <div className="card col-12 col-lg-3 p-2 m-3">
                     <div className="card-body">
                         <h6 className="card-title text-center">
