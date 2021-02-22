@@ -1,0 +1,52 @@
+[
+    {
+        "model": "api.Seccion",
+        "pk": 1,
+        "fields": {
+            "nombre": "seccion A",
+            "activo": 1,
+            "creado": "2019-08-31",
+            "modificado": "2019-08-31"
+        }
+    },
+    {
+        "model": "api.Seccion",
+        "pk": 2,
+        "fields": {
+            "nombre": "seccion B",
+            "activo": 1,
+            "creado": "2019-08-31",
+            "modificado": "2019-08-31"
+        }
+    },
+    {
+        "model": "api.Seccion",
+        "pk": 3,
+        "fields": {
+            "nombre": "seccion C",
+            "activo": 1,
+            "creado": "2019-08-31",
+            "modificado": "2019-08-31"
+        }
+    },
+    {
+        "model": "api.Seccion",
+        "pk": 4,
+        "fields": {
+            "nombre": "seccion D",
+            "activo": 1,
+            "creado": "2019-08-31",
+            "modificado": "2019-08-31"
+        }
+    },
+    {
+        "model": "api.Seccion",
+        "pk": 5,
+        "fields": {
+            "nombre": "Seccion E",
+            "activo": 1,
+            "creado": "2019-08-31",
+            "modificado": "2019-08-31"
+        }
+    }
+]

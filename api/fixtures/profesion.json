@@ -1,0 +1,57 @@
+[
+    {
+        "model": "api.Profesion",
+        "pk": 1,
+        "fields": {
+            "nombre": "Perito Contador",
+            "descripcion": "Profesion Perito Contador",
+            "activo": 1,
+            "creado": "2019-08-31",
+            "modificado": "2019-08-31"
+        }
+    },
+    {
+        "model": "api.Profesion",
+        "pk": 2,
+        "fields": {
+            "nombre": "Bachiller en Computacion",
+            "descripcion": "Profesion Bachiller en Computacion",
+            "activo": 1,
+            "creado": "2019-08-31",
+            "modificado": "2019-08-31"
+        }
+    },
+    {
+        "model": "api.Profesion",
+        "pk": 3,
+        "fields": {
+            "nombre": "Enfermero(a)",
+            "descripcion": "Profesion Enfermero(a)",
+            "activo": 1,
+            "creado": "2019-08-31",
+            "modificado": "2019-08-31"
+        }
+    },
+    {
+        "model": "api.Profesion",
+        "pk": 4,
+        "fields": {
+            "nombre": "Bachiller en ciencias y letras",
+            "descripcion": "Profesion Bachiller en ciencias y letras",
+            "activo": 1,
+            "creado": "2019-08-31",
+            "modificado": "2019-08-31"
+        }
+    },
+    {
+        "model": "api.Profesion",
+        "pk": 5,
+        "fields": {
+            "nombre": "Secretaria",
+            "descripcion": "Profesion Secretaria",
+            "activo": 1,
+            "creado": "2019-08-31",
+            "modificado": "2019-08-31"
+        }
+    }
+]

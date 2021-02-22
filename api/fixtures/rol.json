@@ -1,0 +1,35 @@
+[
+    {
+        "model": "api.Rol",
+        "pk": 1,
+        "fields": {
+            "nombre": "Admin",
+            "descripcion": "Usuario Administrador",
+            "activo": 1,
+            "creado": "2019-08-31",
+            "modificado": "2019-08-31"
+        }
+    },
+    {
+        "model": "api.Rol",
+        "pk": 2,
+        "fields": {
+            "nombre": "Maestro",
+            "descripcion": "Usuario Maestri",
+            "activo": 1,
+            "creado": "2019-08-31",
+            "modificado": "2019-08-31"
+        }
+    },
+    {
+        "model": "api.Rol",
+        "pk": 3,
+        "fields": {
+            "nombre": "Estudiante",
+            "descripcion": "Usuario Estudiante",
+            "activo": 1,
+            "creado": "2019-08-31",
+            "modificado": "2019-08-31"
+        }
+    }
+]

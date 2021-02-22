@@ -1,0 +1,35 @@
+[
+    {
+        "model": "api.Nivel",
+        "pk": 1,
+        "fields": {
+            "nombre": "Primaria",
+            "descripcion": "Nivel Primaria",
+            "activo": 1,
+            "creado": "2019-08-31",
+            "modificado": "2019-08-31"
+        }
+    },
+    {
+        "model": "api.Nivel",
+        "pk": 2,
+        "fields": {
+            "nombre": "Basico",
+            "descripcion": "Nivel Basico",
+            "activo": 1,
+            "creado": "2019-08-31",
+            "modificado": "2019-08-31"
+        }
+    },
+    {
+        "model": "api.Nivel",
+        "pk": 3,
+        "fields": {
+            "nombre": "Diversificado",
+            "descripcion": "Nivel Diversificado",
+            "activo": 1,
+            "creado": "2019-08-31",
+            "modificado": "2019-08-31"
+        }
+    }
+]

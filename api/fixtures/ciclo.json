@@ -1,0 +1,32 @@
+[
+    {
+        "model": "api.Ciclo",
+        "pk": 1,
+        "fields": {
+            "anio": 2021,
+            "activo": 1,
+            "creado": "2019-08-31",
+            "modificado": "2019-08-31"
+        }
+    },
+    {
+        "model": "api.Ciclo",
+        "pk": 2,
+        "fields": {
+            "anio": 2020,
+            "activo": 1,
+            "creado": "2019-08-31",
+            "modificado": "2019-08-31"
+        }
+    },
+    {
+        "model": "api.Ciclo",
+        "pk": 3,
+        "fields": {
+            "anio": 2019,
+            "activo": 1,
+            "creado": "2019-08-31",
+            "modificado": "2019-08-31"
+        }
+    }
+]

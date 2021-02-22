@@ -1,0 +1,69 @@
+[
+    {
+        "model": "api.Curso",
+        "pk": 1,
+        "fields": {
+            "nombre": "Idioma Espaniol",
+            "descripcion": "Curso de idioma espaniol",
+            "activo": 1,
+            "creado": "2019-08-31",
+            "modificado": "2019-08-31"
+        }
+    },
+    {
+        "model": "api.Curso",
+        "pk": 2,
+        "fields": {
+            "nombre": "Ciencias Naturales",
+            "descripcion": "Curso de cinecias",
+            "activo": 1,
+            "creado": "2019-08-31",
+            "modificado": "2019-08-31"
+        }
+    },
+    {
+        "model": "api.Curso",
+        "pk": 3,
+        "fields": {
+            "nombre": "Estudios sociales",
+            "descripcion": "curso de estudios sociales",
+            "activo": 1,
+            "creado": "2019-08-31",
+            "modificado": "2019-08-31"
+        }
+    },
+    {
+        "model": "api.Curso",
+        "pk": 4,
+        "fields": {
+            "nombre": "Historia",
+            "descripcion": "curso de historia",
+            "activo": 1,
+            "creado": "2019-08-31",
+            "modificado": "2019-08-31"
+        }
+    },
+    {
+        "model": "api.Curso",
+        "pk": 5,
+        "fields": {
+            "nombre": "Educacion Fisica",
+            "descripcion": "curso de Educacion Fisica",
+            "activo": 1,
+            "creado": "2019-08-31",
+            "modificado": "2019-08-31"
+        }
+    },
+    {
+        "model": "api.Curso",
+        "pk": 6,
+        "fields": {
+            "nombre": "Matemaricas",
+            "descripcion": "curso de Matemaricas",
+            "activo": 1,
+            "creado": "2019-08-31",
+            "modificado": "2019-08-31"
+        }
+    }
+
+]
