@@ -1,0 +1,35 @@
+[
+    {
+        "model": "api.maestro",
+        "pk": 1,
+        "fields": {
+            "maestro_profile": 2,
+            "profesion":1,
+            "activo": 1,
+            "creado": "2019-08-31",
+            "modificado": "2019-08-31"
+        }
+    },
+    {
+        "model": "api.maestro",
+        "pk": 2,
+        "fields": {
+            "maestro_profile": 3,
+            "profesion":3,
+            "activo": 1,
+            "creado": "2019-08-31",
+            "modificado": "2019-08-31"
+        }
+    },
+    {
+        "model": "api.maestro",
+        "pk": 3,
+        "fields": {
+            "maestro_profile": 4,
+            "profesion":4,
+            "activo": 1,
+            "creado": "2019-08-31",
+            "modificado": "2019-08-31"
+        }
+    }
+]

@@ -1,0 +1,75 @@
+[
+    {
+        "model": "api.Grado",
+        "pk": 1,
+        "fields": {
+            "nivel":1,
+            "nombre": "Primero",
+            "descripcion": "Grado de Primero",
+            "activo": 1,
+            "creado": "2019-08-31",
+            "modificado": "2019-08-31"
+        }
+    },
+    {
+        "model": "api.Grado",
+        "pk": 2,
+        "fields": {
+            "nivel":1,
+            "nombre": "Segundo",
+            "descripcion": "Grado segundo",
+            "activo": 1,
+            "creado": "2019-08-31",
+            "modificado": "2019-08-31"
+        }
+    },
+    {
+        "model": "api.Grado",
+        "pk": 3,
+        "fields": {
+            "nivel":1,
+            "nombre": "Tercero",
+            "descripcion": "Grado de Tercero",
+            "activo": 1,
+            "creado": "2019-08-31",
+            "modificado": "2019-08-31"
+        }
+    },
+    {
+        "model": "api.Grado",
+        "pk": 4,
+        "fields": {
+            "nivel":1,
+            "nombre": "Cuarto",
+            "descripcion": "Grado de Cuarto",
+            "activo": 1,
+            "creado": "2019-08-31",
+            "modificado": "2019-08-31"
+        }
+    },
+    {
+        "model": "api.Grado",
+        "pk": 5,
+        "fields": {
+            "nivel":1,
+            "nombre": "Quinto",
+            "descripcion": "Grado de Quinto",
+            "activo": 1,
+            "creado": "2019-08-31",
+            "modificado": "2019-08-31"
+        }
+    },
+    {
+        "model": "api.Grado",
+        "pk": 6,
+        "fields": {
+            "nivel":1,
+            "nombre": "Sexto",
+            "descripcion": "Grado de Sexto",
+            "activo": 1,
+            "creado": "2019-08-31",
+            "modificado": "2019-08-31"
+        }
+    }
+
+]

@@ -1,0 +1,100 @@
+[
+    {
+        "model": "api.Profile",
+        "pk": 1,
+        "fields": {
+            "phone": "58748789",
+            "address": "5ta calle, Totonicapan",
+            "rol": 1,
+            "usuario":1,
+            "is_first_login": 0,
+            "activo": 1,
+            "creado": "2019-08-31",
+            "modificado": "2019-08-31"
+        }
+    },
+    {
+        "model": "api.Profile",
+        "pk": 2,
+        "fields": {
+            "phone": "48898789",
+            "address": "5ta calle, Totonicapan",
+            "rol": 2,
+            "usuario":2,
+            "is_first_login":1,
+            "activo": 1,
+            "creado": "2019-08-31",
+            "modificado": "2019-08-31"
+        }
+    },
+    {
+        "model": "api.Profile",
+        "pk": 3,
+        "fields": {
+            "phone": "48798788",
+            "address": "",
+            "rol": 2,
+            "usuario":3,
+            "is_first_login":1,
+            "activo": 1,
+            "creado": "2019-08-31",
+            "modificado": "2019-08-31"
+        }
+    },
+    {
+        "model": "api.Profile",
+        "pk": 4,
+        "fields": {
+            "phone": "48798788",
+            "address": "",
+            "rol": 2,
+            "usuario":4,
+            "is_first_login":1,
+            "activo": 1,
+            "creado": "2019-08-31",
+            "modificado": "2019-08-31"
+        }
+    },
+    {
+        "model": "api.Profile",
+        "pk": 5,
+        "fields": {
+            "phone": "48798788",
+            "address": "",
+            "rol": 3,
+            "usuario":5,
+            "is_first_login":1,
+            "activo": 1,
+            "creado": "2019-08-31",
+            "modificado": "2019-08-31"
+        }
+    },
+    {
+        "model": "api.Profile",
+        "pk": 6,
+        "fields": {
+            "phone": "48795254",
+            "address": "",
+            "rol": 3,
+            "usuario":6,
+            "is_first_login":1,
+            "activo": 1,
+            "creado": "2019-08-31",
+            "modificado": "2019-08-31"
+        }
+    },
+    {
+        "model": "api.Profile",
+        "pk": 7,
+        "fields": {
+            "phone": "48795254",
+            "address": "Aldea vasquez",
+            "rol": 3,
+            "usuario":7,
+            "is_first_login":1,
+            "activo": 1,
+            "creado": "2019-08-31",
+            "modificado": "2019-08-31"
+        }
+    }
+]

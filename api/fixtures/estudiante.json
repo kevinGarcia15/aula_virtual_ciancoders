@@ -1,0 +1,38 @@
+[
+    {
+        "model": "api.estudiante",
+        "pk": 1,
+        "fields": {
+            "estudiante_profile": 5,
+            "telefono_contacto":"48798487",
+            "direccion_contacto":"Parramon",
+            "activo": 1,
+            "creado": "2019-08-31",
+            "modificado": "2019-08-31"
+        }
+    },
+    {
+        "model": "api.estudiante",
+        "pk": 2,
+        "fields": {
+            "estudiante_profile": 6,
+            "telefono_contacto":"48798878",
+            "direccion_contacto":"La concordia",
+            "activo": 1,
+            "creado": "2019-08-31",
+            "modificado": "2019-08-31"
+        }
+    },
+    {
+        "model": "api.estudiante",
+        "pk": 3,
+        "fields": {
+            "estudiante_profile": 7,
+            "telefono_contacto":"44456484",
+            "direccion_contacto":"N/A",
+            "activo": 1,
+            "creado": "2019-08-31",
+            "modificado": "2019-08-31"
+        }
+    }
+]

@@ -1,0 +1,69 @@
+[
+    {
+        "model": "api.User",
+        "pk": 2,
+        "fields": {
+            "first_name": "Tomas",
+            "last_name": "Garcia",
+            "email": "tomas@gmail.com",
+            "username": "tomas48",
+            "password":"pbkdf2_sha256$150000$iqrJAJY4gLNN$wQlBIAT/yhEClxkleDNZaSR56ljLO1mChmF1orANpqc="
+        }
+    },
+    {
+        "model": "api.User",
+        "pk": 3,
+        "fields": {
+            "first_name": "Pedro",
+            "last_name": "Perez",
+            "email": "pedro@gmail.com",
+            "username": "pedrito459",
+            "password":"pbkdf2_sha256$150000$aVpZbodUihFK$IE2yI8Ckeu8XFBGkULb16S5OlPHaPQL2xboHZ6DmygA="
+        }
+    },
+    {
+        "model": "api.User",
+        "pk": 4,
+        "fields": {
+            "first_name": "Pedro Daniel",
+            "last_name": "Hernadez Lopez",
+            "email": "pedro487@gmail.com",
+            "username": "pedro458",
+            "password":"pbkdf2_sha256$150000$cp1PTeW3UmNE$bl086r2uR5xdPA4Z36Eiknq3lxW1V+e3wS3hpGnb0rI="
+        }
+    },
+    {
+        "model": "api.User",
+        "pk": 5,
+        "fields": {
+            "first_name": "Herminia Margarita",
+            "last_name": "Lopez Gramajo",
+            "email": "herminia@gmail.com",
+            "username": "herminia488",
+            "password":"pbkdf2_sha256$150000$PnsBx9gbchbk$TZpMbNe481PF+shQZ0Sd+sX9DKaUmJZhLuTdrqY0WkM="
+        }
+    },
+    {
+        "model": "api.User",
+        "pk": 6,
+        "fields": {
+            "first_name": "Petrona Lupita",
+            "last_name": "Garcia Tax",
+            "email": "petrona@gmail.com",
+            "username": "petrona778",
+            "password":"pbkdf2_sha256$150000$2X8shQxhLOpD$3KQ/TJACbIddBTBcM9yIL4tizK2Eyfy7D2Xl1y73V3U="
+        }
+    },
+    {
+        "model": "api.User",
+        "pk": 7,
+        "fields": {
+            "first_name": "Gorge Mauricio",
+            "last_name": "Tzun Vasquez",
+            "email": "george@gmail.com",
+            "username": "george458a",
+            "password":"pbkdf2_sha256$150000$ubJ0M9rB8O12$xe78cK3krItx+A/3EoHvDXqv3i+IFxybeD+RhVtNxAE="
+        }
+    }
+   
+]
