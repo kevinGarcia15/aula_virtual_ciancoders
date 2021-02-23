@@ -14,7 +14,7 @@ export class EstadisticoUsuarios extends Component {
         } = this.props.totalUsuarios;
         return (
             <div className="row">
-                <div className="card col-12 col-lg-9 p-2 m-3">
+                <div className="card col-12 col-lg-10 p-2 m-3">
                     <EventoListarContainer />
                 </div>
                 <div className="card col-12 col-lg-3 p-2 m-3">

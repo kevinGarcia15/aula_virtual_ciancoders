@@ -10,4 +10,11 @@ class EventoSerializer(serializers.ModelSerializer):
     class Meta:
         """Meta class"""
         model = Evento
+        fields = ("titulo", "descripcion", "hora", "fecha")
+
+
+class EventoReadSerializer(serializers.ModelSerializer):
+    class Meta:
+        """Meta class"""
+        model = Evento
         fields = "__all__"

@@ -1,3 +1,4 @@
+import { toLower } from "lodash";
 import React, { Component } from "react";
 import { Link, NavLink } from "react-router-dom";
 
@@ -8,6 +9,7 @@ class SideBar extends Component {
 
     render() {
         const { toggleOpen, navToggle, logOut } = this.props;
+        const rol = toLower(localStorage.getItem("rol"));        
         return (
             <aside
                 className={`main-sidebar px-0 col-12 col-md-3 col-lg-2 ${
@@ -38,7 +40,7 @@ class SideBar extends Component {
                     <ul className="nav--no-borders flex-column nav">
                         <li className="nav-item">
                             <NavLink
-                                to="/"
+                                to={`/${rol}`}
                                 exact
                                 className="nav-link "
                                 activeClassName={"active"}

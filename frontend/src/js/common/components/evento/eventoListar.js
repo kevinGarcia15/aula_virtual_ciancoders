@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import EventoCrear from './eventoCrear'
 
 export class EventoListar extends Component {
     componentDidMount() {
@@ -9,7 +10,7 @@ export class EventoListar extends Component {
     render() {
         const { data } = this.props;
         let hoy = new Date();
-        console.log(data.results)
+        const rol = localStorage.getItem("rol");
         return (
             <React.Fragment>
                 <div className="bg-info text-white text-center rounded p-3">
@@ -19,6 +20,19 @@ export class EventoListar extends Component {
                         year: "numeric",
                     }).format(new Date(hoy))}
                 </div>
+                {rol == "Admin" ? (
+                    <div className="card-body p-0">
+                        <button
+                            type="button"
+                            className="btn btn-secondary mt-2 mb-2"
+                            data-toggle="modal"
+                            data-target="#crearEvento"
+                        >
+                            Nuevo Evento
+                        </button>
+                        <EventoCrear/>
+                    </div>
+                ) : null}
                 {data.results.length != 0 ? (
                     data.results.map((item) => (
                         <div className="card mt-2 mb-2 ml-5 mr-5 p-3">

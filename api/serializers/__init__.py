@@ -7,5 +7,5 @@ from .estudiante import EstudianteSerializer,EstudianteCrearSerializer
 from .profesion import ProfesionSerializer
 from .nivel import NivelSerializer
 from .asignacion import AsignacionSerializer,AsignacionTareaSerializer
-from .evento import EventoSerializer
+from .evento import EventoSerializer, EventoReadSerializer
 from .tarea import TareaSerializer
