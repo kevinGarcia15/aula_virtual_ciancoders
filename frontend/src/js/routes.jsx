@@ -28,6 +28,9 @@ import EventoEditarContainer from './common/components/evento/eventoEditarContai
 import DashboardAdminContainer from './common/components/administrador/dashboardAdminContainer'
 import DashboardMaestroContainer from './common/components/maestro/dashboard/dashboardMaestroContainer'
 import DashboardEstudianteContainer from './common/components/estudiante/dashboard/DashboardEstudianteContainer'
+
+import GradoListarContainer from './common/components/grado/GradoListarContainer'
+
 import 'bootstrap/dist/css/bootstrap.min.css';
 import '../assets/fonts/fonts.css';
 require('../../node_modules/bootstrap/dist/css/bootstrap.css');
@@ -59,6 +62,8 @@ module.exports = (
                 <ProtectedRoute exact path="/estudiantes/:id" component={EstudianteCrearContainer} />
 
                 <ProtectedRoute exact path="/evento/:id/editar" component={EventoEditarContainer} />
+
+                <ProtectedRoute exact path="/grado/" component={GradoListarContainer} />
 
                 <ProtectedRoute exact path="/tabs" component={ExampleTabs} />
                 <Route component={NotFound} />

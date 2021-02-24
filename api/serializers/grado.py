@@ -15,6 +15,7 @@ class GradoSerializer(serializers.ModelSerializer):
 
 class GradoReadSerializer(serializers.ModelSerializer):
     """Serializer para leer"""
+    nivel = serializers.StringRelatedField(read_only=True)
     class Meta:
         """Meta class"""
         model = Grado

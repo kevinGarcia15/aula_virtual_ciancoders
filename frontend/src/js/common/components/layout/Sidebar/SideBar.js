@@ -9,7 +9,7 @@ class SideBar extends Component {
 
     render() {
         const { toggleOpen, navToggle, logOut } = this.props;
-        const rol = toLower(localStorage.getItem("rol"));        
+        const rol = toLower(localStorage.getItem("rol"));
         return (
             <aside
                 className={`main-sidebar px-0 col-12 col-md-3 col-lg-2 ${
@@ -79,6 +79,20 @@ class SideBar extends Component {
                                             </i>
                                         </div>
                                         <span>Estudiantes</span>
+                                    </NavLink>
+                                </li>
+                                <li className="nav-item">
+                                    <NavLink
+                                        to="/grado"
+                                        className="nav-link"
+                                        activeClassName={"active"}
+                                    >
+                                        <div className="d-inline-block item-icon-wrapper">
+                                            <i className="material-icons">
+                                                vertical_split
+                                            </i>
+                                        </div>
+                                        <span>Grados</span>
                                     </NavLink>
                                 </li>
                             </div>

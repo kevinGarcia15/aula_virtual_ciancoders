@@ -21,7 +21,7 @@ export class FormEditar extends Component {
             <form onSubmit={handleSubmit}>
             <div className="modal-content">
                 <div className="modal-header">
-                    <h4 className="modal-title">Crear evento</h4>
+                    <h4 className="modal-title">Editar Evento</h4>
                     <button
                         type="button"
                         className="close"
