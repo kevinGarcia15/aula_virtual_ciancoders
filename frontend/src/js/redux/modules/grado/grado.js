@@ -3,8 +3,7 @@ import {createReducer} from "../baseReducer/baseReducer";
 import {api} from "api"
 import {NotificationManager} from "react-notifications"
 import { push } from "react-router-redux";
-
-
+import { initialize as initializeForm } from 'redux-form';
 
 // ------------------------------------
 // Constants
@@ -17,7 +16,33 @@ export const { reducers, initialState, actions } = createReducer(
     "/grado",
 );
 
-export const crearGrado = (data) => (dispatch) => {
+const leerGrado = id => (dispatch) => {
+    api.get(`grados/${id}`).then((response) => {
+        response.nivel = {value:response.nivel.id, label:response.nivel.nombre}
+        dispatch(initializeForm("gradoForm", response));
+    }).catch(() => {
+    }).finally(() => {
+
+    });
+};
+
+const editarGrado = (id, data) => (dispatch) => {
+    const formData={
+        nivel : data.nivel.value,
+        nombre :  data.nombre,
+        descripcion : data.descripcion
+    }
+    api.put(`grados/${id}`, formData).then(() => {
+        NotificationManager.success('Registro actualizado', 'Éxito', 3000);
+        dispatch(push("/grado"));
+    }).catch(() => {
+        NotificationManager.error('Error en la edición', 'ERROR', 0);
+    }).finally(() => {
+
+    });
+};
+
+const crearGrado = (data) => (dispatch) => {
     const formData={
         nivel : data.nivel.value,
         nombre :  data.nombre,
@@ -30,7 +55,7 @@ export const crearGrado = (data) => (dispatch) => {
                 "Exito",
                 3000
             );
-            dispatch(push("/maestros"));
+            dispatch(push("/grado"));
         })
         .catch((error) => {
             NotificationManager.error(
@@ -42,4 +67,6 @@ export const crearGrado = (data) => (dispatch) => {
 };
 
 actions["crearGrado"] = crearGrado
+actions["editarGrado"] = editarGrado
+actions["leerGrado"] = leerGrado
 export default handleActions(reducers, initialState);

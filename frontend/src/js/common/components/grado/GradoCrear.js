@@ -7,9 +7,26 @@ class GradoCrear extends Component {
         titulo: "Crear Grado",
     };
 
+    componentWillMount(){
+        const {leerGrado, match} = this.props;
+        const id = match.params.id;
+        if (id) {
+            this.setState({crear:false})
+            this.setState({titulo:"Actualizar Grado"})
+            leerGrado(id)
+        }
+    }
+
+    actualizarGrado = (data)=>{
+        const {editarGrado} = this.props;
+        const id = (data.id)
+        editarGrado(id,data)
+    }
+
     render() {
         const {crearGrado} = this.props
-        const funcionEnvio = crearGrado;
+        const {crear} = this.state
+        const funcionEnvio = crear ? crearGrado : this.actualizarGrado;
         return (
             <React.Fragment>
                 <div className="container mt-4">

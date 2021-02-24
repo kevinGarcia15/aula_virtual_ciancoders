@@ -66,6 +66,7 @@ module.exports = (
 
                 <ProtectedRoute exact path="/grado/" component={GradoListarContainer} />
                 <ProtectedRoute exact path="/grado/crear" component={GradoCrearContainer} />
+                <ProtectedRoute exact path="/grado/:id/editar" component={GradoCrearContainer} />
 
                 <ProtectedRoute exact path="/tabs" component={ExampleTabs} />
                 <Route component={NotFound} />
