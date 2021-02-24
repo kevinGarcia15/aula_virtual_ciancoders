@@ -11,7 +11,7 @@ from rest_framework.settings import api_settings
 #permission
 from api.permission.admin import IsAdminUser
 
-from api.models import Grado,Nivel
+from api.models import Grado
 from api.serializers import GradoSerializer, GradoReadSerializer
 
 class GradoViewset(viewsets.ModelViewSet):

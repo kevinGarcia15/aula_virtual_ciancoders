@@ -37,7 +37,7 @@ const listarCiclo = ()=>(dispach) => {
 };
 
 const listarNivel = ()=>(dispach) => {
-    api.get("/nivel")
+    api.get("/niveles")
         .then((response) => {
             dispach({ type: DASHBOARD_NIVEL, niveles: response.results });
         })

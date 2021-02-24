@@ -14,6 +14,10 @@ from api.serializers import NivelSerializer
 class NivelViewset(viewsets.ModelViewSet):
     queryset = Nivel.objects.all()
     serializer_class =  NivelSerializer
+    filter_backends = (DjangoFilterBackend, filters.SearchFilter, filters.OrderingFilter)
+    filter_fields = ("nombre",)
+    search_fields = ("nombre",)
+    ordering_fields = ("nombre",)
 
     def get_permissions(self):
         """" Define permisos para este recurso """

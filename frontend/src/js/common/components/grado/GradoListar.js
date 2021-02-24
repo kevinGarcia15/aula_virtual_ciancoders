@@ -39,7 +39,12 @@ class GradoListar extends Component {
                     <TableHeaderColumn dataField="descripcion" dataSort>
                         Descripcion
                     </TableHeaderColumn>
-                    <TableHeaderColumn dataField="nivel" dataSort>
+                    <TableHeaderColumn 
+                        dataField="nivel" 
+                        dataSort
+                        dataFormat={(cell, row)=>{
+                            return cell.nombre;
+                        }}>
                         Nivel
                     </TableHeaderColumn>
                     <TableHeaderColumn

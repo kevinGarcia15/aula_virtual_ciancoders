@@ -30,6 +30,7 @@ import DashboardMaestroContainer from './common/components/maestro/dashboard/das
 import DashboardEstudianteContainer from './common/components/estudiante/dashboard/DashboardEstudianteContainer'
 
 import GradoListarContainer from './common/components/grado/GradoListarContainer'
+import GradoCrearContainer from './common/components/grado/GradoCrearContainer'
 
 import 'bootstrap/dist/css/bootstrap.min.css';
 import '../assets/fonts/fonts.css';
@@ -64,6 +65,7 @@ module.exports = (
                 <ProtectedRoute exact path="/evento/:id/editar" component={EventoEditarContainer} />
 
                 <ProtectedRoute exact path="/grado/" component={GradoListarContainer} />
+                <ProtectedRoute exact path="/grado/crear" component={GradoCrearContainer} />
 
                 <ProtectedRoute exact path="/tabs" component={ExampleTabs} />
                 <Route component={NotFound} />
