@@ -6,6 +6,8 @@ import Switch from 'react-switch';
 import DayPicker from '../DayPicker';
 import FileUploader from '../FileUploader/FileUploader';
 import DatePicker from "react-date-picker";
+import TimePicker from 'react-time-picker';
+
 import _ from "lodash";
 
 
@@ -376,6 +378,24 @@ export const renderDatePicker = ({className, disabled, maxDate, minDate, input, 
                 disabled={disabled}
                 maxDate={maxDate}
                 minDate={minDate}
+                value={input.value}
+            />
+            {invalid && <div className="invalid-feedback">
+                {error}
+            </div>}
+        </div>
+    )
+};
+
+export const renderTimePicker = ({className, disabled, maxTime, minTime, input, meta: { touched, error } }) => {
+    const invalid = touched && error;
+    return (
+        <div className={classNames(`${className}`, { 'is-invalid': invalid })}>
+            <TimePicker
+                onChange={e => input.onChange(e)}
+                disabled={disabled}
+                maxTime={maxTime}
+                minTime={minTime}
                 value={input.value}
             />
             {invalid && <div className="invalid-feedback">

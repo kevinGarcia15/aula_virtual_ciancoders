@@ -12,14 +12,14 @@ from datetime import datetime
 
 #permission
 from api.permission.admin import IsAdminUser
-from api.models import Evento
+from api.models import Evento, Ciclo
 from api.serializers import EventoSerializer, EventoReadSerializer
 
 class EventoViewset(viewsets.ModelViewSet):
     now = datetime.now()
     fechaActual = now.strftime("%Y-%m-%d")
     anio = now.strftime("%Y")
-    queryset = Evento.objects.filter(ciclo_escolar__anio=anio, fecha__gte=fechaActual).order_by('fecha','hora')
+    queryset = Evento.objects.filter(ciclo_escolar__anio=anio, fecha__gte=fechaActual, activo=True).order_by('fecha','hora')
 
     def get_serializer_class(self):
         """Define serializer for API"""
@@ -35,3 +35,22 @@ class EventoViewset(viewsets.ModelViewSet):
         else:
             permission_classes = [IsAuthenticated,IsAdminUser]
         return [permission() for permission in permission_classes]
+
+    def create(self, request):
+        try:
+            #import pdb; pdb.set_trace()
+            data = request.data
+            serializer = EventoSerializer(data=data)
+            if serializer.is_valid(raise_exception=True):
+                ciclo = Ciclo.objects.get(anio=self.anio)                
+                Evento.objects.create(
+                    ciclo_escolar=ciclo,
+                    titulo = data.get("titulo"),
+                    descripcion = data.get("descripcion"),
+                    fecha = data.get("fecha"),
+                    hora = data.get("hora"),
+                )
+            return Response({"success":"data is success"}, status=status.HTTP_201_CREATED)
+        except TypeError as e:
+            return Response(e, status=status.HTTP_400_BAD_REQUEST)
+    

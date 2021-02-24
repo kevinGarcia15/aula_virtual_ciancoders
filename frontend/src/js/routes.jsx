@@ -23,6 +23,8 @@ import MaestroCrearContainer from './common/components/maestro/MaestroCrearConta
 import EstudianteListContainer from './common/components/estudiante/EstudianteListContainer'
 import EstudianteCrearContainer from './common/components/estudiante/EstudianteCrearContainer'
 
+import EventoEditarContainer from './common/components/evento/eventoEditarContainer'
+
 import DashboardAdminContainer from './common/components/administrador/dashboardAdminContainer'
 import DashboardMaestroContainer from './common/components/maestro/dashboard/dashboardMaestroContainer'
 import DashboardEstudianteContainer from './common/components/estudiante/dashboard/DashboardEstudianteContainer'
@@ -55,6 +57,8 @@ module.exports = (
                 <ProtectedRoute exact path="/estudiantes" component={EstudianteListContainer} />
                 <ProtectedRoute exact path="/estudiantes/crear" component={EstudianteCrearContainer} />
                 <ProtectedRoute exact path="/estudiantes/:id" component={EstudianteCrearContainer} />
+
+                <ProtectedRoute exact path="/evento/:id/editar" component={EventoEditarContainer} />
 
                 <ProtectedRoute exact path="/tabs" component={ExampleTabs} />
                 <Route component={NotFound} />

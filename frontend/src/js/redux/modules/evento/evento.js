@@ -10,7 +10,7 @@ export const { reducers, initialState, actions } = createReducer(
     "evento",
     "evento",
     "eventoForm",
-    "grids",
+    "/admin",
 );
 
 export default handleActions(reducers, initialState);
