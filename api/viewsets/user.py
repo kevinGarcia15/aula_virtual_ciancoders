@@ -9,6 +9,9 @@ from rest_framework.permissions import AllowAny, IsAuthenticated
 from rest_framework.response import Response
 from rest_framework.settings import api_settings
 from django.db import transaction
+from django.core.mail import EmailMultiAlternatives
+from django.template.loader import render_to_string
+
 
 from api.models import User, Profile, Rol
 from api.serializers import UserSerializer, UserReadSerializer, TokenProfileSerializer
@@ -31,7 +34,7 @@ class UserViewset(viewsets.ModelViewSet):
 
     def get_permissions(self):
         """" Define permisos para este recurso """
-        if self.action == "create" or self.action == "token" or self.action == "update_password":
+        if self.action == "create" or self.action == "token" or self.action == "update_password" or self.action == "emailverify":
             permission_classes = [AllowAny]
         else:
             permission_classes = [IsAuthenticated]
@@ -73,6 +76,24 @@ class UserViewset(viewsets.ModelViewSet):
                 return Response({"password": "La contrasenia actual es incorrecta"}, status=status.HTTP_400_BAD_REQUEST)                
         except:
             return Response({"password": "the password is not changed"}, status=status.HTTP_400_BAD_REQUEST)
+
+    @action(methods=["post"], detail=False)
+    def emailverify(self, request):
+        data =  request.data
+        try:
+            if User.objects.get(email = data.get("correo")):
+                subject, from_email, to = 'Recupera Contrasenia', 'team@aulavirtual.com', 'gkevin@gmail.com'
+                content = render_to_string(
+                    'emails/users/reset_password.html',
+                    {'token': '456897sadsa', 'host':'http://0.0.0.0:8080/#', 'email':data.get("correo") }
+                )
+                msg = EmailMultiAlternatives(subject, content, from_email, [to])
+                msg.attach_alternative(content, "text/html")
+                msg.send()
+
+                return Response({"info": "Se le ha enviado un correo electronco, siga las instrucciones para recuperar su contrasenia"}, status=status.HTTP_200_OK)
+        except:
+            return Response({"info": "Usuario no encontrado"}, status=status.HTTP_400_BAD_REQUEST)
 
 
     @action(methods=["put"], detail=False)
