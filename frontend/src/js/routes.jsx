@@ -35,6 +35,9 @@ import GradoCrearContainer from './common/components/grado/GradoCrearContainer'
 import SeccionListarContainer from './common/components/seccion/SeccionListarContainer'
 import SeccionCrearContainer from './common/components/seccion/SeccionCrearContainer'
 
+import CursoListarContainer from './common/components/curso/CursoListarContainer'
+import CursoCrearContainer from './common/components/curso/CursoCrearContainer'
+
 import 'bootstrap/dist/css/bootstrap.min.css';
 import '../assets/fonts/fonts.css';
 require('../../node_modules/bootstrap/dist/css/bootstrap.css');
@@ -74,6 +77,10 @@ module.exports = (
                 <ProtectedRoute exact path="/seccion/" component={SeccionListarContainer} />
                 <ProtectedRoute exact path="/seccion/crear" component={SeccionCrearContainer} />
                 <ProtectedRoute exact path="/seccion/:id/editar" component={SeccionCrearContainer} />
+
+                <ProtectedRoute exact path="/curso/" component={CursoListarContainer} />
+                <ProtectedRoute exact path="/curso/crear" component={CursoCrearContainer} />
+                <ProtectedRoute exact path="/curso/:id/editar" component={CursoCrearContainer} />
 
                 <ProtectedRoute exact path="/tabs" component={ExampleTabs} />
                 <Route component={NotFound} />

@@ -15,6 +15,7 @@ import evento from './modules/evento/evento'
 import RolEstudiante from './modules/estudiante/RolEstudiante'
 import grado from './modules/grado/grado'
 import seccion from './modules/seccion/seccion'
+import curso from './modules/curso/curso'
 
 export default combineReducers({
     form: formReducer,
@@ -32,4 +33,5 @@ export default combineReducers({
     RolEstudiante,
     grado,
     seccion,
+    curso,
 });
