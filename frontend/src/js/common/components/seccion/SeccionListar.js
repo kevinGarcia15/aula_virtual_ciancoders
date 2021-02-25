@@ -1,10 +1,10 @@
-import React, { Component } from "react";
+import React, { Component } from 'react'
 import { Link } from "react-router-dom";
 
 import Grid from "../Utils/Grid";
 import { standardActions } from "../Utils/Grid/StandardActions";
 
-class GradoListar extends Component {
+class SeccionListar extends Component {
     componentDidMount() {
         const { listar } = this.props;
         listar()
@@ -15,10 +15,10 @@ class GradoListar extends Component {
         return (
             <React.Fragment>
                 <Link
-                    to="/grado/crear"
+                    to="/seccion/crear"
                     className="btn btn-primary mt-4 mb-4"
                 >
-                    Nuevo Grado
+                    Nueva Seccion
                 </Link>
                 <Grid
                     hover
@@ -35,23 +35,12 @@ class GradoListar extends Component {
                     >
                         Nombre
                     </TableHeaderColumn>
-                    <TableHeaderColumn dataField="descripcion" dataSort>
-                        Descripcion
-                    </TableHeaderColumn>
-                    <TableHeaderColumn 
-                        dataField="nivel" 
-                        dataSort
-                        dataFormat={(cell, row)=>{
-                            return cell.nombre;
-                        }}>
-                        Nivel
-                    </TableHeaderColumn>
                     <TableHeaderColumn
                         dataField="id"
                         dataAlign="center"
                         dataSort
                         dataFormat={standardActions({
-                            editar: "grado",
+                            editar: "seccion",
                             eliminar: eliminar,
                         })}
                     >
@@ -63,4 +52,5 @@ class GradoListar extends Component {
     }
 }
 
-export default GradoListar;
+
+export default SeccionListar
