@@ -2,15 +2,12 @@ import React, { Component } from "react";
 import { reduxForm, Field } from "redux-form";
 import {
     renderField,
-    renderDatePicker,
     renderTimePicker,
     renderDayPicker
 } from "../Utils/renderField/renderField";
 import {
     validate,
-    validatorFromFunction,
     validators,
-    combine,
 } from "validate-redux-form";
 
 

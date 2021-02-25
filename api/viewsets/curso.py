@@ -16,7 +16,7 @@ from api.serializers import CursoSerializer, CursoReadSerializer
 
 class CursoViewset(viewsets.ModelViewSet):
     """Curso viewSet"""
-    queryset = Curso.objects.filter(activo=True)
+    queryset = Curso.objects.filter(activo=True).order_by("nombre")
     filter_backends = (DjangoFilterBackend, filters.SearchFilter, filters.OrderingFilter)
     filter_fields = ("nombre",)
     search_fields = ("nombre",)
