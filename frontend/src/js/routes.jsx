@@ -17,6 +17,7 @@ import ExampleTabs from './common/components/Examples/Tabs/Tabs';
 
 import CambioContraseniaContainer from './common/components/LoginRegister/Profile/CambioContraseniaContainer'
 import RecuperarContainer from './common/components/LoginRegister/recuperarContrasenia/RecuperarContainer'
+import ResetPasswordContainer from './common/components/LoginRegister/recuperarContrasenia/ResetPasswordContainer'
 
 import MaestrosListContainer from './common/components/maestro/MaestroListContainer'
 import MaestroCrearContainer from './common/components/maestro/MaestroCrearContainer'
@@ -61,6 +62,7 @@ module.exports = (
 
                 <Route exact path="/cambiocontrasenia" component={CambioContraseniaContainer} />
                 <Route exact path="/forgotpassword" component={RecuperarContainer} />
+                <Route exact path="/resetpassword/:token" component={ResetPasswordContainer} />
 
                 <ProtectedRoute exact path="/maestros" component={MaestrosListContainer} />
                 <ProtectedRoute exact path="/maestros/crear" component={MaestroCrearContainer} />

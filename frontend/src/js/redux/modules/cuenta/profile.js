@@ -75,7 +75,7 @@ export const verifyEmail = (data = {}) => (dispatch) => {
             NotificationManager.success(
                 "Se ha enviado un enlace a tu correo electronico, sigue las intrucciones para recuperar tu contraseña",
                 "Éxito",
-                6000
+                0
             );
             dispatch(push("/login"));
         })
@@ -87,10 +87,48 @@ export const verifyEmail = (data = {}) => (dispatch) => {
         });
 };
 
+const verifiacarTokenResetPass = token => (dispatch) => {
+    const data = {
+        "token" :token
+    }
+    api.post("user/verificar_token_reset_pass", data).then((response) => {
+        NotificationManager.success(
+            "Puede cambiar su contraseña",
+            "Éxito",
+            3000
+        );
+    }).catch((error) => {
+        NotificationManager.error("El enlace ha expirado o no es valido", "ERROR", 3000);
+        dispatch(push("/login"));
+    })
+};
+
+export const resetPassword = (data) => (dispatch, getStore) => {
+    dispatch(setLoader(true));
+    api.put("/user/reset_password", data)
+        .then((response) => {
+            NotificationManager.success(
+                "Datos actualizados exitosamente, ahora puede volver a logearse",
+                "SUCCESS",
+                5000
+            );
+            dispatch(push("/login"));
+        })
+        .catch(() => {
+            NotificationManager.error(
+                "No se pudo actualizar su contrasenia, es probable que el enlace haya vencido",
+                "ERROR",
+                0
+            );
+        })
+        .finally(() => {
+            dispatch(setLoader(false));
+        });
+};
+
 export const getMe = () => (dispatch) => {
     api.get("/user/me")
         .then((response) => {
-            console.log({ getMe: response });
             dispatch(initializeForm("profile", response));
         })
         .catch(() => {})
@@ -102,6 +140,8 @@ export const actions = {
     updatePassword,
     getMe,
     verifyEmail,
+    verifiacarTokenResetPass,
+    resetPassword,
 };
 
 export const reducers = {

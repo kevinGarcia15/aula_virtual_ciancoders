@@ -1,6 +1,9 @@
 import json
+import jwt
 
+from django.conf import settings
 from django.core.files import File
+from django.utils import timezone
 from django_filters.rest_framework import DjangoFilterBackend
 from rest_framework import status, filters, viewsets
 from rest_framework.authtoken.models import Token
@@ -12,6 +15,8 @@ from django.db import transaction
 from django.core.mail import EmailMultiAlternatives
 from django.template.loader import render_to_string
 
+#utilities
+from datetime import timedelta
 
 from api.models import User, Profile, Rol
 from api.serializers import UserSerializer, UserReadSerializer, TokenProfileSerializer
@@ -34,7 +39,13 @@ class UserViewset(viewsets.ModelViewSet):
 
     def get_permissions(self):
         """" Define permisos para este recurso """
-        if self.action == "create" or self.action == "token" or self.action == "update_password" or self.action == "emailverify":
+        if (
+            self.action == "create" 
+            or self.action == "token" 
+            or self.action == "update_password" 
+            or self.action == "emailverify" 
+            or self.action == "verificar_token_reset_pass"
+            or self.action == "reset_password"):
             permission_classes = [AllowAny]
         else:
             permission_classes = [IsAuthenticated]
@@ -68,7 +79,6 @@ class UserViewset(viewsets.ModelViewSet):
                 if usuario.check_password(request.data["currentPassword"]):
                     usuario.set_password(request.data["password"])
                     usuario.save()
-                    #import pdb; pdb.set_trace()
                     profile = Profile.objects.get(user=usuario)
                     profile.is_first_login = False
                     profile.save()
@@ -79,13 +89,25 @@ class UserViewset(viewsets.ModelViewSet):
 
     @action(methods=["post"], detail=False)
     def emailverify(self, request):
+        """Verifica si el email que ingreso existe en la BD,
+        si existe, envia un email al correo para reestablecer la contrasenia
+        """
         data =  request.data
         try:
             if User.objects.get(email = data.get("correo")):
+                #generacion de token
+                exp_date =  timezone.now() + timedelta(minutes=15)
+                payload = {
+                    "email": data.get("correo"),
+                    "exp": int(exp_date.timestamp()),
+                    "type":"reset_password"
+                }
+                token =  jwt.encode(payload, settings.SECRET_KEY, algorithm='HS256')
+
                 subject, from_email, to = 'Recupera Contrasenia', 'team@aulavirtual.com', 'gkevin@gmail.com'
                 content = render_to_string(
                     'emails/users/reset_password.html',
-                    {'token': '456897sadsa', 'host':'http://0.0.0.0:8080/#', 'email':data.get("correo") }
+                    {'token': token, 'host':'http://0.0.0.0:8080/#', 'email':data.get("correo") }
                 )
                 msg = EmailMultiAlternatives(subject, content, from_email, [to])
                 msg.attach_alternative(content, "text/html")
@@ -94,6 +116,37 @@ class UserViewset(viewsets.ModelViewSet):
                 return Response({"info": "Se le ha enviado un correo electronco, siga las instrucciones para recuperar su contrasenia"}, status=status.HTTP_200_OK)
         except:
             return Response({"info": "Usuario no encontrado"}, status=status.HTTP_400_BAD_REQUEST)
+ 
+
+    @action(methods=["post"], detail=False)
+    def verificar_token_reset_pass(self, request):
+        """Verifica si el token es valido y no ha caducado"""
+        #import pdb; pdb.set_trace()
+        try:
+            token = request.data.get("token")
+            secret_key = settings.SECRET_KEY
+            jwt.decode(token, secret_key, algorithms=["HS256"])
+            return Response({"info": "Token valido"}, status=status.HTTP_200_OK)
+        except:
+            return Response({"info": "Token caducado o no valido"}, status=status.HTTP_400_BAD_REQUEST)
+
+
+    @action(methods=["put"], detail=False)
+    def reset_password(self, request):
+        """Resetea el password"""
+        #import pdb; pdb.set_trace()
+        try:
+            data = request.data
+            token = data.get("token")
+            secret_key = settings.SECRET_KEY
+            decode = jwt.decode(token, secret_key, algorithms=["HS256"])
+            usuario = User.objects.get(email=decode.get("email"))
+            with transaction.atomic():
+                usuario.set_password(data.get("password"))
+                usuario.save()
+                return Response({"password": "change success"}, status=status.HTTP_200_OK)
+        except:
+            return Response({"password": "the password is not changed"}, status=status.HTTP_400_BAD_REQUEST)
 
 
     @action(methods=["put"], detail=False)

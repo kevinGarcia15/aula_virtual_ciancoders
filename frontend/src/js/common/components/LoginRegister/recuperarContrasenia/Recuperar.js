@@ -15,6 +15,7 @@ class Recuperar extends Component {
 
     render() {
         const { verifyEmail, loader } = this.props;
+        console.log(this.props)
         return (
             <div className="blue-gradient-bg">
                 <div className="d-flex flex-column align-items-center pt-3 bienvenida">
@@ -24,7 +25,7 @@ class Recuperar extends Component {
                 <div className="login-wrapper">
                     <div className="card card-login col-lg-3 col-md-4 col-11">
                         <h5 className="text-center pv">Recuperar contraseña</h5>
-                        <LoadMask loading={loader} light>
+                        <LoadMask loading={loader} light type={"Grid"}>
                             <RecuperarForm onSubmit={verifyEmail} />
                             <span><Link to="/login">Regresar</Link></span>
                         </LoadMask>
