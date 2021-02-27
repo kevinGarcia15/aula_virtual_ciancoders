@@ -36,7 +36,13 @@ export class MaestroList extends Component {
                         >
                         Nombre
                     </TableHeaderColumn>
-                    <TableHeaderColumn dataField="profesion" dataSort>
+                    <TableHeaderColumn 
+                        dataField="profesion" 
+                        dataSort
+                        dataFormat={(cell, row)=>{
+                            return cell.nombre;
+                        }}
+                        >
                         Profesion
                     </TableHeaderColumn>
                     <TableHeaderColumn 

@@ -6,6 +6,7 @@ import {
     renderNumber,
     renderFilePicker,
     SelectField,
+    AsyncSelectField
 } from "../../Utils/renderField/renderField";
 import {
     validate,
@@ -19,7 +20,6 @@ export class RegisterForm extends Component {
         let editar = window.location.href.includes("editar");
         let disabled = false;
         const { handleSubmit, crear, url, titulo, selectOpcion } = this.props;
-
         crear==false && editar==false ? (disabled = true) : (disabled = false);
         return (
             <form className="row" onSubmit={handleSubmit}>
@@ -103,12 +103,11 @@ export class RegisterForm extends Component {
                                             </label>
                                             <Field
                                                 name="profesion"
-                                                options={selectOpcion}
-                                                component={SelectField}
+                                                loadOptions={selectOpcion}
+                                                component={AsyncSelectField}
                                                 disabled={disabled}
-
                                             />
-                                        </div>
+                                         </div>
                                     )}
                                     <label>Teléfono</label>
                                     <Field

@@ -9,10 +9,20 @@ const GUARDAR_REGISTRO_MAESTRO = "GUARDAR_REGISTRO_MAESTRO";
 const GUARDAR_LISTADO_PROFESION = "GUARDAR_LISTADO_PROFESION";
 
 /**Listar profesiones para usarlo en el select de nuestro formulario */
-export const listarProfesion = () => (dispach) => {
-    api.get("/profesion")
-        .then((response) => {
-            dispach({ type: GUARDAR_LISTADO_PROFESION, profesion: response });
+const listarProfesion = (search) => () => {
+    return api.get("/profesion", {search})
+        .then((data) => {
+            //dispach({ type: GUARDAR_LISTADO_PROFESION, profesion: data });
+            if (data) {
+                const profesiones = [];
+                data.results.forEach((profesion) => {
+                    profesiones.push({
+                        value: profesion.id,
+                        label: profesion.nombre,
+                    });
+                });
+                return profesiones;
+            }
         })
         .catch((error) => {
             NotificationManager.error(
@@ -50,7 +60,8 @@ export const registroMaestro = () => (dispatch, getStore) => {
             "last_name":data.last_name,
             "profile":{
                 "phone": data.phone,
-                "address":data.address                }
+                "address":data.address                
+            }
         }
     }
     api.post("/maestro", formData)
@@ -74,16 +85,20 @@ export const registroMaestro = () => (dispatch, getStore) => {
 export const leer = (id) => (dispatch) => {
     api.get(`/maestro/${id}`)
         .then((response) => {
+            console.log(response)
             dispatch({type:GUARDAR_REGISTRO_MAESTRO, registro:response})
+            const maestro = response.maestro_profile
+            const profesion = response.profesion
             const datosForm={
                 "id":response.id,
-                "address":response.maestro_profile.address,
-                "phone":response.maestro_profile.phone,
-                "rol":response.maestro_profile.rol,
-                "email":response.maestro_profile.user.email,
-                "first_name":response.maestro_profile.user.first_name,
-                "last_name":response.maestro_profile.user.last_name,
-                "username":response.maestro_profile.user.username,
+                "address":maestro.address,
+                "phone":maestro.phone,
+                "rol":maestro.rol,
+                "email":maestro.user.email,
+                "first_name":maestro.user.first_name,
+                "last_name":maestro.user.last_name,
+                "username":maestro.user.username,
+                "profesion":{"label":profesion.nombre, "value":profesion.id}
             }
             dispatch(initializeForm("maestroForm", datosForm));
         })

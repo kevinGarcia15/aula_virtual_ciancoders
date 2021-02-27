@@ -10,7 +10,7 @@ export class MaestroCrear extends Component {
         titulo: "Ingresar Maestro",
     };
     componentWillMount() {
-        const { leer, match, listarProfesion } = this.props;
+        const { leer, match} = this.props;
         const id = match.params.id;
         if (id) {
             leer(id);
@@ -18,18 +18,19 @@ export class MaestroCrear extends Component {
             this.setState({ titulo: "Ver Maestro" });
         }
 
-        listarProfesion()
+        //listarProfesion()
     }
     render() {
-        const { registroMaestro, profesion } = this.props;
-        
+        const { registroMaestro, profesion, listarProfesion} = this.props;
+        /*
         const selectOpcion = profesion.results.map((obj)=>{
             var retobj={};
             retobj['label']=obj.nombre;
             retobj['value']=obj.id;
             return retobj;
-        })
+        })*/
 
+       // const selectOpcion = [{"lavel" : "kasdf", "value" : "das"},{"lavel" : "kasdf", "value" : "das"}]
         const funcionEnvio = registroMaestro;
         return (
             <React.Fragment>
@@ -39,7 +40,7 @@ export class MaestroCrear extends Component {
                         crear={this.state.crear}
                         url="/maestros"
                         titulo={this.state.titulo}
-                        selectOpcion={selectOpcion}
+                        selectOpcion={listarProfesion}
                     />
                 </div>
             </React.Fragment>

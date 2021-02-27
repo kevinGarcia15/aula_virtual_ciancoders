@@ -10,7 +10,6 @@ from api.serializers import ProfileSerializer, ProfileAndUserSerializer, CreateP
 
 class MaestroSerializer(serializers.ModelSerializer):
     maestro_profile = ProfileAndUserSerializer(read_only=True)
-    profesion = serializers.StringRelatedField(read_only=True)
 
     class Meta:
         """Meta class"""
@@ -18,6 +17,7 @@ class MaestroSerializer(serializers.ModelSerializer):
         fields = (
             'id', 'profesion', 'maestro_profile'
         )
+        depth=1
 
 class CrearMaestroSerializer(serializers.ModelSerializer):
     """Serializer para crear maestros"""
