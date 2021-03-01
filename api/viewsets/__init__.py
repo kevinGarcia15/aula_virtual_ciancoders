@@ -8,3 +8,4 @@ from .evento import EventoViewset
 from .grado import GradoViewset
 from .seccion import SeccionViewset
 from .curso import CursoViewset
+from .ciclo import CicloViewset

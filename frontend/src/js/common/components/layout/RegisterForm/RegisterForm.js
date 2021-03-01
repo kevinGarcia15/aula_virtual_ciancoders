@@ -119,10 +119,11 @@ export class RegisterForm extends Component {
                                     <label>Teléfono</label>
                                     <Field
                                         name="phone"
-                                        decimalScale={2}
-                                        numberFormat="#### #### #### ####"
+                                        numberFormat={"+(502) ####-####"}
+                                        placeholder="Teléfono"
                                         component={renderNumber}
                                         disabled={disabled}
+                                        className="form-control"
                                     />
                                     <label>Dirección</label>
                                     <Field

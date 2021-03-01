@@ -13,3 +13,4 @@ from .tarea import TareaSerializer
 from .grado import GradoSerializer, GradoReadSerializer
 from .seccion import SeccionSerializer, SeccionReadSerializer
 from .curso import CursoSerializer, CursoReadSerializer
+from .ciclo import CicloReadSerializer, CicloSerializer

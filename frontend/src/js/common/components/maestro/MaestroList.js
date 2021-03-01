@@ -16,8 +16,11 @@ export class MaestroList extends Component {
         const { data, loader, eliminar } = this.props;
         return (
             <React.Fragment>
-                <Link to="/maestros/crear" className="btn btn-primary mt-4 mb-4">
-                    Ingresar Maestro
+                <Link to="/maestros/crear" className="btn btn-primary btn-lg mt-4 mb-4">
+                    Crear Maestro
+                </Link>
+                <Link to="/asignacion/crear" className="btn btn-success btn-lg mt-4 mb-4 ml-2">
+                    Asignar maestro a curso
                 </Link>
                 <Grid
                     hover
