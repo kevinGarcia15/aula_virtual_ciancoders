@@ -10,8 +10,9 @@ class AsignacionCrear extends Component {
             obtenerSecciones,
             obtenerGrados,
             obtenerCiclos,
+            crearAsignacion,
         } = this.props;
-        const funcionEnvio = crear;
+        const funcionEnvio = crearAsignacion;
         return (
             <div className="container mt-4">
                 <AsignacionForm

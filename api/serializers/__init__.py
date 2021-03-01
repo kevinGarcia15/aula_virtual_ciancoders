@@ -7,7 +7,7 @@ from .maestro import MaestroSerializer, CrearMaestroSerializer, ActualizarMaestr
 from .estudiante import EstudianteSerializer,EstudianteCrearSerializer
 from .profesion import ProfesionSerializer
 from .nivel import NivelSerializer
-from .asignacion import AsignacionSerializer,AsignacionTareaSerializer
+from .asignacion import AsignacionSerializer,AsignacionTareaSerializer, AsignacionCrearSerializer
 from .evento import EventoSerializer, EventoReadSerializer
 from .tarea import TareaSerializer
 from .grado import GradoSerializer, GradoReadSerializer

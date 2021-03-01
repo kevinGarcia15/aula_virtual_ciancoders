@@ -2,6 +2,7 @@ import { handleActions } from "redux-actions";
 import { createReducer } from "../baseReducer/baseReducer";
 import { NotificationManager } from "react-notifications";
 import { api } from "api";
+import { push } from "react-router-redux";
 // ------------------------------------
 // Constants
 // ------------------------------------
@@ -13,6 +14,33 @@ export const { reducers, initialState, actions } = createReducer(
     "/asigncion"
 );
 
+const crearAsignacion = (data) => (dispatch) => {
+    const formData={
+        maestro : data.maestro.value,
+        curso : data.curso.value,
+        seccion : data.seccion.value,
+        grado : data.grado.value,
+        asignacion_ciclo : data.asignacion_ciclo.value,
+        descripcion : data.descripcion
+    }
+    console.log(formData)
+    api.post("/asignaciones", formData)
+        .then((response) => {
+            NotificationManager.success(
+                "Registro crado exitosamente",
+                "Exito",
+                3000
+            );
+            dispatch(push("/maestros"));
+        })
+        .catch((error) => {
+            NotificationManager.error(
+                "Ocurrio un error al registrar al maestro",
+                "ERROR",
+                3000
+            );
+        });
+};
 const obtenerMaestros = (search) => () => {
     return api
         .get("/maestro", { search })
@@ -140,5 +168,6 @@ actions["obtenerCursos"] = obtenerCursos;
 actions["obtenerSecciones"] = obtenerSecciones;
 actions["obtenerGrados"] = obtenerGrados;
 actions["obtenerCiclos"] = obtenerCiclos;
+actions["crearAsignacion"] = crearAsignacion;
 
 export default handleActions(reducers, initialState);

@@ -31,3 +31,13 @@ class AsignacionTareaSerializer(serializers.ModelSerializer):
         fields = (
             'id','curso','asignaciones'
         )
+
+
+class AsignacionCrearSerializer(serializers.ModelSerializer):
+    class Meta:
+        """Meta class"""
+
+        model = Asignacion
+        fields = (
+            'id','maestro', 'asignacion_ciclo', 'curso','grado','seccion','descripcion'
+        )

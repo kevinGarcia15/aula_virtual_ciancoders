@@ -67,7 +67,7 @@ class AsignacionForm extends Component {
                                             Ciclo escolar
                                         </label>
                                         <Field
-                                            name="ciclo"
+                                            name="asignacion_ciclo"
                                             loadOptions={obtenerCiclos}
                                             component={AsyncSelectField}
                                         />
