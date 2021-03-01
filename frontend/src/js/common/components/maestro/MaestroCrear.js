@@ -1,7 +1,4 @@
 import React, { Component } from "react";
-//import Button from "reactstrap/lib/Button";
-//import {reduxForm } from "redux-form";
-//import { validate, validatorFromFunction, validators, combine } from 'validate-redux-form';
 import RegisterForm from "../layout/RegisterForm/RegisterForm";
 
 export class MaestroCrear extends Component {
@@ -15,23 +12,12 @@ export class MaestroCrear extends Component {
         if (id) {
             leer(id);
             this.setState({ crear: false });
-            this.setState({ titulo: "Ver Maestro" });
+            this.setState({ titulo: "Maestro" });
         }
-
-        //listarProfesion()
     }
     render() {
-        const { registroMaestro, profesion, listarProfesion} = this.props;
-        /*
-        const selectOpcion = profesion.results.map((obj)=>{
-            var retobj={};
-            retobj['label']=obj.nombre;
-            retobj['value']=obj.id;
-            return retobj;
-        })*/
-
-       // const selectOpcion = [{"lavel" : "kasdf", "value" : "das"},{"lavel" : "kasdf", "value" : "das"}]
-        const funcionEnvio = registroMaestro;
+        const { registroMaestro, listarProfesion, actualizarMaestro} = this.props;
+        const funcionEnvio = this.state.crear ? registroMaestro : actualizarMaestro;
         return (
             <React.Fragment>
                 <div className="container mt-3">

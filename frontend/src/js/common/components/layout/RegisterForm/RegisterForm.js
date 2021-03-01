@@ -4,9 +4,7 @@ import { reduxForm, Field } from "redux-form";
 import {
     renderField,
     renderNumber,
-    renderFilePicker,
-    SelectField,
-    AsyncSelectField
+    AsyncSelectField,
 } from "../../Utils/renderField/renderField";
 import {
     validate,
@@ -20,11 +18,15 @@ export class RegisterForm extends Component {
         let editar = window.location.href.includes("editar");
         let disabled = false;
         const { handleSubmit, crear, url, titulo, selectOpcion } = this.props;
-        crear==false && editar==false ? (disabled = true) : (disabled = false);
+        crear == false && editar == false
+            ? (disabled = true)
+            : (disabled = false);
         return (
             <form className="row" onSubmit={handleSubmit}>
                 <div className="col-12">
-                    <Link to={url} className="btn btn-primary btn-sm">Atras</Link>
+                    <Link to={url} className="btn btn-primary btn-sm">
+                        Atras
+                    </Link>
                     <h3 className="text-center">{titulo}</h3>
                 </div>
                 <div className="col-12">
@@ -47,21 +49,27 @@ export class RegisterForm extends Component {
                                         component={renderField}
                                         disabled={disabled}
                                     />
-                                    <label>Correo</label>
-                                    <Field
-                                        name="email"
-                                        component={renderField}
-                                        disabled={disabled}
-                                    />
-                                    <label>Usuario</label>
-                                    <Field
-                                        name="username"
-                                        component={renderField}
-                                        disabled={disabled}
-                                    />
-                                    {crear ? 
+                                    {editar == false ? (
                                         <div>
-                                            <label htmlFor="password">Contraseña</label>
+                                            <label>Correo</label>
+                                            <Field
+                                                name="email"
+                                                component={renderField}
+                                                disabled={disabled}
+                                            />
+                                            <label>Usuario</label>
+                                            <Field
+                                                name="username"
+                                                component={renderField}
+                                                disabled={disabled}
+                                            />
+                                        </div>
+                                    ) : null}
+                                    {crear ? (
+                                        <div>
+                                            <label htmlFor="password">
+                                                Contraseña
+                                            </label>
                                             <Field
                                                 name="password"
                                                 label="Contraseña"
@@ -78,10 +86,9 @@ export class RegisterForm extends Component {
                                                 component={renderField}
                                                 type="password"
                                                 className="form-control"
-                                                />
-                                        </div>:
-                                        null
-                                    }
+                                            />
+                                        </div>
+                                    ) : null}
                                 </div>
                             </div>
                         </div>
@@ -107,7 +114,7 @@ export class RegisterForm extends Component {
                                                 component={AsyncSelectField}
                                                 disabled={disabled}
                                             />
-                                         </div>
+                                        </div>
                                     )}
                                     <label>Teléfono</label>
                                     <Field
@@ -144,31 +151,30 @@ export class RegisterForm extends Component {
                         </div>
                     </div>
                 </div>
-                {crear||editar ?
-                <div className="col-12 mt-3">
-                    <div className="card">
-                        <div className="card-body">
-                            <div className="row justify-content-end">
-                                <div className="col-3">
-                                    <Link
-                                        to={url}
-                                        className="btn btn-secondary mr-2"
-                                    >
-                                        Cancelar
-                                    </Link>
-                                    <button
-                                        className="btn btn-primary"
-                                        type="submit"
-                                    >
-                                        Guardar
-                                    </button>
+                {crear || editar ? (
+                    <div className="col-12 mt-3">
+                        <div className="card">
+                            <div className="card-body">
+                                <div className="row justify-content-end">
+                                    <div className="col-3">
+                                        <Link
+                                            to={url}
+                                            className="btn btn-secondary mr-2"
+                                        >
+                                            Cancelar
+                                        </Link>
+                                        <button
+                                            className="btn btn-primary"
+                                            type="submit"
+                                        >
+                                            Guardar
+                                        </button>
+                                    </div>
                                 </div>
                             </div>
                         </div>
                     </div>
-                </div>:
-                null
-                }
+                ) : null}
             </form>
         );
     }

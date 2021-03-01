@@ -50,8 +50,9 @@ export const listar = () => (dispach) => {
 
 export const registroMaestro = () => (dispatch, getStore) => {
     const data = getStore().form.maestroForm.values;
+    console.log(data)
     const formData={
-        "profesion": data.profesion,
+        "profesion": data.profesion.value,
         "user":{
             "username":data.username,
             "password": data.password,
@@ -81,6 +82,39 @@ export const registroMaestro = () => (dispatch, getStore) => {
             );
         });
 };
+
+export const actualizarMaestro = () => (dispatch, getStore) => {
+    const data = getStore().form.maestroForm.values;
+    const id = data.id
+    const formData={
+        "profesion": data.profesion.value,
+        "user":{
+            "first_name": data.first_name,
+            "last_name":data.last_name,
+            "profile":{
+                "phone": data.phone,
+                "address":data.address                
+            }
+        }
+    }
+    api.put(`/maestro/${id}`, formData)
+        .then((response) => {
+            NotificationManager.success(
+                "Registro crado exitosamente",
+                "Exito",
+                3000
+            );
+            dispatch(push("/maestros"));
+        })
+        .catch((error) => {
+            NotificationManager.error(
+                "Ocurrio un error al registrar al maestro",
+                "ERROR",
+                3000
+            );
+        });
+};
+
 
 export const leer = (id) => (dispatch) => {
     api.get(`/maestro/${id}`)
@@ -136,7 +170,8 @@ export const actions = {
     listarProfesion,
     registroMaestro,
     leer,
-    eliminar
+    eliminar,
+    actualizarMaestro
 };
 
 export const reducers = {

@@ -68,7 +68,20 @@ class CreateProfileSerializer(serializers.ModelSerializer):
             'password',
             'email',
             'profile',
-        )      
+        )   
+
+class ActualizarProfileSerializer(serializers.ModelSerializer):
+    """verifica los datos al actualizar un usuario"""
+
+    profile = ProfileCreateSerializer(required=True)
+
+    class Meta:
+        model = User
+        fields = (
+            'first_name',
+            'last_name',
+            'profile',
+        )        
 
 class TokenProfileSerializer(serializers.ModelSerializer):
     """retorna los datos del perfil para usarlo en la autenticacion"""
