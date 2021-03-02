@@ -55,7 +55,17 @@ class AsignacionViewset(viewsets.ModelViewSet):
             nueva_asignacion = estudiante.asignacion_estudiante.add(asignacion)
             serializer = EstudianteSerializer(nueva_asignacion)
 
-            return Response({"estudiantes" : serializer.data}, status=status.HTTP_200_OK)
+            return Response(serializer.data, status=status.HTTP_200_OK)
         except TypeError as e:
             return Response(e, status=status.HTTP_400_BAD_REQUEST)
-        
+
+    @action(methods=["post"], detail=False)
+    def elimiar_alumno(self, request):
+        data = request.data
+        try:
+            asignacion = Asignacion.objects.get(pk=data.get("id_asignacion"))
+            estudiante = Estudiante.objects.get(pk=data.get("id_estudiante"))
+            estudiante.asignacion_estudiante.remove(asignacion)
+            return Response("eliminacion satisfactoria", status=status.HTTP_200_OK)
+        except TypeError as e:
+            return Response(e, status=status.HTTP_400_BAD_REQUEST)        

@@ -16,7 +16,6 @@ const listarEstudiantes = (id) => (dispatch) => {
             const data = {
                 results: response.estudiantes,
             };
-            console.log(data)
             dispatch({
                 type: GUARDAR_LISTADO_ESTUDIANTES_ASIGNADOS,
                 data: data,
@@ -74,10 +73,33 @@ const asignar = (id, data) => (dispatch) => {
         });
 };
 
+export const eliminar = (id, id_asignacion)=>(dispatch)=>{
+    const formData = {
+        "id_estudiante": id,
+        "id_asignacion": parseInt(id_asignacion)
+    }
+    api.post('/asignaciones/elimiar_alumno',formData)
+    .then((response) => {
+        NotificationManager.success(
+            "Alumno eliminado exitosamente",
+            "Exito",
+            3000
+        );
+        dispatch(listarEstudiantes(id_asignacion));
+    })
+    .catch((error) => {
+        NotificationManager.error(
+            "Ocurrio un error al eliminar el registro",
+            "ERROR",
+            3000
+        );
+    });
+}
 export const actions = {
     listarEstudiantes,
     obtenerEstudiantes,
     asignar,
+    eliminar,
 };
 
 export const reducers = {

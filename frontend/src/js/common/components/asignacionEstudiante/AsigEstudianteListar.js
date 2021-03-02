@@ -15,9 +15,15 @@ class AsigEstudianteListar extends Component {
         const id = match.params.id
         asignar(id,data)
     }
+    eliminarEstudiante = (id)=>{
+        const {match, eliminar} = this.props;
+        const id_asignacion = match.params.id
+        eliminar(id,id_asignacion)
+    }
     render() {
         const { data, loader, curso, obtenerEstudiantes } = this.props;
         const funcionAsignar = this.asignarEstudiante;
+        const eliminar = this.eliminarEstudiante
         return (
             <React.Fragment>
                 <div className="d-flex flex-column align-items-center mt-3">
@@ -69,7 +75,7 @@ class AsigEstudianteListar extends Component {
                         dataAlign="center"
                         dataSort
                         dataFormat={standardActions({
-                            eliminar: () => {},
+                            eliminar: eliminar,
                         })}
                     >
                         Acciones
