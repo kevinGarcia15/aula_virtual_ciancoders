@@ -11,7 +11,7 @@ from rest_framework.settings import api_settings
 #permission
 from api.permission.admin import IsAdminUser
 
-from api.models import Asignacion
+from api.models import Asignacion, Estudiante
 from api.serializers import AsignacionCrearSerializer,AsignacionSerializer,EstudianteSerializer
 
 class AsignacionViewset(viewsets.ModelViewSet):
@@ -45,4 +45,17 @@ class AsignacionViewset(viewsets.ModelViewSet):
             }, 
             status=status.HTTP_200_OK
         )
+
+    @action(methods=["post"], detail=False)
+    def estudiante_asignar(self, request):
+        data = request.data
+        try:
+            asignacion = Asignacion.objects.get(pk=data.get("asignatura"))
+            estudiante = Estudiante.objects.get(pk=data.get("estudiante"))
+            nueva_asignacion = estudiante.asignacion_estudiante.add(asignacion)
+            serializer = EstudianteSerializer(nueva_asignacion)
+
+            return Response({"estudiantes" : serializer.data}, status=status.HTTP_200_OK)
+        except TypeError as e:
+            return Response(e, status=status.HTTP_400_BAD_REQUEST)
         

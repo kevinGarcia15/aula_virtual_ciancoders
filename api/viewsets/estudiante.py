@@ -22,13 +22,17 @@ class EstudianteViewset(viewsets.ModelViewSet):
     USUARIO = "Estudiante"
 
     queryset = Estudiante.objects.filter(activo=True, estudiante_profile__rol__nombre=USUARIO)
-    #import pdb; pdb.set_trace()
     serializer_class = EstudianteSerializer
+
+    filter_backends = (DjangoFilterBackend, filters.SearchFilter, filters.OrderingFilter)
+    filter_fields = ("estudiante_profile__user__first_name",)
+    search_fields = ("estudiante_profile__user__first_name",)
+    ordering_fields = ("estudiante_profile__user__first_name",)
 
     def get_permissions(self):
         """" Define permisos para este recurso """
         permission_classes = [IsAuthenticated]
-        if self.action in ['create', 'list']:
+        if self.action in ['create', 'update']:
             permission_classes.append(IsAdminUser)
         return [permission() for permission in permission_classes]
 

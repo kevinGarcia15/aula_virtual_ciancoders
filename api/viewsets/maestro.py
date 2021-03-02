@@ -21,11 +21,11 @@ class MaestroViewset(viewsets.ModelViewSet):
     USUARIO = "Maestro"
 
     queryset = Maestro.objects.filter(activo=True, maestro_profile__rol__nombre=USUARIO)
+    serializer_class = MaestroSerializer
     filter_backends = (DjangoFilterBackend, filters.SearchFilter, filters.OrderingFilter)
     filter_fields = ("maestro_profile__user__first_name",)
     search_fields = ("maestro_profile__user__first_name",)
     ordering_fields = ("maestro_profile__user__first_name",)
-    serializer_class = MaestroSerializer
 
     def get_permissions(self):
         """" Define permisos para este recurso """

@@ -10,15 +10,24 @@ class AsigEstudianteListar extends Component {
         const id = match.params.id;
         listarEstudiantes(id);
     }
+    asignarEstudiante = (data)=>{
+        const {asignar, match, listarEstudiantes} = this.props;
+        const id = match.params.id
+        asignar(id,data)
+    }
     render() {
-        const { data, loader, curso, asignar } = this.props;
+        const { data, loader, curso, obtenerEstudiantes } = this.props;
+        const funcionAsignar = this.asignarEstudiante;
         return (
             <React.Fragment>
                 <div className="d-flex flex-column align-items-center mt-3">
                     <h2>{curso.curso}</h2>
                     <h5>{`${curso.grado} ${curso.seccion}`}</h5>
                 </div>
-                <AsignacionForm onSubmit={asignar}/>
+                <AsignacionForm 
+                    onSubmit={funcionAsignar}
+                    obtenerEstudiantes={obtenerEstudiantes}
+                    />
                 <Grid
                     hover
                     striped

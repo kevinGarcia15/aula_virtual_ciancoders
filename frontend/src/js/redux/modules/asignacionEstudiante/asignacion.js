@@ -6,18 +6,19 @@ import { push } from "react-router-redux";
 // ------------------------------------
 // Constants
 // ------------------------------------
-const GUARDAR_LISTADO_ESTUDIANTE_ASIGNADOS =
-    "GUARDAR_LISTADO_ESTUDIANTE_ASIGNADOS";
-const INFORMACION_CURSO = "INFORMACION_CURSO"
+const GUARDAR_LISTADO_ESTUDIANTES_ASIGNADOS =
+    "GUARDAR_LISTADO_ESTUDIANTES_ASIGNADOS";
+const INFORMACION_CURSO = "INFORMACION_CURSO";
 
 const listarEstudiantes = (id) => (dispatch) => {
     api.get("asignaciones/estudiantes", { id })
         .then((response) => {
             const data = {
-                results: response.estudiantes
-           }
+                results: response.estudiantes,
+            };
+            console.log(data)
             dispatch({
-                type: GUARDAR_LISTADO_ESTUDIANTE_ASIGNADOS,
+                type: GUARDAR_LISTADO_ESTUDIANTES_ASIGNADOS,
                 data: data,
             });
             dispatch({
@@ -29,22 +30,58 @@ const listarEstudiantes = (id) => (dispatch) => {
         .finally(() => {});
 };
 
-const asignar = (id) => (dispatch) => {
-    api.post("asignaciones/estudiantes")
-        .then((response) => {
-           
+const obtenerEstudiantes = (search) => () => {
+    return api
+        .get("/estudiante", { search })
+        .then((data) => {
+            if (data) {
+                const estudiantes = [];
+                data.results.forEach((estudiante) => {
+                    estudiantes.push({
+                        value: estudiante.id,
+                        label: `${estudiante.estudiante_profile.user.first_name} ${estudiante.estudiante_profile.user.last_name}`,
+                    });
+                });
+                return estudiantes;
+            }
         })
-        .catch(() => {})
-        .finally(() => {});
+        .catch((error) => {
+            NotificationManager.error(
+                "Ocurrio un error listar el registro maestros",
+                "ERROR",
+                3000
+            );
+        });
+};
+const asignar = (id, data) => (dispatch) => {
+    const formData = {
+        asignatura: parseInt(id),
+        estudiante: data.estudiante.value,
+    };
+    api.post("asignaciones/estudiante_asignar", formData)
+        .then((response) => {
+            NotificationManager.success(
+                "Estudiante agreagdo exitosamente",
+                "Exito",
+                3000
+            );
+            dispatch(listarEstudiantes(id));
+        })
+        .catch((error) => {
+            NotificationManager.error(error.detail, "ERROR", 3000);
+        })
+        .finally(() => {
+        });
 };
 
 export const actions = {
     listarEstudiantes,
+    obtenerEstudiantes,
     asignar,
 };
 
 export const reducers = {
-    [GUARDAR_LISTADO_ESTUDIANTE_ASIGNADOS]: (state, { data }) => {
+    [GUARDAR_LISTADO_ESTUDIANTES_ASIGNADOS]: (state, { data }) => {
         return {
             ...state,
             data,
@@ -61,7 +98,7 @@ export const reducers = {
 export const intialState = {
     loader: false,
     data: {},
-    curso:{},
+    curso: {},
 };
 
 export default handleActions(reducers, intialState);
