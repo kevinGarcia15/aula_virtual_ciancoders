@@ -12,7 +12,7 @@ from rest_framework.settings import api_settings
 from api.permission.admin import IsAdminUser
 
 from api.models import Asignacion
-from api.serializers import AsignacionCrearSerializer,AsignacionSerializer
+from api.serializers import AsignacionCrearSerializer,AsignacionSerializer,EstudianteSerializer
 
 class AsignacionViewset(viewsets.ModelViewSet):
     """Asignacion Viewset""" 
@@ -31,3 +31,18 @@ class AsignacionViewset(viewsets.ModelViewSet):
         if self.action in ['create', 'update']:
             permission_classes.append(IsAdminUser)
         return [permission() for permission in permission_classes]
+
+    @action(methods=["get"], detail=False)
+    def estudiantes(self, request):
+        asignacion_id = request.query_params.get("id")
+        asignacion = Asignacion.objects.get(pk=asignacion_id)
+        asignacionSerializer = AsignacionSerializer(asignacion)
+        estudiantes_asignados = asignacion.estudiante_asignaciones.all()
+        serializer = EstudianteSerializer(estudiantes_asignados, many=True)
+        return Response(
+            {"estudiantes" : serializer.data, 
+            "infoCurso":asignacionSerializer.data
+            }, 
+            status=status.HTTP_200_OK
+        )
+        

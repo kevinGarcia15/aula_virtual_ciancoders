@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import { Link } from "react-router-dom";
 
 export class CursosAsignados extends Component {
     render() {
@@ -13,12 +14,14 @@ export class CursosAsignados extends Component {
                         <ul className="list-group list-group-flush">
                             {cursos
                                 ? cursos.map((item) => (
+                                    <Link to={`asignacion/${item.id}/estudiantes`}>
                                       <li
                                           className="list-group-item"
                                           key={item.id}
                                       >
                                           {`${item.curso}, Grado: ${item.grado}, ${item.seccion}`}
-                                      </li>
+                                      </li>                                    
+                                    </Link>
                                   ))
                                 : null}
                         </ul>
