@@ -1,39 +1,50 @@
 import React, { Component } from "react";
+import { Link } from "react-router-dom";
 import Grid from "../Utils/Grid";
 import { standardActions } from "../Utils/Grid/StandardActions";
 import AsignacionForm from "./AsignacionForm";
-
+import PortadaContainer from '../asignacion/PortadaContainer'
 
 class AsigEstudianteListar extends Component {
+    constructor(props){
+        super(props)
+        const { match } = this.props;
+        const id = match.params.id;
+        this.state = {
+            id_asignacion: id
+        }
+    }
     componentDidMount() {
         const { listarEstudiantes, match } = this.props;
         const id = match.params.id;
         listarEstudiantes(id);
     }
-    asignarEstudiante = (data)=>{
-        const {asignar, match, listarEstudiantes} = this.props;
-        const id = match.params.id
-        asignar(id,data)
-    }
-    eliminarEstudiante = (id)=>{
-        const {match, eliminar} = this.props;
-        const id_asignacion = match.params.id
-        eliminar(id,id_asignacion)
-    }
+    asignarEstudiante = (data) => {
+        const { asignar } = this.props;
+        const id = this.state.id_asignacion;
+        asignar(id, data);
+    };
+    eliminarEstudiante = (id) => {
+        const { eliminar } = this.props;
+        const id_asignacion = this.state.id_asignacion;
+        eliminar(id, id_asignacion);
+    };
     render() {
         const { data, loader, curso, obtenerEstudiantes } = this.props;
         const funcionAsignar = this.asignarEstudiante;
-        const eliminar = this.eliminarEstudiante
+        const eliminar = this.eliminarEstudiante;
+        const id_asignacion = this.state.id_asignacion
         return (
             <React.Fragment>
+                <PortadaContainer id={parseInt(id_asignacion)}/>
                 <div className="d-flex flex-column align-items-center mt-3">
-                    <h2>{curso.curso}</h2>
-                    <h5>{`${curso.grado} ${curso.seccion}`}</h5>
+                    <h3 className="">{curso.curso}</h3>
+                    <p>{`${curso.grado} ${curso.seccion}`}</p>
                 </div>
-                <AsignacionForm 
+                <AsignacionForm
                     onSubmit={funcionAsignar}
                     obtenerEstudiantes={obtenerEstudiantes}
-                    />
+                />
                 <Grid
                     hover
                     striped

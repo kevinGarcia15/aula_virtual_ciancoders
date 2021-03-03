@@ -19,7 +19,7 @@ class AsignacionForm extends Component {
                         placeholder="Estudiantes"
                     />
                 </div>
-                <button type="submit" className="btn btn-primary">Agregar</button>
+                <button type="submit" className="btn btn-primary">Agregar al curso</button>
             </form>
         );
     }

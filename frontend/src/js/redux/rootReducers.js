@@ -16,6 +16,7 @@ import RolEstudiante from './modules/estudiante/RolEstudiante'
 import grado from './modules/grado/grado'
 import seccion from './modules/seccion/seccion'
 import curso from './modules/curso/curso'
+import asignacion from './modules/asignacion/asignacion'
 import asignacionMaestro from './modules/asignacionMaestro/asignacion'
 import asignacionEstudiante from './modules/asignacionEstudiante/asignacion'
 
@@ -36,6 +37,7 @@ export default combineReducers({
     grado,
     seccion,
     curso,
+    asignacion,
     asignacionMaestro,
     asignacionEstudiante,
 });

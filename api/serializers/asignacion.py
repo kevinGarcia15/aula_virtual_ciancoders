@@ -17,7 +17,7 @@ class AsignacionSerializer(serializers.ModelSerializer):
 
         model = Asignacion
         fields = (
-            'id','curso','grado','seccion','descripcion'
+            'id','curso','grado','seccion','descripcion','portada'
         )
 
 

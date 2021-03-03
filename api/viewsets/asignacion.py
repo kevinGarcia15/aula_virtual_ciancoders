@@ -7,6 +7,7 @@ from rest_framework.decorators import action
 from rest_framework.permissions import AllowAny, IsAuthenticated
 from rest_framework.response import Response
 from rest_framework.settings import api_settings
+from datetime import datetime
 
 #permission
 from api.permission.admin import IsAdminUser
@@ -16,7 +17,9 @@ from api.serializers import AsignacionCrearSerializer,AsignacionSerializer,Estud
 
 class AsignacionViewset(viewsets.ModelViewSet):
     """Asignacion Viewset""" 
-    queryset = Asignacion.objects.filter(activo=True)
+    now = datetime.now()
+    anio = now.strftime("%Y")
+    queryset = Asignacion.objects.filter(asignacion_ciclo__anio=anio)
     
     def get_serializer_class(self):
         """Define serializer for API"""
