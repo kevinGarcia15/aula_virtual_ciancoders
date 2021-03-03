@@ -15,8 +15,8 @@ class AsigEstudianteListar extends Component {
         }
     }
     componentDidMount() {
-        const { listarEstudiantes, match } = this.props;
-        const id = match.params.id;
+        const { listarEstudiantes} = this.props;
+        const id = this.state.id_asignacion;
         listarEstudiantes(id);
     }
     asignarEstudiante = (data) => {

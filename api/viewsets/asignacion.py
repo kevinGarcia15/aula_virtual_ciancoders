@@ -72,3 +72,18 @@ class AsignacionViewset(viewsets.ModelViewSet):
             return Response("eliminacion satisfactoria", status=status.HTTP_200_OK)
         except TypeError as e:
             return Response(e, status=status.HTTP_400_BAD_REQUEST)        
+
+
+    @action(methods=["put"], detail=False)
+    def actualizar_portada(self, request,*args, **kwargs):
+        data = request.data
+        try:
+            portada = data.get("portada")
+            data = json.loads(data["data"])
+            id_asignacion = data.get("asignacion")
+            asignacion = Asignacion.objects.get(pk=id_asignacion)
+            asignacion.portada = File(portada)
+            asignacion.save()
+            return Response("Portada actualizada exitosamente", status=status.HTTP_200_OK)
+        except TypeError as e:
+            return Response(e, status=status.HTTP_400_BAD_REQUEST)
