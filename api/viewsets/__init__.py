@@ -10,3 +10,4 @@ from .seccion import SeccionViewset
 from .curso import CursoViewset
 from .ciclo import CicloViewset
 from .asignacion import AsignacionViewset
+from .tarea import TareaViewset

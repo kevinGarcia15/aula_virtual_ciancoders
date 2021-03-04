@@ -10,4 +10,10 @@ class TareaSerializer(serializers.ModelSerializer):
     class Meta:
         """Meta class"""
         model = Tarea
-        fields = ("id",)
+        fields = ("titulo", "fecha_entrega", "hora_entrega","nota")
+
+class TareaReadSerializer(serializers.ModelSerializer):
+    class Meta:
+        """Meta class"""
+        model = Tarea
+        fields = "__all__"

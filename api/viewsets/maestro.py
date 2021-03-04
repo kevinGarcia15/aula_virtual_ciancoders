@@ -13,8 +13,18 @@ from django.db import transaction
 #permission
 from api.permission.admin import IsAdminUser
 
-from api.models import Maestro, Profile, User, Rol, Profesion, Asignacion, Tarea, Tarea_Estudinate
-from api.serializers import MaestroSerializer ,CrearMaestroSerializer, AsignacionSerializer, ActualizarMaestroSerializer
+from api.models import (
+    Maestro, Profile, 
+    User, Rol, Profesion, 
+    Asignacion, Tarea, 
+    Tarea_Estudinate
+)
+from api.serializers import (
+    MaestroSerializer ,
+    CrearMaestroSerializer, 
+    AsignacionSerializer, 
+    ActualizarMaestroSerializer
+)
 
 
 class MaestroViewset(viewsets.ModelViewSet):

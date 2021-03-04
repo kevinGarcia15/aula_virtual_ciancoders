@@ -14,7 +14,7 @@ class Tarea(models.Model):
     fecha_entrega = models.DateField(auto_now=False, auto_now_add=False)    
     hora_entrega = models.TimeField(auto_now=False, auto_now_add=False)
     nota = models.FloatField(default=0)
-    archivo = models.FileField(upload_to='tarea_maestros')
+    archivo = models.FileField(upload_to='tarea_maestros', blank=True, null=True)
     permitir_archivo = models.BooleanField(default=True)
 
     activo = models.BooleanField(default=True)
