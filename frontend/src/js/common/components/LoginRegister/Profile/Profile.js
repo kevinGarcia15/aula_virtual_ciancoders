@@ -12,6 +12,7 @@ class Profile extends Component {
     }
 
     setAvatar = (avatar) => {
+        console.log(avatar)
         this.setState({avatar});
     };
 

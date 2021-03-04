@@ -14,10 +14,10 @@ export class CursosAsignados extends Component {
                         <ul className="list-group list-group-flush">
                             {cursos
                                 ? cursos.map((item) => (
-                                    <Link to={`asignacion/${item.id}/estudiantes`}>
+                                    <Link key={item.id} to={`asignacion/${item.id}/estudiantes`}>
                                       <li
                                           className="list-group-item"
-                                          key={item.id}
+                                          
                                       >
                                           {`${item.curso}, Grado: ${item.grado}, ${item.seccion}`}
                                       </li>                                    

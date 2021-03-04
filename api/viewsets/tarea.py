@@ -35,3 +35,14 @@ class TareaViewset(viewsets.ModelViewSet):
         """" Define permisos para este recurso """
         permission_classes = [IsAuthenticated, IsMaestroUser]
         return [permission() for permission in permission_classes]
+
+    @action(methods=['get'], detail=False)
+    def asignacion(self, request):
+        asignacion_id = request.query_params.get("id")
+        tareas = Tarea.objects.filter(asignacion_id=asignacion_id)
+        serializer = TareaReadSerializer(tareas, many=True)
+        return Response(
+            {"tareas" : serializer.data, 
+            }, 
+            status=status.HTTP_200_OK
+        )
