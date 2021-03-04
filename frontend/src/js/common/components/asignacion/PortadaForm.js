@@ -1,14 +1,22 @@
 import React, { Component } from "react";
 import { Field, reduxForm } from "redux-form";
 import { renderFilePicker } from "../Utils/renderField/renderField";
+import '../../../../style/portada.css'
 
 class PortadaForm extends Component {
     render() {
-        const { handleSubmit, onCloseModal, modalStatus,portadaCurso, setPortada } = this.props;
+        const {
+            handleSubmit,
+            onCloseModal,
+            modalStatus,
+            portadaCurso,
+            setPortada,
+        } = this.props;
+        let modalClass = modalStatus ? "modal-container" : "modal modal-container";
         return (
-            <div className="" id="crearEvento">
-                <div className="modal-dialog">
-                    <form action="" onSubmit={handleSubmit}>
+            <div className={modalClass} id="actualizarPortada">
+                <div className="modal-body-content">
+                    <form onSubmit={handleSubmit}>
                         <div className="modal-content">
                             <div className="modal-header">
                                 <h4 className="modal-title">Agregar portada</h4>
@@ -40,7 +48,7 @@ class PortadaForm extends Component {
                                     data-dismiss="modal"
                                     onClick={onCloseModal}
                                 >
-                                    Cerrar
+                                    Cancelar
                                 </button>
                                 <button
                                     type="submit"

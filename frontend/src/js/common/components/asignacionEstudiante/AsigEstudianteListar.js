@@ -37,10 +37,6 @@ class AsigEstudianteListar extends Component {
         return (
             <React.Fragment>
                 <PortadaContainer id={parseInt(id_asignacion)}/>
-                <div className="d-flex flex-column align-items-center mt-3">
-                    <h3 className="">{curso.curso}</h3>
-                    <p>{`${curso.grado} ${curso.seccion}`}</p>
-                </div>
                 <AsignacionForm
                     onSubmit={funcionAsignar}
                     obtenerEstudiantes={obtenerEstudiantes}

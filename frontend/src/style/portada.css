@@ -1,0 +1,35 @@
+.max-height{
+    height: 400px;
+    overflow: hidden;
+}
+.modal-body-content{
+    width: 35%
+}
+.modal-container{
+    display: flex;
+    justify-content: center;
+    position: fixed;
+    top: 0;
+    left: 0;
+    height: 100%;
+    width: 100%;
+    z-index: 10;
+    background: rgba(0,0,0,0.5);
+    padding-left: 20%;
+    padding-top: 5%;
+}
+
+@media screen and (max-width: 768px) {
+    .max-height {
+        height: 210px;
+    }
+    .modal-container{
+        padding-left: 0%;
+        padding-top: 5%;
+        align-items: center;
+    }
+    .modal-body-content{
+        width: 85%;
+    }
+    
+  }

@@ -27,8 +27,6 @@ const leer = id => (dispatch) => {
 
 export const actualizarAsignacion = (data = {}, attachments = []) => (dispatch, getStore) => {
     dispatch(setLoader(true));
-    console.log(data)
-    console.log(attachments)
     api.putAttachments("asignaciones/actualizar_portada", data, attachments)
         .then((response) => {
             dispatch(leer(data.asignacion));
