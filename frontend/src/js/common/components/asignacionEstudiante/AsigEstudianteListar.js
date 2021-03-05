@@ -42,7 +42,7 @@ class AsigEstudianteListar extends Component {
                     <div className="row">
                         <div className="col-7 mr-3 card">
                             <div className="d-flex flex-column align-items-center">
-                                <h3>Estudiantes</h3>
+                                <h4>Estudiantes</h4>
                             </div>
                             <AsignacionForm
                                 onSubmit={funcionAsignar}

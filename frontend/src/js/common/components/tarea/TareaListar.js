@@ -9,11 +9,11 @@ class TareaListar extends Component {
         listarTareas(id_asignacion);
     }
     render() {
-        const { data, loader } = this.props;
+        const { data, loader, id_asignacion} = this.props;
         return (
             <div className="d-flex flex-column align-items-center">
                 <h4>Tareas</h4>
-                <Link to="" className="btn btn-secondary btn-block">
+                <Link to={`/tarea/${id_asignacion}/crear`} className="btn btn-primary btn-block">
                     Crear Tarea
                 </Link>
                 <Grid
