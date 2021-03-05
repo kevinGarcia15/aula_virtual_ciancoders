@@ -139,7 +139,7 @@ export const renderSwitch = ({
     );
 };
 
-export const renderFieldCheck = ({ input, label, value, disabled, type, meta: { touched, error } }) => {
+export const renderFieldCheck = ({ input,checkboxStatus, label, value, disabled, type, meta: { touched, error } }) => {
     const invalid = touched && error;
     return (
         <React.Fragment>
@@ -148,9 +148,10 @@ export const renderFieldCheck = ({ input, label, value, disabled, type, meta: { 
                     <input
                         type="checkbox"
                         disabled={disabled}
+                        defaultChecked={checkboxStatus}
                         {...input}
                         className={classNames('', { 'is-invalid': invalid })}
-                    />
+                    />                    
                     <span className="fa fa-check" />
                     &nbsp;{label}
                 </label>

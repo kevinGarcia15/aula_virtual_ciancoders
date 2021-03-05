@@ -35,8 +35,8 @@ class TareaListar extends Component {
                         dataAlign="center"
                         dataSort
                         dataFormat={standardActions({
-                            editar: "/tarea",
-                            ver: "/tarea",
+                            editar: `/tarea/${id_asignacion}`,
+                            ver: `/tarea/${id_asignacion}`,
                             eliminar: () => {},
                         })}
                     >

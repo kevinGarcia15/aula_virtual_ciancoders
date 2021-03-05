@@ -12,20 +12,16 @@ import {
 } from ".././Utils/renderField/renderField";
 import {
     validate,
-    validatorFromFunction,
     validators,
-    combine,
 } from "validate-redux-form";
+
 class TareaForm extends Component {
     render() {
-        const { titulo, handleSubmit, setArchivo } = this.props;
+        const { titulo, handleSubmit, setArchivo, id_asignacion, checkboxStatus } = this.props;
         const disabled = false;
         return (
             <form className="row" onSubmit={handleSubmit}>
                 <div className="col-12">
-                    <Link to="" className="btn btn-primary btn-sm">
-                        Atras
-                    </Link>
                     <h3 className="text-center">{titulo}</h3>
                 </div>
                 <div className="col-12">
@@ -33,7 +29,7 @@ class TareaForm extends Component {
                         <div className="card-body">
                             <div className="row">
                                 <div className="col-4">
-                                    <h5 className="card-title">Crear Tarea</h5>
+                                    <h5 className="card-title">{titulo} Tarea</h5>
                                 </div>
                                 <div className="col-8">
                                     <div className="mb-2">
@@ -74,6 +70,7 @@ class TareaForm extends Component {
                                             decimalScale={2}
                                             name="nota"
                                             placeholder="Nota"
+                                            suffix=" puntos"
                                             component={renderNumber}
                                         />
                                     </div>
@@ -91,6 +88,7 @@ class TareaForm extends Component {
                                     <Field
                                         name="permitir_archivo"
                                         label="Permitir subir archivos"
+                                        checkboxStatus={checkboxStatus}
                                         component={renderFieldCheck}
                                     />
                                     </div>
@@ -105,7 +103,7 @@ class TareaForm extends Component {
                             <div className="row justify-content-end">
                                 <div className="col-3">
                                     <Link
-                                        to=""
+                                        to={`/asignacion/${id_asignacion}/estudiantes`}
                                         className="btn btn-secondary mr-2"
                                     >
                                         Cancelar
