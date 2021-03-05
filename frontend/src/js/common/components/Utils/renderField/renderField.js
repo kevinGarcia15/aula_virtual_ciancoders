@@ -34,13 +34,14 @@ export const renderField = ({
 };
 
 export const renderTextArea = ({
-                                   input, placeholder, rows, meta: { touched, error },
+                                   input, placeholder, disabled, rows, meta: { touched, error },
                                }) => {
     const invalid = touched && error;
     return (
         <div>
       <textarea
           {...input}
+          disabled={disabled}
           placeholder={placeholder}
           style={{ resize: 'none' }}
           rows={rows || 3}

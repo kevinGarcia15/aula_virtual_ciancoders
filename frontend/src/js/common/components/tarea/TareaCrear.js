@@ -36,9 +36,17 @@ class TareaCrear extends Component {
             { file: this.state.archivo, name: "archivo" },
         ]);
     };
+
+    update = (data) => {
+        const { actualizar} = this.props;
+        actualizar(
+            { ...data, portada: null, asignacion: this.state.id_asignacion },
+            [{ file: this.state.archivo, name: "archivo" }]
+        );
+    };
     render() {
         const {leerTarea}= this.props
-        const funcionEnvio = this.crear;
+        const funcionEnvio = this.state.crear ? this.crear: this.update;
         return (
             <React.Fragment>
                 <div className="container mt-3">
@@ -47,7 +55,8 @@ class TareaCrear extends Component {
                         titulo={this.state.titulo}
                         setArchivo={this.setArchivo}
                         id_asignacion={this.state.id_asignacion}
-                        checkboxStatus={leerTarea.permitir_archivo}
+                        infoTarea={leerTarea}
+                        crear={this.state.crear}
                     />
                 </div>
             </React.Fragment>

@@ -9,7 +9,7 @@ import { push } from "react-router-redux";
 // ------------------------------------
 const LOADER = "ASIGNACION_LOADER";
 const GUARDAR_LISTADO_TAREAS = "GUARDAR_LISTADO_TAREAS";
-const GUARDAR_TAREA = "GUARDAR_TAREA"
+const GUARDAR_TAREA = "GUARDAR_TAREA";
 
 export const setLoader = (loader) => ({
     type: LOADER,
@@ -17,7 +17,7 @@ export const setLoader = (loader) => ({
 });
 
 const listarTareas = (id) => (dispatch) => {
-    api.get("tareas/asignacion", {id})
+    api.get("tareas/asignacion", { id })
         .then((response) => {
             const data = {
                 results: response.tareas,
@@ -47,11 +47,7 @@ export const crear = (data = {}, attachments = []) => (dispatch, getStore) => {
             dispatch(push(`/asignacion/${data.asignacion}/estudiantes`));
         })
         .catch((error) => {
-            NotificationManager.error(
-                error.detail,
-                "ERROR",
-                0
-            );
+            NotificationManager.error(error.detail, "ERROR", 0);
         })
         .finally(() => {
             dispatch(setLoader(false));
@@ -68,19 +64,39 @@ const leer = (id) => (dispatch) => {
             });
         })
         .catch((error) => {
-            NotificationManager.error(
-                error.detail,
-                "ERROR",
-                0
-            );
+            NotificationManager.error(error.detail, "ERROR", 0);
         })
         .finally(() => {});
 };
 
+export const actualizar = (data = {}, attachments = []) => (dispatch, getStore) => {
+    dispatch(setLoader(true));
+    
+    api.putAttachments(`tareas/${data.id}`, data, attachments)
+        .then((response) => {
+            NotificationManager.success(
+                "Datos actualizados exitosamente",
+                "ERROR",
+                1000
+            );
+            dispatch(push(`/asignacion/${data.asignacion}/estudiantes`));
+        })
+        .catch(() => {
+            NotificationManager.error(
+                "Credenciales incorrectas, vuelva a intentar",
+                "ERROR",
+                0
+            );
+        })
+        .finally(() => {
+            dispatch(setLoader(false));
+        });
+};
 export const actions = {
     listarTareas,
     crear,
     leer,
+    actualizar,
 };
 
 export const reducers = {
@@ -96,13 +112,12 @@ export const reducers = {
             leerTarea,
         };
     },
-
 };
 
 export const intialState = {
     loader: false,
     data: {},
-    leerTarea:{}
+    leerTarea: {},
 };
 
 export default handleActions(reducers, intialState);

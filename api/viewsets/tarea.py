@@ -80,7 +80,61 @@ class TareaViewset(viewsets.ModelViewSet):
         except TypeError as e:
             return Response(e, status=status.HTTP_400_BAD_REQUEST)
 
+    def update(self, request, pk):
+        try:
+            data =  request.data
+            archivo = data.get("archivo")
+            data = json.loads(data["data"])
+            #import pdb; pdb.set_trace()
 
+            serializer =  TareaSerializer(data=data)
+            if serializer.is_valid(raise_exception=True):
+                if not data.get("permitir_archivo"):
+                    permitir_archivo = False
+                else:
+                    permitir_archivo = True
+
+                verificacion = self.verificarNota(
+                    data.get("asignacion"), 
+                    data.get("nota")
+                )
+                if verificacion == False:
+                    tarea =  Tarea.objects.get(pk=pk)
+
+                    if archivo is not None: 
+                        if tarea.archivo is not None:
+                            tarea.archivo.delete()
+                            tarea.archivo=File(archivo)
+
+                    tarea.titulo=data.get("titulo")
+                    tarea.descripcion=data.get("descripcion")
+                    tarea.fecha_entrega=data.get("fecha_entrega")
+                    tarea.hora_entrega=data.get("hora_entrega")
+                    tarea.nota=data.get("nota")
+                    tarea.permitir_archivo=permitir_archivo
+                    tarea.save()
+                    return Response('todo anda bien', status=status.HTTP_201_CREATED)
+                else:                
+                    return Response('Se ha superado el limite total de la nota del curso', status=status.HTTP_400_BAD_REQUEST)
+
+        except TypeError as e:
+            return Response(e, status=status.HTTP_400_BAD_REQUEST)
+
+    def verificarNota(self, asignacion, notaForm):
+        """Verifica que la suma de las notas del curso no supere los 100 puntos"""
+        max_nota = 100
+        suma_nota = Tarea.objects.filter(
+            asignacion_id=asignacion, 
+            asignacion__asignacion_ciclo__anio=self.anio).aggregate(Sum('nota')
+            )
+        suma_total = suma_nota.get('nota__sum')
+        if not suma_total:
+            suma_total=0
+
+        if (suma_total + float(notaForm)) > max_nota:
+            return True
+        else:
+            return False
     @action(methods=['get'], detail=False)
     def asignacion(self, request):
         asignacion_id = request.query_params.get("id")

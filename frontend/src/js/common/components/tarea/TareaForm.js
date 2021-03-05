@@ -10,26 +10,36 @@ import {
     renderFilePicker,
     renderFieldCheck,
 } from ".././Utils/renderField/renderField";
-import {
-    validate,
-    validators,
-} from "validate-redux-form";
+import { validate, validators } from "validate-redux-form";
 
 class TareaForm extends Component {
     render() {
-        const { titulo, handleSubmit, setArchivo, id_asignacion, checkboxStatus } = this.props;
-        const disabled = false;
+        let editar = window.location.href.includes("editar");
+        let disabled = false;
+        const {
+            titulo,
+            handleSubmit,
+            setArchivo,
+            id_asignacion,
+            infoTarea,
+            crear,
+        } = this.props;
+        crear == false && editar == false
+            ? (disabled = true)
+            : (disabled = false);
         return (
             <form className="row" onSubmit={handleSubmit}>
                 <div className="col-12">
-                    <h3 className="text-center">{titulo}</h3>
+                    <h3 className="text-center"></h3>
                 </div>
                 <div className="col-12">
                     <div className="card">
                         <div className="card-body">
                             <div className="row">
                                 <div className="col-4">
-                                    <h5 className="card-title">{titulo} Tarea</h5>
+                                    <h5 className="card-title">
+                                        {titulo} Tarea
+                                    </h5>
                                 </div>
                                 <div className="col-8">
                                     <div className="mb-2">
@@ -71,6 +81,7 @@ class TareaForm extends Component {
                                             name="nota"
                                             placeholder="Nota"
                                             suffix=" puntos"
+                                            disabled={disabled}
                                             component={renderNumber}
                                         />
                                     </div>
@@ -78,47 +89,76 @@ class TareaForm extends Component {
                                         <label htmlFor="avatar">
                                             Archivo adjunto
                                         </label>
+                                        <br />
+                                        <a
+                                            href={infoTarea.archivo}
+                                            target="_blank"
+                                        >
+                                            {infoTarea.archivo}
+                                        </a>
                                         <Field
+                                            photo={infoTarea.archivo}
                                             name="archivo"
                                             setFile={setArchivo}
+                                            disabled={disabled}
                                             component={renderFilePicker}
                                         />
                                     </div>
                                     <div className="mt-4">
-                                    <Field
-                                        name="permitir_archivo"
-                                        label="Permitir subir archivos"
-                                        checkboxStatus={checkboxStatus}
-                                        component={renderFieldCheck}
-                                    />
+                                        <Field
+                                            name="permitir_archivo"
+                                            label="Permitir subir archivos"
+                                            disabled={disabled}
+                                            checkboxStatus={
+                                                infoTarea.permitir_archivo
+                                            }
+                                            component={renderFieldCheck}
+                                        />
                                     </div>
                                 </div>
                             </div>
                         </div>
                     </div>
                 </div>
-                <div className="col-12">
-                    <div className="card">
-                        <div className="card-body">
-                            <div className="row justify-content-end">
-                                <div className="col-3">
-                                    <Link
-                                        to={`/asignacion/${id_asignacion}/estudiantes`}
-                                        className="btn btn-secondary mr-2"
-                                    >
-                                        Cancelar
-                                    </Link>
-                                    <button
-                                        className="btn btn-primary"
-                                        type="submit"
-                                    >
-                                        Guardar
-                                    </button>
+                {disabled == false ? (
+                    <div className="col-12">
+                        <div className="card">
+                            <div className="card-body">
+                                <div className="row justify-content-end">
+                                    <div className="col-3">
+                                        <Link
+                                            to={`/asignacion/${id_asignacion}/estudiantes`}
+                                            className="btn btn-secondary mr-2"
+                                        >
+                                            Cancelar
+                                        </Link>
+                                        <button
+                                            className="btn btn-primary"
+                                            type="submit"
+                                        >
+                                            Guardar
+                                        </button>
+                                    </div>
                                 </div>
                             </div>
                         </div>
                     </div>
-                </div>
+                ) : (
+                    <div className="col-12">
+                        <div className="card">
+                            <div className="card-body">
+                                <div className="row justify-content-end">
+                                    <Link
+                                        to={`/asignacion/${id_asignacion}/estudiantes`}
+                                        className="btn btn-secondary mr-2"
+                                    >
+                                        Aceptar
+                                    </Link>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                )}
             </form>
         );
     }
