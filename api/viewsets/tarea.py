@@ -135,10 +135,18 @@ class TareaViewset(viewsets.ModelViewSet):
             return True
         else:
             return False
+
+    def destroy(self, request, pk):
+        tarea = Tarea.objects.get(pk=pk)
+        tarea.archivo.delete()
+        tarea.delete()
+        return Response({"success":"user was deleted success"}, status=status.HTTP_200_OK)
+
+
     @action(methods=['get'], detail=False)
     def asignacion(self, request):
         asignacion_id = request.query_params.get("id")
-        tareas = Tarea.objects.filter(asignacion_id=asignacion_id)
+        tareas = Tarea.objects.filter(activo=True, asignacion_id=asignacion_id)
         serializer = TareaReadSerializer(tareas, many=True)
         return Response(
             {"tareas" : serializer.data,}, 

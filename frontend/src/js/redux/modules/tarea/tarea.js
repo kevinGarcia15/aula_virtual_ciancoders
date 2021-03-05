@@ -92,11 +92,24 @@ export const actualizar = (data = {}, attachments = []) => (dispatch, getStore) 
             dispatch(setLoader(false));
         });
 };
+
+const eliminar = (id,asignacion) => (dispatch) => {
+    dispatch(setLoader(true));
+    api.eliminar(`tareas/${id}`).then(() => {
+        dispatch(listarTareas(asignacion));
+        NotificationManager.success('Registro eliminado', 'Éxito', 3000);
+    }).catch(() => {
+        NotificationManager.success('Error en la transacción', 'Éxito', 3000);
+    }).finally(() => {
+        dispatch(setLoader(false));
+    });
+};
 export const actions = {
     listarTareas,
     crear,
     leer,
     actualizar,
+    eliminar,
 };
 
 export const reducers = {

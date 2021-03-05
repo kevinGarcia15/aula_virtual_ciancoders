@@ -8,6 +8,10 @@ class TareaListar extends Component {
         const { listarTareas, id_asignacion } = this.props;
         listarTareas(id_asignacion);
     }
+    eliminar = (id)=>{
+        const {eliminar, id_asignacion} = this.props
+        eliminar(id, id_asignacion)
+    }
     render() {
         const { data, loader, id_asignacion} = this.props;
         return (
@@ -37,7 +41,7 @@ class TareaListar extends Component {
                         dataFormat={standardActions({
                             editar: `/tarea/${id_asignacion}`,
                             ver: `/tarea/${id_asignacion}`,
-                            eliminar: () => {},
+                            eliminar: this.eliminar,
                         })}
                     >
                         Acciones
