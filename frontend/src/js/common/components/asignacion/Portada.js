@@ -52,20 +52,20 @@ class Portada extends Component {
                         modalStatus={this.state.modalIsOpen}
                         infoAsignacion={infoAsignacion}
                     />
-                <div className="container">
+                <div className="container card">
                     <div className="d-flex flex-column align-items-center mt-3">
                         <div className="max-height">
                             <img
                                 src={url}
                                 alt="Portada"
-                                className="img-fluid"
+                                className="img-fluid rounded"
                             />
                         </div>
                         {rol == "Maestro" ? (
                             <a
                                 type="button"
                                 onClick={this.handleOpenModal}
-                                className="mt-2"
+                                className="mt-2 mb-2"
                             >
                                 <span className="badge d-flex align-items-center badge-pill badge-secondary">
                                     <span className="material-icons mr-1">

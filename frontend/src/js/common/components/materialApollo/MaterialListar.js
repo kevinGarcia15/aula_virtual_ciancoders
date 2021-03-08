@@ -8,10 +8,10 @@ class MaterialListar extends Component {
         const { listarMaterial, id_asignacion } = this.props;
         listarMaterial(id_asignacion);
     }
-    /*eliminar = (id)=>{
+    eliminar = (id)=>{
         const {eliminar, id_asignacion} = this.props
         eliminar(id, id_asignacion)
-    }*/
+    }
     render() {
         const { data, loader, id_asignacion } = this.props;
         return (
@@ -50,7 +50,7 @@ class MaterialListar extends Component {
                         dataFormat={standardActions({
                             editar: `/material/${id_asignacion}`,
                             ver: `/material/${id_asignacion}`,
-                            eliminar: () => {},
+                            eliminar: this.eliminar,
                         })}
                     >
                         Acciones

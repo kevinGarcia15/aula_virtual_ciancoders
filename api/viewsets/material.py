@@ -90,3 +90,9 @@ class MaterialViewset(viewsets.ModelViewSet):
    
         except TypeError as e:
             return Response(e, status=status.HTTP_400_BAD_REQUEST)
+
+    def destroy(self, request, pk):
+        material = Material.objects.get(pk=pk)
+        material.archivo.delete()
+        material.delete()
+        return Response({"success":"user was deleted success"}, status=status.HTTP_200_OK)
