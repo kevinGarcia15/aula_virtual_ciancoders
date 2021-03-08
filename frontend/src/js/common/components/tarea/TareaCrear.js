@@ -40,7 +40,7 @@ class TareaCrear extends Component {
     update = (data) => {
         const { actualizar} = this.props;
         actualizar(
-            { ...data, portada: null, asignacion: this.state.id_asignacion },
+            { ...data, archivo: null, asignacion: this.state.id_asignacion },
             [{ file: this.state.archivo, name: "archivo" }]
         );
     };

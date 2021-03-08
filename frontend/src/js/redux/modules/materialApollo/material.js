@@ -59,10 +59,36 @@ const leer = (id) => (dispatch) => {
         })
         .finally(() => {});
 };
+
+export const actualizar = (data = {}, attachments = []) => (dispatch, getStore) => {
+    dispatch(setLoader(true));
+    
+    api.putAttachments(`materiales/${data.id}`, data, attachments)
+        .then((response) => {
+            NotificationManager.success(
+                "Datos actualizados exitosamente",
+                "ERROR",
+                1000
+            );
+            dispatch(push(`/asignacion/${data.asignacion}/estudiantes`));
+        })
+        .catch(() => {
+            NotificationManager.error(
+                "Credenciales incorrectas, vuelva a intentar",
+                "ERROR",
+                0
+            );
+        })
+        .finally(() => {
+            dispatch(setLoader(false));
+        });
+};
+
 export const actions = {
     listarMaterial,
     crear,
     leer,
+    actualizar
 };
 
 export const reducers = {
@@ -83,6 +109,7 @@ export const reducers = {
 export const initialState = {
     loader: false,
     data: {},
+    leerMaterial:{}, 
 };
 
 export default handleActions(reducers, initialState);

@@ -33,9 +33,18 @@ class MaterialCrear extends Component {
             [{ file: this.state.archivo, name: "archivo" }]
         );
     };
+    
+    update = (data) =>{
+        const { actualizar} = this.props;
+        actualizar(
+            { ...data, archivo: null, asignacion: this.state.id_asignacion },
+            [{ file: this.state.archivo, name: "archivo" }]
+        );    
+    }
+
     render() {
         const {leerMaterial} = this.props
-        const funcionEnvio = this.crear;
+        const funcionEnvio = this.state.crear ? this.crear: this.update;
         return (
             <React.Fragment>
                 <div className="container mt-3">

@@ -66,3 +66,27 @@ class MaterialViewset(viewsets.ModelViewSet):
                 return Response('Registro creado exitosamente', status=status.HTTP_201_CREATED)
             except TypeError as e:
                 return Response(e, status=status.HTTP_400_BAD_REQUEST)
+
+
+    def update(self, request, pk):
+        try:
+            data =  request.data
+            archivo = data.get("archivo")
+            data = json.loads(data["data"])
+            #import pdb; pdb.set_trace()
+
+            serializer =  MaterialSerializer(data=data)
+            if serializer.is_valid(raise_exception=True):
+                material =  Material.objects.get(pk=pk)
+                if archivo is not None: 
+                    if material.archivo is not None:
+                        material.archivo.delete()
+                        material.archivo=File(archivo)
+
+                material.titulo=data.get("titulo")
+                material.descripcion=data.get("descripcion")
+                material.save()
+                return Response('Datos actualizados exitosamente', status=status.HTTP_201_CREATED)
+   
+        except TypeError as e:
+            return Response(e, status=status.HTTP_400_BAD_REQUEST)
