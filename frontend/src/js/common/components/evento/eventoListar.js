@@ -79,7 +79,7 @@ export class EventoListar extends Component {
                         </Grid>
                     </div>
                 ) : (
-                    <div>
+                    <div style={{maxHeight: "400px"}}>
                         {data.results.length != 0 ? (
                             data.results.map((item) => (
                                 <div
