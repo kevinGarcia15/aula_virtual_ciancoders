@@ -5,7 +5,7 @@ import { standardActions } from "../Utils/Grid/StandardActions";
 import AsignacionForm from "./AsignacionForm";
 import PortadaContainer from "../asignacion/PortadaContainer";
 import TareaListarContainer from "../tarea/TareaListarContainer";
-import MaterialListarContainer from "../materialApollo/MaterialListarContainer"
+import MaterialListarContainer from "../materialApollo/MaterialListarContainer";
 
 class AsigEstudianteListar extends Component {
     constructor(props) {
@@ -102,8 +102,7 @@ class AsigEstudianteListar extends Component {
                                 id_asignacion={parseInt(id_asignacion)}
                             />
                         </div>
-                        <div className="col-lg-2 col-1">
-                        </div>
+                        <div className="col-lg-2 col-1"></div>
                         <div className="col-lg-5 col-12 card mt-3">
                             <MaterialListarContainer
                                 id_asignacion={parseInt(id_asignacion)}

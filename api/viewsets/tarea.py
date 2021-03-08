@@ -146,7 +146,7 @@ class TareaViewset(viewsets.ModelViewSet):
     @action(methods=['get'], detail=False)
     def asignacion(self, request):
         asignacion_id = request.query_params.get("id")
-        tareas = Tarea.objects.filter(activo=True, asignacion_id=asignacion_id)
+        tareas = Tarea.objects.filter(activo=True, asignacion_id=asignacion_id).order_by("fecha_entrega")
         serializer = TareaReadSerializer(tareas, many=True)
         return Response(
             {"tareas" : serializer.data,}, 

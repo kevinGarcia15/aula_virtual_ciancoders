@@ -2,22 +2,28 @@ import React, { Component } from "react";
 import { Link } from "react-router-dom";
 import Grid from "../Utils/Grid";
 import { standardActions } from "../Utils/Grid/StandardActions";
+import Moment from "react-moment";
+import 'moment-timezone';
+
 
 class TareaListar extends Component {
     componentDidMount() {
         const { listarTareas, id_asignacion } = this.props;
         listarTareas(id_asignacion);
     }
-    eliminar = (id)=>{
-        const {eliminar, id_asignacion} = this.props
-        eliminar(id, id_asignacion)
-    }
+    eliminar = (id) => {
+        const { eliminar, id_asignacion } = this.props;
+        eliminar(id, id_asignacion);
+    };
     render() {
-        const { data, loader, id_asignacion} = this.props;
+        const { data, loader, id_asignacion } = this.props;
         return (
             <div className="d-flex flex-column align-items-center">
                 <h4>Tareas</h4>
-                <Link to={`/tarea/${id_asignacion}/crear`} className="btn btn-primary btn-block">
+                <Link
+                    to={`/tarea/${id_asignacion}/crear`}
+                    className="btn btn-primary btn-block"
+                >
                     Crear Tarea
                 </Link>
                 <Grid
@@ -31,7 +37,13 @@ class TareaListar extends Component {
                     <TableHeaderColumn isKey dataField="titulo" dataSort>
                         Titulo
                     </TableHeaderColumn>
-                    <TableHeaderColumn dataField="fecha_entrega" dataSort>
+                    <TableHeaderColumn
+                        dataField="fecha_entrega"
+                        dataSort
+                        dataFormat={(cell, row) => {
+                            return <Moment locale="es-GB" fromNow>{cell}</Moment>;
+                        }}
+                    >
                         Entrega
                     </TableHeaderColumn>
                     <TableHeaderColumn
