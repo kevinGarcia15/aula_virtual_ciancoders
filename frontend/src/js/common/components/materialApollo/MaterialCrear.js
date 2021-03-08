@@ -12,6 +12,17 @@ class MaterialCrear extends Component {
             archivo: null,
         };
     }
+    componentDidMount() {
+        const { leer, match } = this.props;
+        const id = match.params.id;
+        if (id) {
+            leer(id);
+            this.setState({
+                crear: false,
+                titulo: "Ver",
+            });
+        }
+    }
     setArchivo = (archivo) => {
         this.setState({ archivo: archivo });
     };
@@ -23,6 +34,7 @@ class MaterialCrear extends Component {
         );
     };
     render() {
+        const {leerMaterial} = this.props
         const funcionEnvio = this.crear;
         return (
             <React.Fragment>
@@ -33,6 +45,7 @@ class MaterialCrear extends Component {
                         setArchivo={this.setArchivo}
                         id_asignacion={this.state.id_asignacion}
                         crear={this.state.crear}
+                        infoMaterial = {leerMaterial}
                     />
                 </div>
             </React.Fragment>

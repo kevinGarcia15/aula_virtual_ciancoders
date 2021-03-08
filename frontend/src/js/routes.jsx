@@ -101,6 +101,7 @@ module.exports = (
                 <ProtectedRoute exact path="/tarea/:asignacion/:id" component={TareaCrearContainer} />
 
                 <ProtectedRoute exact path="/material/:asignacion/crear" component={MaterialCrearContainer} />
+                <ProtectedRoute exact path="/material/:asignacion/:id" component={MaterialCrearContainer} />
 
                 <ProtectedRoute exact path="/tabs" component={ExampleTabs} />
                 <Route component={NotFound} />

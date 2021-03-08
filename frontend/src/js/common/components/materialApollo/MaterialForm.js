@@ -14,6 +14,7 @@ class MaterialForm extends Component{
             setArchivo,
             id_asignacion,
             crear,
+            infoMaterial,
         } = this.props;
         crear == false && editar == false
             ? (disabled = true)
@@ -55,10 +56,10 @@ class MaterialForm extends Component{
                                         </label>
                                         <br />
                                         <a
-                                            href=""
+                                            href={infoMaterial.archivo}
                                             target="_blank"
                                         >
-                                            Archivo
+                                            {infoMaterial.archivo}
                                         </a>
                                         <Field
                                             name="archivo"

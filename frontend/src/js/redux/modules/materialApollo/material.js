@@ -6,6 +6,8 @@ import { push } from "react-router-redux";
 
 const LOADER = "ASIGNACION_LOADER";
 const GUARDAR_MATERIALES_APOLLO = "GUARDAR_MATERIALES_APOLLO";
+const GUARDAR_MATERIAL_APOLLO = "GUARDAR_MATERIAL_APOLLO";
+
 
 export const setLoader = (loader) => ({
     type: LOADER,
@@ -33,7 +35,7 @@ export const crear = (data = {}, attachments = []) => (dispatch, getStore) => {
                 "SUCCESS",
                 2000
             );
-//            dispatch(push(`/asignacion/${data.asignacion}/estudiantes`));
+            dispatch(push(`/asignacion/${data.asignacion}/estudiantes`));
         })
         .catch((error) => {
             NotificationManager.error(error.detail, "ERROR", 0);
@@ -43,9 +45,24 @@ export const crear = (data = {}, attachments = []) => (dispatch, getStore) => {
         });
 };
 
+const leer = (id) => (dispatch) => {
+    api.get(`materiales/${id}`)
+        .then((response) => {
+            dispatch(initializeForm("materialForm", response));
+            dispatch({
+                type: GUARDAR_MATERIAL_APOLLO,
+                leerMaterial: response,
+            });
+        })
+        .catch((error) => {
+            NotificationManager.error(error.detail, "ERROR", 0);
+        })
+        .finally(() => {});
+};
 export const actions = {
     listarMaterial,
     crear,
+    leer,
 };
 
 export const reducers = {
@@ -53,6 +70,12 @@ export const reducers = {
         return {
             ...state,
             data,
+        };
+    },
+    [GUARDAR_MATERIAL_APOLLO]: (state, { leerMaterial }) => {
+        return {
+            ...state,
+            leerMaterial,
         };
     },
 };
