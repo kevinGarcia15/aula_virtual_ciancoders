@@ -14,3 +14,4 @@ from .grado import GradoSerializer, GradoReadSerializer
 from .seccion import SeccionSerializer, SeccionReadSerializer
 from .curso import CursoSerializer, CursoReadSerializer
 from .ciclo import CicloReadSerializer, CicloSerializer
+from .material import MaterialSerializer, MaterialReadSerializer
