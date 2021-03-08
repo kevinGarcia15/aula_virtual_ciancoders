@@ -20,6 +20,7 @@ import asignacion from './modules/asignacion/asignacion'
 import asignacionMaestro from './modules/asignacionMaestro/asignacion'
 import asignacionEstudiante from './modules/asignacionEstudiante/asignacion'
 import tarea from './modules/tarea/tarea'
+import material from './modules/materialApollo/material'
 
 export default combineReducers({
     form: formReducer,
@@ -42,4 +43,5 @@ export default combineReducers({
     asignacionMaestro,
     asignacionEstudiante,
     tarea,
+    material,
 });

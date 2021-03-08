@@ -5,6 +5,7 @@ import { standardActions } from "../Utils/Grid/StandardActions";
 import AsignacionForm from "./AsignacionForm";
 import PortadaContainer from "../asignacion/PortadaContainer";
 import TareaListarContainer from "../tarea/TareaListarContainer";
+import MaterialListarContainer from "../materialApollo/MaterialListarContainer"
 
 class AsigEstudianteListar extends Component {
     constructor(props) {
@@ -38,9 +39,9 @@ class AsigEstudianteListar extends Component {
         return (
             <React.Fragment>
                 <PortadaContainer id={parseInt(id_asignacion)} />
-                <div className="">
+                <div className="container">
                     <div className="row">
-                        <div className="col-lg-7 col-12 mr-3 card">
+                        <div className="col-12 mr-3 card">
                             <div className="d-flex flex-column align-items-center">
                                 <h4>Estudiantes</h4>
                             </div>
@@ -96,9 +97,15 @@ class AsigEstudianteListar extends Component {
                                 </TableHeaderColumn>
                             </Grid>{" "}
                         </div>
-
-                        <div className="col-lg-4 col-12 card">
+                        <div className="col-lg-5 col-12 card mt-3">
                             <TareaListarContainer
+                                id_asignacion={parseInt(id_asignacion)}
+                            />
+                        </div>
+                        <div className="col-lg-2 col-1">
+                        </div>
+                        <div className="col-lg-5 col-12 card mt-3">
+                            <MaterialListarContainer
                                 id_asignacion={parseInt(id_asignacion)}
                             />
                         </div>

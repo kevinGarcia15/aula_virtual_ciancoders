@@ -1,5 +1,4 @@
 import { handleActions } from "redux-actions";
-import { createReducer } from "../baseReducer/baseReducer";
 import { initialize as initializeForm } from "redux-form";
 import { NotificationManager } from "react-notifications";
 import { api } from "api";
