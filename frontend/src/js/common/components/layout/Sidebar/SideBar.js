@@ -8,7 +8,7 @@ class SideBar extends Component {
     }
 
     render() {
-        const { toggleOpen, navToggle, logOut } = this.props;
+        const { toggleOpen, navToggle, logOut, cursosMaestro } = this.props;
         const rol = toLower(localStorage.getItem("rol"));
         return (
             <aside
@@ -51,6 +51,31 @@ class SideBar extends Component {
                                 <span>Home</span>
                             </NavLink>
                         </li>
+                        {localStorage.getItem("rol") == "Maestro" &&
+                        cursosMaestro.maestro ? (
+                            cursosMaestro.maestro.map((item) => {
+                                return (
+                                    <div key={item.id}>
+                                        <li className="nav-item">
+                                            <Link
+                                                to={`/asignacion/${item.id}/estudiantes`}
+                                                className="nav-link"
+                                                activeClassName={"active"}
+                                            >
+                                                <div className="d-inline-block item-icon-wrapper">
+                                                    <i className="material-icons">
+                                                        account_box
+                                                    </i>
+                                                </div>
+                                                <span>{item.curso}</span>
+                                            </Link>
+                                        </li>
+                                    </div>
+                                );
+                            })
+                        ) : (
+                            null
+                        )}
                         {localStorage.getItem("rol") == "Admin" ? (
                             <div>
                                 <li className="nav-item">

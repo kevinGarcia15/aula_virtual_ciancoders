@@ -40,7 +40,7 @@ class AsigEstudianteListar extends Component {
                 <PortadaContainer id={parseInt(id_asignacion)} />
                 <div className="">
                     <div className="row">
-                        <div className="col-7 mr-3 card">
+                        <div className="col-lg-7 col-12 mr-3 card">
                             <div className="d-flex flex-column align-items-center">
                                 <h4>Estudiantes</h4>
                             </div>
@@ -97,7 +97,7 @@ class AsigEstudianteListar extends Component {
                             </Grid>{" "}
                         </div>
 
-                        <div className="col-4 card">
+                        <div className="col-lg-4 col-12 card">
                             <TareaListarContainer
                                 id_asignacion={parseInt(id_asignacion)}
                             />

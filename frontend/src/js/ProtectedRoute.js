@@ -4,7 +4,7 @@ import { connect } from "react-redux";
 import { logOut, getMe } from "./redux/modules/cuenta/login";
 
 // maquetado base
-import SiderBar from './common/components/layout/Sidebar/SideBar';
+import SiderBarContainer from './common/components/layout/Sidebar/SideBarContainer';
 import Footer from './common/components/layout/Footer/Footer';
 
 import Navbar from "./common/components/layout/Navbar/Navbar";
@@ -46,7 +46,7 @@ class PrivateRouteBase extends Component {
                 render={props =>
                     isAuthenticated ? (
                         (isAuthenticated === true) ? (<div>
-                            <SiderBar toggleOpen={this.state.toggleOpen} navToggle={this.navToggle} logOut={logOut} />
+                            <SiderBarContainer toggleOpen={this.state.toggleOpen} navToggle={this.navToggle} logOut={logOut} />
                             <main className="main-content p-0 col-sm-12 col-md-9 offset-md-3 col-lg-10 offset-lg-2">
                                 <div className="main-navbar bg-white sticky-top">
                                     <div className="p-0 container">
