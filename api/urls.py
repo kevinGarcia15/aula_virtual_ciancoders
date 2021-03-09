@@ -20,6 +20,7 @@ router.register(r'ciclos', viewsets.CicloViewset)
 router.register(r'asignaciones', viewsets.AsignacionViewset)
 router.register(r'tareas', viewsets.TareaViewset)
 router.register(r'materiales', viewsets.MaterialViewset)
+router.register(r'tareaestudiantes', viewsets.TareaEstudianteViewset)
 urlpatterns = [
     path('api/', include(router.urls)),
     url(r"^api/token", obtain_auth_token, name="api-token"),

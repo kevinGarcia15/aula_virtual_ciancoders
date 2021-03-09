@@ -15,3 +15,4 @@ from .seccion import SeccionSerializer, SeccionReadSerializer
 from .curso import CursoSerializer, CursoReadSerializer
 from .ciclo import CicloReadSerializer, CicloSerializer
 from .material import MaterialSerializer, MaterialReadSerializer
+from .tarea_estudiante import TareaEstudianteSerializer, TareaEstudianteReadSerializer
