@@ -14,7 +14,6 @@ class Tarea_Estudinate(models.Model):
     texto = models.CharField(max_length=250, blank=True, null=True)
     archivo = models.FileField(upload_to='tarea_alumnos', null=True, blank=True)
     punteo = models.FloatField(default=0)
-    fecha_entregado = models.DateTimeField(auto_now=True)     
 
     activo = models.BooleanField(default=True)
     creado = models.DateTimeField(auto_now_add=True)
