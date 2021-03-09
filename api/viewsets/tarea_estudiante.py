@@ -17,3 +17,10 @@ class TareaEstudianteViewset(viewsets.ModelViewSet):
     """Viewset del modelo tarea_estudiante"""
     queryset = Tarea_Estudiante.objects.filter(tarea__asignacion__asignacion_ciclo__anio= "2021")
     serializer_class = TareaEstudianteReadSerializer
+
+    @action(methods=['get'], detail=False)
+    def entregados(self, request):
+        tarea_id = request.query_params.get("id")
+        tareas = Tarea_Estudiante.objects.filter(tarea_id=tarea_id)
+        serializer = TareaEstudianteReadSerializer(tareas, many=True)
+        return Response({"entregas":serializer.data}, status=status.HTTP_200_OK)

@@ -68,9 +68,12 @@ const leer = (id) => (dispatch) => {
         .finally(() => {});
 };
 
-export const actualizar = (data = {}, attachments = []) => (dispatch, getStore) => {
+export const actualizar = (data = {}, attachments = []) => (
+    dispatch,
+    getStore
+) => {
     dispatch(setLoader(true));
-    
+
     api.putAttachments(`tareas/${data.id}`, data, attachments)
         .then((response) => {
             NotificationManager.success(
@@ -92,16 +95,23 @@ export const actualizar = (data = {}, attachments = []) => (dispatch, getStore) 
         });
 };
 
-const eliminar = (id,asignacion) => (dispatch) => {
+const eliminar = (id, asignacion) => (dispatch) => {
     dispatch(setLoader(true));
-    api.eliminar(`tareas/${id}`).then(() => {
-        dispatch(listarTareas(asignacion));
-        NotificationManager.success('Registro eliminado', 'Éxito', 3000);
-    }).catch(() => {
-        NotificationManager.success('Error en la transacción', 'Éxito', 3000);
-    }).finally(() => {
-        dispatch(setLoader(false));
-    });
+    api.eliminar(`tareas/${id}`)
+        .then(() => {
+            dispatch(listarTareas(asignacion));
+            NotificationManager.success("Registro eliminado", "Éxito", 3000);
+        })
+        .catch(() => {
+            NotificationManager.success(
+                "Error en la transacción",
+                "Éxito",
+                3000
+            );
+        })
+        .finally(() => {
+            dispatch(setLoader(false));
+        });
 };
 export const actions = {
     listarTareas,

@@ -46,6 +46,8 @@ import AsigEstudianteContainer from './common/components/asignacionEstudiante/As
 import TareaCrearContainer from './common/components/tarea/TareaCrearContainer'
 import MaterialCrearContainer from './common/components/materialApollo/MaterialCrearContainer'
 
+import TareaEstudianteListarContainer from './common/components/tarea_estudiante/TareaEstudianteListarContainer'
+
 import 'bootstrap/dist/css/bootstrap.min.css';
 import '../assets/fonts/fonts.css';
 require('../../node_modules/bootstrap/dist/css/bootstrap.css');
@@ -103,6 +105,8 @@ module.exports = (
                 <ProtectedRoute exact path="/material/:asignacion/crear" component={MaterialCrearContainer} />
                 <ProtectedRoute exact path="/material/:asignacion/:id" component={MaterialCrearContainer} />
                 <ProtectedRoute exact path="/material/:asignacion/:id/editar/" component={MaterialCrearContainer} />
+
+                <ProtectedRoute exact path="/tareaestudiante/:id_tarea/estudiantes" component={TareaEstudianteListarContainer}/>
 
                 <ProtectedRoute exact path="/tabs" component={ExampleTabs} />
                 <Route component={NotFound} />
