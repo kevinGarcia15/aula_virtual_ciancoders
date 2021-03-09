@@ -11,6 +11,6 @@ from .grado import Grado
 from .curso import Curso
 from .asignacion import Asignacion
 from .tarea import Tarea
-from .tarea_estudiante  import Tarea_Estudinate
+from .tarea_estudiante  import Tarea_Estudiante
 from .material import Material
 from .rol import Rol

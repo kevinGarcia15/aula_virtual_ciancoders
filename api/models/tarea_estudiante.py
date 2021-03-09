@@ -6,7 +6,7 @@ from django.db import models
 from api.models.estudiante import Estudiante
 from api.models.tarea import Tarea
 
-class Tarea_Estudinate(models.Model):
+class Tarea_Estudiante(models.Model):
     """Modelo Tarea_Estudinate"""
     estudiante = models.ForeignKey(Estudiante, related_name='estudiantes', on_delete=models.CASCADE)
     tarea = models.ForeignKey(Tarea, related_name='tareas', on_delete=models.CASCADE)

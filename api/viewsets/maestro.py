@@ -17,7 +17,7 @@ from api.models import (
     Maestro, Profile, 
     User, Rol, Profesion, 
     Asignacion, Tarea, 
-    Tarea_Estudinate
+    Tarea_Estudiante
 )
 from api.serializers import (
     MaestroSerializer ,
@@ -145,7 +145,7 @@ class MaestroViewset(viewsets.ModelViewSet):
         for asignacion in asignacion_maestro:
             tarea = Tarea.objects.filter(asignacion=asignacion)
             for item in tarea:
-                tarea_estudiante = Tarea_Estudinate.objects.filter(tarea=item, punteo=0)
+                tarea_estudiante = Tarea_Estudiante.objects.filter(tarea=item, punteo=0)
                 count_items = tarea_estudiante.count()
                 count_flag = 0
                 for item2 in tarea_estudiante:

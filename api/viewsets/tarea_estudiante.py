@@ -8,7 +8,7 @@ from rest_framework.response import Response
 from rest_framework.settings import api_settings
 
 #modelo
-from api.models import Tarea_Estudinate
+from api.models import Tarea_Estudiante
 
 #serializer 
 from api.serializers import TareaEstudianteSerializer, TareaEstudianteReadSerializer
