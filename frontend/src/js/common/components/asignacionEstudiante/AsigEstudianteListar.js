@@ -97,12 +97,12 @@ class AsigEstudianteListar extends Component {
                                 </TableHeaderColumn>
                             </Grid>{" "}
                         </div>
-                        <div className="col-lg-5 col-12 card mt-3">
+                        <div className="col-lg-6 col-12 card mt-3">
                             <TareaListarContainer
                                 id_asignacion={parseInt(id_asignacion)}
                             />
                         </div>
-                        <div className="col-lg-2 col-1"></div>
+                        <div className="col-lg-1 col-1"></div>
                         <div className="col-lg-5 col-12 card mt-3">
                             <MaterialListarContainer
                                 id_asignacion={parseInt(id_asignacion)}

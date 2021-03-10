@@ -158,7 +158,7 @@ class TareaForm extends Component {
                                         to={`/tareaestudiante/${infoTarea.id}/estudiantes`}
                                         className="btn btn-primary mr-2"
                                     >
-                                        Calificar tareas <span className="badge badge-danger">6</span>
+                                        Calificar tareas
                                     </Link>
                                 </div>
                             </div>
