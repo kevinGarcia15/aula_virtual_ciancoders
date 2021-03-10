@@ -40,7 +40,7 @@ export const crear = (data = {}, attachments = []) => (dispatch, getStore) => {
         .then((response) => {
             NotificationManager.success(
                 "Tarea creada exitosamente",
-                "ERROR",
+                "Exito",
                 2000
             );
             dispatch(push(`/asignacion/${data.asignacion}/estudiantes`));
@@ -78,7 +78,7 @@ export const actualizar = (data = {}, attachments = []) => (
         .then((response) => {
             NotificationManager.success(
                 "Datos actualizados exitosamente",
-                "ERROR",
+                "Exito",
                 1000
             );
             dispatch(push(`/asignacion/${data.asignacion}/estudiantes`));

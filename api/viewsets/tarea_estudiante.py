@@ -8,10 +8,14 @@ from rest_framework.response import Response
 from rest_framework.settings import api_settings
 
 #modelo
-from api.models import Tarea_Estudiante
+from api.models import Tarea_Estudiante, Tarea
 
 #serializer 
-from api.serializers import TareaEstudianteSerializer, TareaEstudianteReadSerializer
+from api.serializers import (
+    TareaEstudianteSerializer, 
+    TareaEstudianteReadSerializer,
+    TareaReadSerializer
+)                           
 
 class TareaEstudianteViewset(viewsets.ModelViewSet):
     """Viewset del modelo tarea_estudiante"""
@@ -23,4 +27,25 @@ class TareaEstudianteViewset(viewsets.ModelViewSet):
         tarea_id = request.query_params.get("id")
         tareas = Tarea_Estudiante.objects.filter(tarea_id=tarea_id)
         serializer = TareaEstudianteReadSerializer(tareas, many=True)
-        return Response({"entregas":serializer.data}, status=status.HTTP_200_OK)
+
+        tarea = Tarea.objects.get(pk=tarea_id)
+        tareaSerializer =  TareaReadSerializer(tarea, many=False)
+        return Response(
+            {"tarea": tareaSerializer.data, "entregas":serializer.data}, 
+            status=status.HTTP_200_OK
+        )
+
+    def update(self, request, pk):
+        try:
+            #import pdb; pdb.set_trace()
+            data = request.data
+            tarea = Tarea.objects.get(pk=data.get("id_tarea"))
+            nota_maxima = tarea.nota
+            if float(data.get("punteo")) > nota_maxima:
+                return Response({"detail": "La nota es mayor a lo establecido"}, status=status.HTTP_400_BAD_REQUEST)
+            tarea_estudiante = Tarea_Estudiante.objects.get(pk=pk)
+            tarea_estudiante.punteo = data.get("punteo")
+            tarea_estudiante.save()
+            return Response('Actualizado exitosamente', status=status.HTTP_201_CREATED)
+        except TypeError as e:
+            return Response(e, status=status.HTTP_400_BAD_REQUEST)
