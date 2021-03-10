@@ -5,7 +5,7 @@ export class MisCursos extends Component {
         const { cursos } = this.props;
         return (
             <React.Fragment>
-                <div className="card col-12 col-lg-3 p-2 m-4">
+                <div className="card col-12 col-lg-5 p-2">
                     <div className="card-body">
                         <h6 className="card-title text-center">
                             Mis cursos
@@ -17,7 +17,10 @@ export class MisCursos extends Component {
                                           className="list-group-item"
                                           key={item.id}
                                       >
-                                          {item.curso}
+                                         <div>
+                                        {item.curso}
+                                        {` (Catedratico: ${item.maestro.maestro_profile.user.first_name} ${item.maestro.maestro_profile.user.last_name})`}
+                                        </div>
                                       </li>
                                   ))
                                 : null}

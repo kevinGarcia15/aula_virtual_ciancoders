@@ -7,17 +7,19 @@ from api.models import Asignacion
 
 #serializer 
 from api.serializers.tarea import TareaSerializer
+from api.serializers import MaestroSerializer
+
 
 class AsignacionSerializer(serializers.ModelSerializer):
     curso = serializers.StringRelatedField()
     grado = serializers.StringRelatedField()
     seccion = serializers.StringRelatedField()
+    maestro = MaestroSerializer(read_only=True)
     class Meta:
         """Meta class"""
-
         model = Asignacion
         fields = (
-            'id','curso','grado','seccion','descripcion','portada'
+            'id','curso','grado','seccion','descripcion','portada','maestro'
         )
 
 
