@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import InformacionTarea from "./InformacionTarea";
 
 import TareaForm from "./TareaForm";
 
@@ -38,26 +39,34 @@ class TareaCrear extends Component {
     };
 
     update = (data) => {
-        const { actualizar} = this.props;
+        const { actualizar } = this.props;
         actualizar(
             { ...data, archivo: null, asignacion: this.state.id_asignacion },
             [{ file: this.state.archivo, name: "archivo" }]
         );
     };
     render() {
-        const {leerTarea}= this.props
-        const funcionEnvio = this.state.crear ? this.crear: this.update;
+        const { leerTarea } = this.props;
+        const funcionEnvio = this.state.crear ? this.crear : this.update;
+        const rol = localStorage.getItem("rol");
         return (
             <React.Fragment>
                 <div className="container mt-3">
-                    <TareaForm
-                        onSubmit={funcionEnvio}
-                        titulo={this.state.titulo}
-                        setArchivo={this.setArchivo}
+                    {rol == "Maestro" ? (
+                        <TareaForm
+                            onSubmit={funcionEnvio}
+                            titulo={this.state.titulo}
+                            setArchivo={this.setArchivo}
+                            id_asignacion={this.state.id_asignacion}
+                            infoTarea={leerTarea}
+                            crear={this.state.crear}
+                        />
+                    ) : (
+                        <InformacionTarea                             onSubmit={funcionEnvio}
                         id_asignacion={this.state.id_asignacion}
                         infoTarea={leerTarea}
-                        crear={this.state.crear}
-                    />
+                        />
+                    )}
                 </div>
             </React.Fragment>
         );
