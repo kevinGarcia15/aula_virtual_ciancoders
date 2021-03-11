@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import { Link } from "react-router-dom";
 
 export class MisCursos extends Component {
     render() {
@@ -13,15 +14,18 @@ export class MisCursos extends Component {
                         <ul className="list-group list-group-flush">
                         {cursos
                                 ? cursos.map((item) => (
+                                    <Link to={`/asignacion/${item.id}`} key={item.id}
+                                    >
                                       <li
                                           className="list-group-item"
-                                          key={item.id}
                                       >
                                          <div>
                                         {item.curso}
                                         {` (Catedratico: ${item.maestro.maestro_profile.user.first_name} ${item.maestro.maestro_profile.user.last_name})`}
                                         </div>
                                       </li>
+                                    
+                                    </Link>
                                   ))
                                 : null}
                         </ul>

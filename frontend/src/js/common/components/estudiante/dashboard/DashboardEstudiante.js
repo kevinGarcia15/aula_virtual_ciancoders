@@ -14,8 +14,8 @@ export class DashboardEstudiante extends Component {
         console.log(this.props);
         return (
             <div className="container">
-                <div className="row">
-                    <div className="card col-12 col-lg-12 p-2 mb-4 mt-4 justify-content-center overflow-auto">
+                <div className="row justify-content-md-center">
+                    <div className="card col-12 col-lg-8 p-2 mb-4 mt-4 justify-content-center overflow-auto">
                         <EventoListarContainer />
                     </div>
                     <Tareas tareas={tareasEntregar.tareas_entregar} />

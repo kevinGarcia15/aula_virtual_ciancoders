@@ -48,6 +48,8 @@ import MaterialCrearContainer from './common/components/materialApollo/MaterialC
 
 import TareaEstudianteListarContainer from './common/components/tarea_estudiante/TareaEstudianteListarContainer'
 
+import GestionContainer from './common/components/gestionAsignaturaEstudiante/GestionContainer'
+
 import 'bootstrap/dist/css/bootstrap.min.css';
 import '../assets/fonts/fonts.css';
 require('../../node_modules/bootstrap/dist/css/bootstrap.css');
@@ -107,6 +109,8 @@ module.exports = (
                 <ProtectedRoute exact path="/material/:asignacion/:id/editar/" component={MaterialCrearContainer} />
 
                 <ProtectedRoute exact path="/tareaestudiante/:id_tarea/estudiantes" component={TareaEstudianteListarContainer}/>
+
+                <ProtectedRoute exact path="/asignacion/:id/" component={GestionContainer} />
 
                 <ProtectedRoute exact path="/tabs" component={ExampleTabs} />
                 <Route component={NotFound} />
