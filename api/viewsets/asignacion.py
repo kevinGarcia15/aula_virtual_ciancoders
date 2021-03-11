@@ -11,6 +11,7 @@ from datetime import datetime
 
 #permission
 from api.permission.admin import IsAdminUser
+from api.permission.maestro import IsMaestroUser
 
 from api.models import Asignacion, Estudiante
 from api.serializers import AsignacionCrearSerializer,AsignacionSerializer,EstudianteSerializer
@@ -31,6 +32,8 @@ class AsignacionViewset(viewsets.ModelViewSet):
     def get_permissions(self):
         """" Define permisos para este recurso """
         permission_classes = [IsAuthenticated]
+        if self.action in ['estudiantes', 'estudiante_asignar','elimiar_alumno','actualizar_portada']:
+            permission_classes.append(IsMaestroUser)
         if self.action in ['create', 'update']:
             permission_classes.append(IsAdminUser)
         return [permission() for permission in permission_classes]

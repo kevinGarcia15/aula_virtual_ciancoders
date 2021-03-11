@@ -79,7 +79,7 @@ class TareaListar extends Component {
                             dataFormat={(cell, row) => {
                                 return (
                                     <Link
-                                        to={`/tareaestudiante/${row.id}/entregar`}
+                                        to={`/tareaestudiante/${row.id}/entregar/${id_asignacion}`}
                                         className="d-flex justify-content-center text-success "
                                     >
                                         <span className="material-icons">
@@ -114,7 +114,7 @@ class TareaListar extends Component {
                                 ver: `/tarea/${id_asignacion}`,
                             })}
                         >
-                            Acciones
+                            Detalles
                         </TableHeaderColumn>
                     )}
                 </Grid>

@@ -18,6 +18,8 @@ class Portada extends Component {
         this.setState({ id_asignacion: id });
         leer(id);
     }
+    componentWillUnmount(){
+    }
     setPortada = (portada) => {
         this.setState({ portada: portada });
     };

@@ -47,7 +47,7 @@ import TareaCrearContainer from './common/components/tarea/TareaCrearContainer'
 import MaterialCrearContainer from './common/components/materialApollo/MaterialCrearContainer'
 
 import TareaEstudianteListarContainer from './common/components/tarea_estudiante/TareaEstudianteListarContainer'
-
+import TareaEstudianteCrearContainer from './common/components/tarea_estudiante/TareaEstudianteCrearContainer'
 import GestionContainer from './common/components/gestionAsignaturaEstudiante/GestionContainer'
 
 import 'bootstrap/dist/css/bootstrap.min.css';
@@ -109,6 +109,7 @@ module.exports = (
                 <ProtectedRoute exact path="/material/:asignacion/:id/editar/" component={MaterialCrearContainer} />
 
                 <ProtectedRoute exact path="/tareaestudiante/:id_tarea/estudiantes" component={TareaEstudianteListarContainer}/>
+                <ProtectedRoute exact path="/tareaestudiante/:id_tarea/entregar/:id_asignacion" component={TareaEstudianteCrearContainer}/>
 
                 <ProtectedRoute exact path="/asignacion/:id/" component={GestionContainer} />
 

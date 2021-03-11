@@ -10,31 +10,31 @@ export class InformacionTarea extends Component {
         const { id_asignacion, infoTarea } = this.props;
         return (
             <div className="card">
-                <ul class="list-group">
-                    <li class="list-group-item">
+                <ul className="list-group">
+                    <li className="list-group-item">
                         <h5 className="font-weight-bold">Titulo:</h5>{" "}
                         {infoTarea.titulo}
                     </li>
-                    <li class="list-group-item">
+                    <li className="list-group-item">
                         <h5 className="font-weight-bold">Descripción:</h5>{" "}
                         {infoTarea.descripcion}
                     </li>
-                    <li class="list-group-item">
+                    <li className="list-group-item">
                         <h5 className="font-weight-bold">Fecha de entrega:</h5>{" "}
                         <Moment format="DD/MM/YYYY">
                         {infoTarea.fecha_entrega}
                         </Moment>
                     </li>
-                    <li class="list-group-item">
+                    <li className="list-group-item">
                         <h5 className="font-weight-bold">Hora de entrega:</h5>{" "}
                             {infoTarea.hora_entrega} hrs
                     </li>
-                    <li class="list-group-item">
+                    <li className="list-group-item">
                         <h5 className="font-weight-bold">Punteo:</h5>{" "}
                         {infoTarea.nota}
                     </li>
                     {infoTarea.archivo ? (
-                        <li class="list-group-item">
+                        <li className="list-group-item">
                             <h5 className="font-weight-bold">Archivo adjunto disponible:</h5>{" "}
                             <a
                                 href={infoTarea.archivo}
@@ -42,7 +42,7 @@ export class InformacionTarea extends Component {
                                 target="_blank"
                                 rel="noopener noreferrer"
                             >
-                                <span class="material-icons">get_app</span>
+                                <span className="material-icons">get_app</span>
                             </a>
                         </li>
                     ) : null}
@@ -55,7 +55,7 @@ export class InformacionTarea extends Component {
                         Aceptar
                     </Link>
                     <Link
-                        to=""
+                        to={`/tareaestudiante/${infoTarea.id}/entregar/${id_asignacion}`}
                         className="btn btn-primary m-2 d-flex align-item-center"
                     >
                         Subir tarea
