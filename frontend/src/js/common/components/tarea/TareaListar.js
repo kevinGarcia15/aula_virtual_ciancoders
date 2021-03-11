@@ -16,15 +16,19 @@ class TareaListar extends Component {
     };
     render() {
         const { data, loader, id_asignacion } = this.props;
+        const rolUsuario = localStorage.getItem("rol");
+        const rol = "Maestro";
         return (
             <div className="d-flex flex-column align-items-center">
                 <h4>Tareas</h4>
-                <Link
-                    to={`/tarea/${id_asignacion}/crear`}
-                    className="btn btn-primary btn-block"
-                >
-                    Crear Tarea
-                </Link>
+                {rolUsuario == rol ? (
+                    <Link
+                        to={`/tarea/${id_asignacion}/crear`}
+                        className="btn btn-primary btn-block"
+                    >
+                        Crear Tarea
+                    </Link>
+                ) : null}
                 <Grid
                     hover
                     striped
@@ -49,37 +53,71 @@ class TareaListar extends Component {
                     >
                         Entrega
                     </TableHeaderColumn>
-                    <TableHeaderColumn
-                        dataField="fecha_entrega"
-                        dataSort
-                        dataFormat={(cell, row) => {
-                            return (
-                                <Link
-                                    to={`/tareaestudiante/${row.id}/estudiantes`}
-                                    className="d-flex justify-content-center text-success "
-                                >
-                                    <span class="material-icons">
-                                        assignment_turned_in
-                                    </span>
-                                </Link>
-                            );
-                        }}
-                    >
-                        Calificar
-                    </TableHeaderColumn>
-                    <TableHeaderColumn
-                        dataField="id"
-                        dataAlign="center"
-                        dataSort
-                        dataFormat={standardActions({
-                            editar: `/tarea/${id_asignacion}`,
-                            ver: `/tarea/${id_asignacion}`,
-                            eliminar: this.eliminar,
-                        })}
-                    >
-                        Acciones
-                    </TableHeaderColumn>
-                </Grid>{" "}
+                    {rolUsuario == rol ? (
+                        <TableHeaderColumn
+                            dataField="fecha_entrega"
+                            dataSort
+                            dataFormat={(cell, row) => {
+                                return (
+                                    <Link
+                                        to={`/tareaestudiante/${row.id}/estudiantes`}
+                                        className="d-flex justify-content-center text-success "
+                                    >
+                                        <span className="material-icons">
+                                            assignment_turned_in
+                                        </span>
+                                    </Link>
+                                );
+                            }}
+                        >
+                            Calificar
+                        </TableHeaderColumn>
+                    ) : (
+                        <TableHeaderColumn
+                            dataField="fecha_entrega"
+                            dataSort
+                            dataFormat={(cell, row) => {
+                                return (
+                                    <Link
+                                        to={`/tareaestudiante/${row.id}/entregar`}
+                                        className="d-flex justify-content-center text-success "
+                                    >
+                                        <span className="material-icons">
+                                            assignment_turned_in
+                                        </span>
+                                    </Link>
+                                );
+                            }}
+                        >
+                            Entregar Tarea
+                        </TableHeaderColumn>
+                    )}
+                    {rolUsuario == rol ? (
+                        <TableHeaderColumn
+                            dataField="id"
+                            dataAlign="center"
+                            dataSort
+                            dataFormat={standardActions({
+                                editar: `/tarea/${id_asignacion}`,
+                                ver: `/tarea/${id_asignacion}`,
+                                eliminar: this.eliminar,
+                            })}
+                        >
+                            Acciones
+                        </TableHeaderColumn>
+                    ) : (
+                        <TableHeaderColumn
+                            dataField="id"
+                            dataAlign="center"
+                            dataSort
+                            dataFormat={standardActions({
+                                ver: `/tarea/${id_asignacion}`,
+                            })}
+                        >
+                            Acciones
+                        </TableHeaderColumn>
+                    )}
+                </Grid>
             </div>
         );
     }

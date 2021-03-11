@@ -35,7 +35,7 @@ class TareaViewset(viewsets.ModelViewSet):
     def get_permissions(self):
         """" Define permisos para este recurso """
         permission_classes = [IsAuthenticated]
-        if self.action is not "asignacion":
+        if self.action not in ['asignacion', 'retrieve']:
             permission_classes.append(IsMaestroUser)
         return [permission() for permission in permission_classes]
 

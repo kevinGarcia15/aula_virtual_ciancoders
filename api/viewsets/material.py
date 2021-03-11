@@ -31,13 +31,14 @@ class MaterialViewset(viewsets.ModelViewSet):
             return MaterialReadSerializer
         else:
             return MaterialSerializer
-
+            
     def get_permissions(self):
         """" Define permisos para este recurso """
-        permission_classes = [IsAuthenticated, IsMaestroUser]
-        if self.action == "list":
-            permission_classes.append(IsAdminUser)
+        permission_classes = [IsAuthenticated]
+        if self.action not in ['asignacion', 'retrieve']:
+            permission_classes.append(IsMaestroUser)
         return [permission() for permission in permission_classes]
+
 
     @action(methods=['get'], detail=False)
     def asignacion(self, request):

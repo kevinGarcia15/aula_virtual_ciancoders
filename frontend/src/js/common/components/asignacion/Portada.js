@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import { Link } from "react-router-dom";
 import PortadaForm from "./PortadaForm";
 const defaultPortada = require("assets/img/defaultPortada.png");
-import '../../../../style/portada.css'
+import "../../../../style/portada.css";
 
 class Portada extends Component {
     constructor(props) {
@@ -44,14 +44,14 @@ class Portada extends Component {
         const rol = localStorage.getItem("rol");
         return (
             <React.Fragment>
-                    <PortadaForm
-                        portadaCurso={infoAsignacion.portada}
-                        onSubmit={this.update}
-                        setPortada={this.setPortada}
-                        onCloseModal={this.handleCloseModal}
-                        modalStatus={this.state.modalIsOpen}
-                        infoAsignacion={infoAsignacion}
-                    />
+                <PortadaForm
+                    portadaCurso={infoAsignacion.portada}
+                    onSubmit={this.update}
+                    setPortada={this.setPortada}
+                    onCloseModal={this.handleCloseModal}
+                    modalStatus={this.state.modalIsOpen}
+                    infoAsignacion={infoAsignacion}
+                />
                 <div className="container card">
                     <div className="d-flex flex-column align-items-center mt-3">
                         <div className="max-height">
@@ -79,7 +79,13 @@ class Portada extends Component {
                 </div>
                 <div className="d-flex flex-column align-items-center mt-3">
                     <h3 className="">{infoAsignacion.curso}</h3>
-                    <p>{`${infoAsignacion.grado} ${infoAsignacion.seccion}`}</p>
+                    <p className="mb-0">{`${infoAsignacion.grado} ${infoAsignacion.seccion}`}</p>
+                    {infoAsignacion.maestro?
+                    <React.Fragment>
+                        <p className="mb-0">{`Catedratico: ${infoAsignacion.maestro.maestro_profile.user.first_name} ${infoAsignacion.maestro.maestro_profile.user.last_name}`}</p>
+                        <p>{`Contacto: tel. ${infoAsignacion.maestro.maestro_profile.phone}`}</p>
+                    </React.Fragment>
+                    :null}
                 </div>
             </React.Fragment>
         );

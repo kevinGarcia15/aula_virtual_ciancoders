@@ -20,7 +20,7 @@ class Grado(models.Model):
         return self.nombre
     
     def __str__(self):
-        return self.nombre
+        return ("{} {}".format(self.nombre, self.nivel.nombre))
 
     def delete(self, *args):
         self.activo = False

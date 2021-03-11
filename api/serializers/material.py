@@ -12,4 +12,4 @@ class MaterialSerializer(serializers.ModelSerializer):
 class MaterialReadSerializer(serializers.ModelSerializer):
     class Meta:
         model = Material
-        fields = ("id","titulo", "descripcion", "archivo","activo")
+        fields = ("id","titulo", "descripcion", "archivo","activo", "creado")
