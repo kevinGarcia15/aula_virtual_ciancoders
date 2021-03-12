@@ -1,14 +1,18 @@
 """Viewset del modelo tarea_estudiante"""
 import json
-
-from rest_framework import viewsets, status
+from rest_framework import status, filters, viewsets
+from django_filters.rest_framework import DjangoFilterBackend
 from rest_framework.decorators import action
 from django.core.files import File
 from rest_framework.response import Response
 from rest_framework.settings import api_settings
+from rest_framework.permissions import AllowAny, IsAuthenticated
+from datetime import date, time, datetime
+#permisos
+from api.permission.maestro import IsMaestroUser
 
 #modelo
-from api.models import Tarea_Estudiante, Tarea
+from api.models import Tarea_Estudiante, Tarea, Profile, Estudiante
 
 #serializer 
 from api.serializers import (
@@ -21,6 +25,50 @@ class TareaEstudianteViewset(viewsets.ModelViewSet):
     """Viewset del modelo tarea_estudiante"""
     queryset = Tarea_Estudiante.objects.filter(tarea__asignacion__asignacion_ciclo__anio= "2021")
     serializer_class = TareaEstudianteReadSerializer
+
+    def get_permissions(self):
+        """" Define permisos para este recurso """
+        permission_classes = [IsAuthenticated]
+        if self.action in ['entregados', 'update']:
+            permission_classes.append(IsMaestroUser)
+        return [permission() for permission in permission_classes]
+
+    def create(self, request):
+        try:
+            #import pdb; pdb.set_trace()
+
+            data = request.data
+            archivo = data.get('archivo')
+            data = json.loads(data["data"])
+            serializer = TareaEstudianteSerializer(data=data)
+            if serializer.is_valid(raise_exception=True):
+                user = request.user
+                perfil = Profile.objects.get(user=user)
+                estudiante = Estudiante.objects.get(estudiante_profile=perfil)
+                tarea = Tarea.objects.get(pk=data.get("tarea"))
+
+                date_and_time = datetime.combine(tarea.fecha_entrega,tarea.hora_entrega)
+                today = datetime.now()
+                if today <= date_and_time:   
+                    if archivo is not None and tarea.permitir_archivo is True:
+                        obj, created = Tarea_Estudiante.objects.get_or_create(
+                            estudiante=estudiante,
+                            tarea=tarea, 
+                            defaults={'archivo':File(archivo)},
+                        )
+                        return Response({"detail": created}, status=status.HTTP_201_CREATED)
+                    else:
+                        obj, created = Tarea_Estudiante.objects.get_or_create(
+                            estudiante=estudiante,
+                            tarea=tarea, 
+                            defaults={'texto':data.get("texto")},
+                        )
+                        return Response({"detail": created}, status=status.HTTP_201_CREATED)
+                else:
+                    return Response({"detail": "tiempo de entrega expirado"}, status=status.HTTP_400_BAD_REQUEST)
+        except TypeError as e:
+            return Response(e, status=status.HTTP_400_BAD_REQUEST)
+
 
     @action(methods=['get'], detail=False)
     def entregados(self, request):

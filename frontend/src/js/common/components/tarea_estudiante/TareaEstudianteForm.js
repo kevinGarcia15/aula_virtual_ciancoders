@@ -6,16 +6,15 @@ import {
     renderFilePicker,
 } from ".././Utils/renderField/renderField";
 import { validate, validators } from "validate-redux-form";
+import LoadMask from "../Utils/LoadMask/LoadMask";
 
 class TareaEstudianteForm extends Component {
     render() {
         const disabled = false;
-        const { handleSubmit, setArchivo, titulo , id_asignacion} = this.props;
+        const { handleSubmit, setArchivo, titulo , id_asignacion, permitirArchivo, loader} = this.props;
         return (
+            <LoadMask light loading={loader} type={"Grid"}>
             <form className="row" onSubmit={handleSubmit}>
-                <div className="col-12">
-                    <h3 className="text-center"></h3>
-                </div>
                 <div className="col-12">
                     <div className="card">
                         <div className="card-body">
@@ -26,16 +25,9 @@ class TareaEstudianteForm extends Component {
                                     </h5>
                                 </div>
                                 <div className="col-8">
+                                    {permitirArchivo?
                                     <div className="mb-2">
-                                        <label>Texto</label>
-                                        <Field
-                                            name="descripcion"
-                                            component={renderTextArea}
-                                            disabled={disabled}
-                                        />
-                                    </div>
-                                    <div className="mb-2">
-                                        <label htmlFor="avatar">
+                                        <label htmlFor="archivo">
                                             Archivo adjunto
                                         </label>
                                         <Field
@@ -44,7 +36,16 @@ class TareaEstudianteForm extends Component {
                                             disabled={disabled}
                                             component={renderFilePicker}
                                         />
+                                    </div>:
+                                    <div className="mb-2">
+                                        <label>Texto</label>
+                                        <Field
+                                            name="texto"
+                                            component={renderTextArea}
+                                            disabled={disabled}
+                                        />
                                     </div>
+                                    }
                                 </div>
                             </div>
                         </div>
@@ -90,12 +91,17 @@ class TareaEstudianteForm extends Component {
                     </div>
                 )}
             </form>
+            </LoadMask>
         );
     }
 }
 export default reduxForm({
     form: "tareaEstudianteForm",
     validate: (data) => {
-        return validate(data, {});
+        return validate(data, {
+            archivo: validators.exists()("Este campo es requerido"),
+            texto: validators.exists()("Este campo es requerido"),
+
+        });
     },
 })(TareaEstudianteForm);

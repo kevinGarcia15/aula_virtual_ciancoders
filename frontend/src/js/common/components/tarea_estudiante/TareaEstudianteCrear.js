@@ -12,34 +12,42 @@ class TareaEstudianteCrear extends Component{
         archivo:null
     }
     componentDidMount(){
-        const {match} = this.props
+        const {match, leerTarea} = this.props
         this.setState({
             id_tarea:match.params.id_tarea,
             id_asignacion:match.params.id_asignacion
         })
+        leerTarea(match.params.id_tarea)
     }
     setArchivo = (archivo) => {
         this.setState({ archivo: archivo });
     };
-    
+
     crear = (data) => {
-        //const { crear } = this.props;
+        const { crear } = this.props;
         const id_tarea = this.state.id_tarea;
-        /*crear({ ...data, archivo: null, asignacion: id_asignacion }, [
+        const id_asignacion = this.state.id_asignacion;
+        crear({ ...data, archivo: null, tarea: id_tarea, id_asignacion:id_asignacion }, [
             { file: this.state.archivo, name: "archivo" },
-        ]);*/
-        console.log(data)
-        console.log(this.state.archivo)
+        ]);
+  //      console.log(data)
+  //      console.log(this.state.archivo)
     };
     render(){
+        const {infoTarea, loader} = this.props
         const funcionEnvio = this.crear
         return(
             <div className="container mt-3">
+                <h4>Tarea: {infoTarea.titulo}</h4>
+                <p className="mb-0">{infoTarea.descripcion}</p>
+                <p>Punteo: {infoTarea.nota} puntos</p>
                 <TareaEstudianteForm 
                     id_asignacion={this.state.id_asignacion}
                     titulo ={this.state.titulo}
                     setArchivo={this.setArchivo}
                     onSubmit={funcionEnvio}
+                    permitirArchivo = {infoTarea.permitir_archivo}
+                    loader={loader}
                 />
             </div>
         )

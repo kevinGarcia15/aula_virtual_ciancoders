@@ -1,5 +1,6 @@
 import CrearEstudianteTarea from './TareaEstudianteCrear'
 import {actions} from '../../../redux/modules/tarea_estudiante/tareaEstudiante'
+//import {actions as actionsTarea} from '../../../redux/modules/tarea/tarea'
 import {connect} from 'react-redux'
 
 const ms2p = (state)=>{
