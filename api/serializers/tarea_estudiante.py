@@ -5,7 +5,7 @@ from rest_framework import serializers
 from api.models import Tarea_Estudiante
 
 #serializer
-from api.serializers import EstudianteSerializer
+from api.serializers import EstudianteSerializer, TareaSerializer
 
 class TareaEstudianteSerializer(serializers.ModelSerializer):
     """Serializer para crear y actualizar el modelo"""
@@ -19,3 +19,10 @@ class TareaEstudianteReadSerializer(serializers.ModelSerializer):
     class Meta:
         model = Tarea_Estudiante
         fields = ("id","texto", "archivo", "punteo", "creado","estudiante")
+
+class TareaEstudianteMisNotasSerializer(serializers.ModelSerializer):
+    """Serializer de solo lectura"""
+    tarea = TareaSerializer()
+    class Meta:
+        model = Tarea_Estudiante
+        fields = ("id","texto", "archivo", "punteo", "creado","tarea")

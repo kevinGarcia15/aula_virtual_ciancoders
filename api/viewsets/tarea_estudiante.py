@@ -18,7 +18,8 @@ from api.models import Tarea_Estudiante, Tarea, Profile, Estudiante
 from api.serializers import (
     TareaEstudianteSerializer, 
     TareaEstudianteReadSerializer,
-    TareaReadSerializer
+    TareaReadSerializer,
+    TareaEstudianteMisNotasSerializer
 )                           
 
 class TareaEstudianteViewset(viewsets.ModelViewSet):
@@ -72,6 +73,7 @@ class TareaEstudianteViewset(viewsets.ModelViewSet):
 
     @action(methods=['get'], detail=False)
     def entregados(self, request):
+        """obtiene todas las tareas que han enviados los estudiantes a un curso"""
         tarea_id = request.query_params.get("id")
         tareas = Tarea_Estudiante.objects.filter(tarea_id=tarea_id)
         serializer = TareaEstudianteReadSerializer(tareas, many=True)
@@ -80,6 +82,19 @@ class TareaEstudianteViewset(viewsets.ModelViewSet):
         tareaSerializer =  TareaReadSerializer(tarea, many=False)
         return Response(
             {"tarea": tareaSerializer.data, "entregas":serializer.data}, 
+            status=status.HTTP_200_OK
+        )
+
+    @action(methods=['get'], detail=False)
+    def misnotas(self, request):
+        id_asignacion = request.query_params.get("id_asignacion")
+        user = request.user
+        perfil = Profile.objects.get(user=user)
+        estudiante = Estudiante.objects.get(estudiante_profile=perfil)
+        mis_notas = Tarea_Estudiante.objects.filter(estudiante=estudiante,tarea__asignacion_id = id_asignacion)
+        serializer = TareaEstudianteMisNotasSerializer(mis_notas, many=True)
+        return Response(
+            serializer.data, 
             status=status.HTTP_200_OK
         )
 

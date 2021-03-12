@@ -6,6 +6,7 @@ import { NotificationManager } from "react-notifications";
 
 const GUARDAR_LISTADO_TAREA_ESTUDIANTES = "GUARDAR_LISTADO_TAREA_ESTUDIANTES";
 const GUARDAR_INFO_TAREA = "GUARDAR_INFO_TAREA";
+const MIS_NOTAS = "MIS_NOTAS";
 const LOADER = "ASIGNACION_LOADER";
 
 export const setLoader = (loader) => ({
@@ -95,12 +96,27 @@ const leerTarea = (id) => (dispatch) => {
         })
         .finally(() => {});
 };
+/**Funcion para obtener las tareas que ha enviado un estudiante de una asignatura y sus notas*/
+const ObtenerMisNotas = (id_asignacion)=>(dispatch)=>{
+    api.get("tareaestudiantes/misnotas", { id_asignacion })
+        .then((response) => {
+            const data = {
+                results: response,
+            };
+            dispatch({
+                type: MIS_NOTAS,
+                misNotas: data,
+            });
+        })
+        .catch(() => {})
+        .finally(() => {});}
 
 export const actions = {
     listar,
     actualizarPunteo,
     crear,
-    leerTarea
+    leerTarea,
+    ObtenerMisNotas
 }
 export const reducers = {
     [GUARDAR_LISTADO_TAREA_ESTUDIANTES]: (state, { data }) => {
@@ -115,11 +131,18 @@ export const reducers = {
             infoTarea,
         };
     },
+    [MIS_NOTAS]: (state, { misNotas }) => {
+        return {
+            ...state,
+            misNotas,
+        };
+    },
 };
 export const initialState = {
     loader: false,
     data: {},
-    infoTarea:{}
+    infoTarea:{},
+    misNotas:{}
 };
 
 export default handleActions(reducers, initialState);
