@@ -52,30 +52,28 @@ class SideBar extends Component {
                             </NavLink>
                         </li>
                         {localStorage.getItem("rol") == "Maestro" &&
-                        cursosMaestro.maestro ? (
-                            cursosMaestro.maestro.map((item) => {
-                                return (
-                                    <div key={item.id}>
-                                        <li className="nav-item">
-                                            <Link
-                                                to={`/asignacion/${item.id}/estudiantes`}
-                                                className="nav-link"
-                                                activeClassName={"active"}
-                                            >
-                                                <div className="d-inline-block item-icon-wrapper">
-                                                    <i className="material-icons">
-                                                        account_box
-                                                    </i>
-                                                </div>
-                                                <span>{item.curso}</span>
-                                            </Link>
-                                        </li>
-                                    </div>
-                                );
-                            })
-                        ) : (
-                            null
-                        )}
+                        cursosMaestro.maestro
+                            ? cursosMaestro.maestro.map((item) => {
+                                  return (
+                                      <div key={item.id}>
+                                          <li className="nav-item">
+                                              <Link
+                                                  to={`/asignacion/${item.id}/estudiantes`}
+                                                  className="nav-link"
+                                                  activeClassName={"active"}
+                                              >
+                                                  <div className="d-inline-block item-icon-wrapper">
+                                                      <i className="material-icons">
+                                                          account_box
+                                                      </i>
+                                                  </div>
+                                                  <span>{item.curso}</span>
+                                              </Link>
+                                          </li>
+                                      </div>
+                                  );
+                              })
+                            : null}
                         {localStorage.getItem("rol") == "Admin" ? (
                             <div>
                                 <li className="nav-item">
@@ -150,20 +148,22 @@ class SideBar extends Component {
                                 </li>
                             </div>
                         ) : null}
-                        <li className="nav-item">
-                            <NavLink
-                                to="/misasignaciones/"
-                                className="nav-link"
-                                activeClassName={"active"}
-                            >
-                                <div className="d-inline-block item-icon-wrapper">
-                                    <i className="material-icons">
-                                        vertical_split
-                                    </i>
-                                </div>
-                                <span>Mis Cursos</span>
-                            </NavLink>
-                        </li>
+                        {localStorage.getItem("rol") == "Estudiante" ? (
+                            <li className="nav-item">
+                                <NavLink
+                                    to="/misasignaciones/"
+                                    className="nav-link"
+                                    activeClassName={"active"}
+                                >
+                                    <div className="d-inline-block item-icon-wrapper">
+                                        <i className="material-icons">
+                                            vertical_split
+                                        </i>
+                                    </div>
+                                    <span>Mis Cursos</span>
+                                </NavLink>
+                            </li>
+                        ) : null}
                         <li className="nav-item">
                             <NavLink
                                 to="/grids"

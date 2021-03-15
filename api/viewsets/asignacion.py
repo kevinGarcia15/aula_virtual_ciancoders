@@ -12,10 +12,14 @@ from datetime import datetime
 #permission
 from api.permission.admin import IsAdminUser
 from api.permission.maestro import IsMaestroUser
-from api.permission.estudiante import IsAsignacionOwner
+from api.permission.asignacion import IsAsignacionOwner
  
 from api.models import Asignacion, Estudiante
-from api.serializers import AsignacionCrearSerializer,AsignacionSerializer,EstudianteSerializer
+from api.serializers import (
+    AsignacionCrearSerializer,
+    AsignacionSerializer,
+    EstudianteSerializer
+)
 
 class AsignacionViewset(viewsets.ModelViewSet):
     """Asignacion Viewset""" 
