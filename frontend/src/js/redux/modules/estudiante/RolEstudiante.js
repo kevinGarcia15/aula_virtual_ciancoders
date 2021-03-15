@@ -1,3 +1,6 @@
+/**modulo que obtiene informacion para el dashboard del usuario
+ * estudiante
+ */
 import { handleActions } from "redux-actions";
 import { push } from "react-router-redux";
 import { initialize as initializeForm } from "redux-form";
@@ -10,7 +13,10 @@ const DASHBOARD_TAREAS_ENTREGAR = "DASHBOARD_TAREAS_ENTREGAR";
 const misCursos = ()=>(dispach) => {
     api.get("/estudiante/cursos_estudiante")
         .then((response) => {
-            dispach({ type: DASHBOARD_MIS_CURSOS, cursosAsignados: response });
+            const data = {
+                results: response.estudiante,
+            };
+            dispach({ type: DASHBOARD_MIS_CURSOS, cursosAsignados: data });
         })
         .catch((error) => {
             NotificationManager.error(

@@ -20,7 +20,7 @@ export class DashboardEstudiante extends Component {
                     </div>
                     <Tareas tareas={tareasEntregar.tareas_entregar} />
                     <div className="col-lg-1"></div>
-                    <MisCursos cursos={cursosAsignados.estudiante} />
+                    <MisCursos cursos={cursosAsignados.results} />
                 </div>
             </div>
         );
