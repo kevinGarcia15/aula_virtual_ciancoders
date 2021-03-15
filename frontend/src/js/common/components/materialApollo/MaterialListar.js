@@ -33,6 +33,7 @@ class MaterialListar extends Component {
                     striped
                     data={data}
                     loading={loader}
+                    pagination={false}
                     //onPageChange={onPageChange}
                     //onSortChange={onSortChange}
                 >

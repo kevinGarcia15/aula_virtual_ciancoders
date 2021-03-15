@@ -26,6 +26,7 @@ class TareasEnviadas extends Component {
                     striped
                     data={misNotas}
                     loading={loader}
+                    pagination={false}
                     //onPageChange={onPageChange}
                     //onSortChange={onSortChange}
                 >
