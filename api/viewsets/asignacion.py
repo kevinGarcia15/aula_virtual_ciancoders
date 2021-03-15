@@ -3,7 +3,7 @@ import json
 from django.core.files import File
 from django_filters.rest_framework import DjangoFilterBackend
 from rest_framework import status, filters, viewsets
-from rest_framework.decorators import action
+from rest_framework.decorators import action, permission_classes
 from rest_framework.permissions import AllowAny, IsAuthenticated
 from rest_framework.response import Response
 from rest_framework.settings import api_settings
@@ -12,7 +12,8 @@ from datetime import datetime
 #permission
 from api.permission.admin import IsAdminUser
 from api.permission.maestro import IsMaestroUser
-
+from api.permission.estudiante import IsAsignacionOwner
+ 
 from api.models import Asignacion, Estudiante
 from api.serializers import AsignacionCrearSerializer,AsignacionSerializer,EstudianteSerializer
 
@@ -32,10 +33,14 @@ class AsignacionViewset(viewsets.ModelViewSet):
     def get_permissions(self):
         """" Define permisos para este recurso """
         permission_classes = [IsAuthenticated]
+        #import pdb; pdb.set_trace()
+
         if self.action in ['estudiantes', 'estudiante_asignar','elimiar_alumno','actualizar_portada']:
             permission_classes.append(IsMaestroUser)
-        if self.action in ['create', 'update']:
+        if self.action in ['create', 'update', 'list']:
             permission_classes.append(IsAdminUser)
+        if self.action == 'retrieve':
+            permission_classes.append(IsAsignacionOwner)
         return [permission() for permission in permission_classes]
 
     @action(methods=["get"], detail=False)
