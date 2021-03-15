@@ -1,6 +1,6 @@
 import { connect } from 'react-redux';
 import { actions } from '../../../redux/modules/asignacionEstudiante/asignacion';
-import AsigEstudianteListar from './AsigEstudianteListar';
+import GestionAsignatura from './GestionAsignatura';
 
 const ms2p = (state) => {
   return {
@@ -10,4 +10,4 @@ const ms2p = (state) => {
 
 const md2p = { ...actions };
 
-export default connect(ms2p, md2p)(AsigEstudianteListar);
+export default connect(ms2p, md2p)(GestionAsignatura);

@@ -41,7 +41,7 @@ import CursoListarContainer from './common/components/curso/CursoListarContainer
 import CursoCrearContainer from './common/components/curso/CursoCrearContainer'
 
 import AsignacionCrearContainer from './common/components/asignacionMaestro/AsignacionCrearContainer'
-import AsigEstudianteContainer from './common/components/asignacionEstudiante/AsigEstudianteContainer'
+import AsigEstudianteContainer from './common/components/gestionAsignaturaMaestro/GestionAsignaturaContainer'
 
 import TareaCrearContainer from './common/components/tarea/TareaCrearContainer'
 import MaterialCrearContainer from './common/components/materialApollo/MaterialCrearContainer'
