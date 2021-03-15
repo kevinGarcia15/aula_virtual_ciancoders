@@ -9,6 +9,8 @@ from rest_framework.permissions import AllowAny, IsAuthenticated
 from rest_framework.response import Response
 from rest_framework.settings import api_settings
 from django.db import transaction
+from datetime import datetime
+
 
 #permission
 from api.permission.admin import IsAdminUser
@@ -122,7 +124,8 @@ class MaestroViewset(viewsets.ModelViewSet):
 
     @action(methods=["get"], detail=False)
     def cursos_maestro(self, request):
-        anio = "2021"
+        now = datetime.now()
+        anio = now.strftime("%Y")
         user = request.user
         profile = Profile.objects.get(user=user)
         maestro = Maestro.objects.get(maestro_profile=profile)
@@ -133,7 +136,8 @@ class MaestroViewset(viewsets.ModelViewSet):
 
     @action(methods=["get"], detail=False)
     def total_tareas(self, request):
-        anio="2021"
+        now = datetime.now()
+        anio = now.strftime("%Y")
         user = request.user
         profile = Profile.objects.get(user=user)
         maestro = Maestro.objects.get(maestro_profile=profile)

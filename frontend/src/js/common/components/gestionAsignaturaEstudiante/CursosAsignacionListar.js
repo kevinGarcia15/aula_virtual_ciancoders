@@ -28,6 +28,15 @@ class CursosAsignacionListar extends Component {
                         Grado
                     </TableHeaderColumn>
                     <TableHeaderColumn
+                        dataField="maestro"
+                        dataSort
+                        dataFormat={(cell) => {
+                            return `${cell.maestro_profile.user.first_name} ${cell.maestro_profile.user.last_name}`;
+                        }}
+                    >
+                        Catedratico
+                    </TableHeaderColumn>
+                    <TableHeaderColumn
                         dataField="id"
                         dataAlign="center"
                         dataSort

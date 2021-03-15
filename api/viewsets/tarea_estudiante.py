@@ -24,7 +24,9 @@ from api.serializers import (
 
 class TareaEstudianteViewset(viewsets.ModelViewSet):
     """Viewset del modelo tarea_estudiante"""
-    queryset = Tarea_Estudiante.objects.filter(tarea__asignacion__asignacion_ciclo__anio= "2021")
+    now = datetime.now()
+    anio = now.strftime("%Y")
+    queryset = Tarea_Estudiante.objects.filter(tarea__asignacion__asignacion_ciclo__anio=anio)
     serializer_class = TareaEstudianteReadSerializer
 
     def get_permissions(self):

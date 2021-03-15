@@ -86,7 +86,8 @@ class EstudianteViewset(viewsets.ModelViewSet):
 
     @action(methods=["get"], detail=False)
     def cursos_estudiante(self, request):
-        anio = "2021"
+        now = datetime.now()
+        anio = now.strftime("%Y")
         user = request.user
         profile = Profile.objects.get(user=user)
         estudiante = Estudiante.objects.get(estudiante_profile=profile)

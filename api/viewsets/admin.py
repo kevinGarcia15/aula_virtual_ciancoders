@@ -45,7 +45,7 @@ class AdminViewset(viewsets.ModelViewSet):
             "estudiantesActivos": estudiantes_activos,
             "estudiantesInactivos": estudiantes_inactivos,
         }
-        return Response(data, status=status.HTTP_201_CREATED)
+        return Response(data, status=status.HTTP_200_OK)
     
     @action(methods=["get"], detail=False)
     def ciclo(self, request):
@@ -70,5 +70,5 @@ class AdminViewset(viewsets.ModelViewSet):
             "secciones": secciones,
             "estudiantesAsignados":estudiantes_asignados
         }
-        return Response(data, status=status.HTTP_201_CREATED)        
+        return Response(data, status=status.HTTP_200_OK)        
 
