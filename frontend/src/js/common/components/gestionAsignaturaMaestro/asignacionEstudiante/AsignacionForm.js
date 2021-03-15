@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import { reduxForm, Field } from "redux-form";
-import { AsyncSelectField } from "../Utils/renderField/renderField";
+import { AsyncSelectField } from "../../Utils/renderField/renderField";
 import { validate, validators } from "validate-redux-form";
 
 class AsignacionForm extends Component {
