@@ -58,7 +58,7 @@ const obtenerMaestros = (search) => () => {
                 data.results.forEach((maestro) => {
                     maestros.push({
                         value: maestro.id,
-                        label: maestro.maestro_profile.user.first_name,
+                        label: `${maestro.maestro_profile.user.first_name} ${maestro.maestro_profile.user.last_name}`,
                     });
                 });
                 return maestros;

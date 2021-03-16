@@ -47,18 +47,18 @@ class AsignacionForm extends Component {
                                         />
                                     </div>
                                     <div className="mt-2">
-                                        <label htmlFor="seccion">Sección</label>
-                                        <Field
-                                            name="seccion"
-                                            loadOptions={obtenerSecciones}
-                                            component={AsyncSelectField}
-                                        />
-                                    </div>
-                                    <div className="mt-2">
                                         <label htmlFor="grado">Grado</label>
                                         <Field
                                             name="grado"
                                             loadOptions={obtenerGrados}
+                                            component={AsyncSelectField}
+                                        />
+                                    </div>
+                                    <div className="mt-2">
+                                        <label htmlFor="seccion">Sección</label>
+                                        <Field
+                                            name="seccion"
+                                            loadOptions={obtenerSecciones}
                                             component={AsyncSelectField}
                                         />
                                     </div>
