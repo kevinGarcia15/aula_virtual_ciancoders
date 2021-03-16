@@ -3,13 +3,14 @@ import { Link } from "react-router-dom";
 
 class Footer extends Component {
     render() {
+        const rol = localStorage.getItem("rol")
         return (
             <footer className="main-footer d-flex p-2 px-3 bg-white border-top">
                 <div className="container">
                     <div className="row">
                         <ul className="nav">
                             <li className="nav-item">
-                                <Link className="nav-link" to="/">
+                                <Link className="nav-link" to={`/${rol}`}>
                                     Home
                                 </Link>
                             </li>

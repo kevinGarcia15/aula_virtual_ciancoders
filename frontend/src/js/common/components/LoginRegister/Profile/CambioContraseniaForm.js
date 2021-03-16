@@ -8,10 +8,13 @@ import {
     combine,
 } from "validate-redux-form";
 import { renderField } from "../../Utils/renderField";
+import { toLower } from "lodash";
 
 const CambioContraseniaForm = (props) => {
     const { handleSubmit } = props;
     const isFirstLogin = localStorage.getItem("isFirstLogin");
+    const rol = toLower(localStorage.getItem("rol"));
+
     return (
         <form
             name="contraseniaForm"
@@ -54,7 +57,7 @@ const CambioContraseniaForm = (props) => {
                 </div>
                 <div className="buttons-box">
                     <Link
-                        to="/"
+                        to={`/${rol}`}
                         className="btn btn-secondary m-1 align-self-center"
                     >
                         Mas tarde

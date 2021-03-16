@@ -4,6 +4,7 @@ import { NotificationManager } from "react-notifications";
 import { initialize as initializeForm } from "redux-form";
 import { api } from "api";
 import { setMe } from "./login";
+import { toLower } from "lodash";
 
 const LOADER = "LOGIN_LOADER";
 
@@ -49,12 +50,13 @@ export const updatePassword = (data = {}) => (dispatch, getStore) => {
     api.put("/user/update_password", data)
         .then((response) => {
             localStorage.setItem("isFirstLogin", false);
+            const rol = toLower(localStorage.getItem("rol"));
             NotificationManager.success(
                 "Datos actualizados exitosamente",
                 "SUCCESS",
                 3000
             );
-            dispatch(push("/"));
+            dispatch(push(`/${rol}`));
         })
         .catch(() => {
             NotificationManager.error(
