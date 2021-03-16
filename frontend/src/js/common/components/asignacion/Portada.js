@@ -31,6 +31,12 @@ class Portada extends Component {
             [{ file: this.state.portada, name: "portada" }]
         );
     };
+
+    componentWillUnmount(){
+        const {resetStateInfoAsignacion} = this.props
+        resetStateInfoAsignacion()
+    }
+    
     handleOpenModal = (e) => {
         this.setState({ modalIsOpen: true });
     };

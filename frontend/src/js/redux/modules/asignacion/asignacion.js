@@ -8,7 +8,7 @@ import { initialize as initializeForm } from "redux-form";
 // ------------------------------------
 // Constants
 // ------------------------------------
-const GUARDAR_REGISTRO_ASIGNACION = "GUARDAR_REGISTRO_ASIGNACION"
+const GUARDAR_REGISTRO_ASIGNACION = "GUARDAR_REGISTRO_ASIGNACION";
 
 const LOADER = "ASIGNACION_LOADER";
 
@@ -17,15 +17,22 @@ export const setLoader = (loader) => ({
     loader,
 });
 
-const leer = id => (dispatch) => {
-    api.get(`asignaciones/${id}`).then((response) => {
-        dispatch({type:GUARDAR_REGISTRO_ASIGNACION, infoAsignacion:response})
-    }).catch(() => {
-    }).finally(() => {
-    });
+const leer = (id) => (dispatch) => {
+    api.get(`asignaciones/${id}`)
+        .then((response) => {
+            dispatch({
+                type: GUARDAR_REGISTRO_ASIGNACION,
+                infoAsignacion: response,
+            });
+        })
+        .catch(() => {})
+        .finally(() => {});
 };
 
-export const actualizarAsignacion = (data = {}, attachments = []) => (dispatch, getStore) => {
+export const actualizarAsignacion = (data = {}, attachments = []) => (
+    dispatch,
+    getStore
+) => {
     dispatch(setLoader(true));
     api.putAttachments("asignaciones/actualizar_portada", data, attachments)
         .then((response) => {
@@ -48,9 +55,15 @@ export const actualizarAsignacion = (data = {}, attachments = []) => (dispatch, 
             dispatch(setLoader(false));
         });
 };
+
+const resetStateInfoAsignacion = () => (dispatch) => {
+    dispatch({ type: GUARDAR_REGISTRO_ASIGNACION, infoAsignacion: {} });
+};
+
 export const actions = {
     leer,
     actualizarAsignacion,
+    resetStateInfoAsignacion
 };
 
 export const reducers = {
@@ -70,7 +83,7 @@ export const reducers = {
 
 export const intialState = {
     loader: false,
-    infoAsignacion: {}
+    infoAsignacion: {},
 };
 
 export default handleActions(reducers, intialState);
