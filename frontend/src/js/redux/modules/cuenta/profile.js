@@ -3,7 +3,7 @@ import { push } from "react-router-redux";
 import { NotificationManager } from "react-notifications";
 import { initialize as initializeForm } from "redux-form";
 import { api } from "api";
-import { setMe } from "./login";
+import { getMe as refreshUser } from "./login";
 import { toLower } from "lodash";
 
 const LOADER = "LOGIN_LOADER";
@@ -26,7 +26,7 @@ export const update = (data = {}, attachments = []) => (dispatch, getStore) => {
     dispatch(setLoader(true));
     api.putAttachments("user/update_me", data, attachments)
         .then((response) => {
-            dispatch(setMe(response));
+            dispatch(refreshUser());
             NotificationManager.success(
                 "Datos actualizados exitosamente",
                 "ERROR",

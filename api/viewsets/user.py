@@ -161,6 +161,7 @@ class UserViewset(viewsets.ModelViewSet):
             user.last_name = data.get("user").get("last_name")
             perfil, created = Profile.objects.get_or_create(user=user)
             if avatar is not None:
+                perfil.avatar.delete()
                 perfil.avatar = File(avatar)
             profile = data.get("profile")
             if profile is not None:
