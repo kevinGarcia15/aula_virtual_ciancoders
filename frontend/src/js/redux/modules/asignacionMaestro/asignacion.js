@@ -1,19 +1,28 @@
 import { handleActions } from "redux-actions";
-import { createReducer } from "../baseReducer/baseReducer";
 import { NotificationManager } from "react-notifications";
 import { api } from "api";
 import { push } from "react-router-redux";
 // ------------------------------------
 // Constants
 // ------------------------------------
+const GUARDAR_LISTADO_ASIGNACIONES = "GUARDAR_LISTADO_ASIGNACIONES"
 
-export const { reducers, initialState, actions } = createReducer(
-    "asigncion",
-    "asignaciones",
-    "asignacionForm",
-    "/asigncion"
-);
-
+const listar = ()=>(dispatch)=>{
+    api.get("/asignaciones")
+        .then((response)=>{
+            dispatch({
+                type: GUARDAR_LISTADO_ASIGNACIONES,
+                data: response,
+            });
+        })
+        .catch((error)=>{
+            NotificationManager.error(
+                "Ocurrio un error al obtener los datos",
+                "ERROR",
+                3000
+            );
+        })
+}
 const crearAsignacion = (data) => (dispatch) => {
     const formData={
         maestro : data.maestro.value,
@@ -23,7 +32,6 @@ const crearAsignacion = (data) => (dispatch) => {
         asignacion_ciclo : data.asignacion_ciclo.value,
         descripcion : data.descripcion
     }
-    console.log(formData)
     api.post("/asignaciones", formData)
         .then((response) => {
             NotificationManager.success(
@@ -31,7 +39,7 @@ const crearAsignacion = (data) => (dispatch) => {
                 "Exito",
                 3000
             );
-            dispatch(push("/maestros"));
+            dispatch(push("/asignacion/listar"));
         })
         .catch((error) => {
             NotificationManager.error(
@@ -162,12 +170,27 @@ const obtenerCiclos = (search) => () => {
         });
 };
 
+export const actions = {
+    listar, 
+    obtenerMaestros,
+    obtenerCursos,
+    obtenerSecciones,
+    obtenerGrados,
+    obtenerCiclos,
+    crearAsignacion
+};
 
-actions["obtenerMaestros"] = obtenerMaestros;
-actions["obtenerCursos"] = obtenerCursos;
-actions["obtenerSecciones"] = obtenerSecciones;
-actions["obtenerGrados"] = obtenerGrados;
-actions["obtenerCiclos"] = obtenerCiclos;
-actions["crearAsignacion"] = crearAsignacion;
+export const reducers = {
+    [GUARDAR_LISTADO_ASIGNACIONES]: (state, { data }) => {
+        return {
+            ...state,
+            data,
+        };
+    },
+}
 
+export const initialState = {
+    loader: false,
+    data:{}
+}
 export default handleActions(reducers, initialState);

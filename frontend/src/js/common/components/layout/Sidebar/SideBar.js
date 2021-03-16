@@ -83,6 +83,20 @@ class SideBar extends Component {
                                 </li>
                                 <li className="nav-item">
                                     <NavLink
+                                        to="/asignacion/listar"
+                                        className="nav-link"
+                                        activeClassName={"active"}
+                                    >
+                                        <div className="d-inline-block item-icon-wrapper">
+                                            <i className="material-icons">
+                                                assignment
+                                            </i>
+                                        </div>
+                                        <span>Asignaciones</span>
+                                    </NavLink>
+                                </li>
+                                <li className="nav-item">
+                                    <NavLink
                                         to="/grado"
                                         className="nav-link"
                                         activeClassName={"active"}
@@ -157,48 +171,6 @@ class SideBar extends Component {
                                 </NavLink>
                             </li>
                         ) : null}
-                        <li className="nav-item">
-                            <NavLink
-                                to="/grids"
-                                className="nav-link"
-                                activeClassName={"active"}
-                            >
-                                <div className="d-inline-block item-icon-wrapper">
-                                    <i className="material-icons">
-                                        vertical_split
-                                    </i>
-                                </div>
-                                <span>Grids</span>
-                            </NavLink>
-                        </li>
-                        <li className="nav-item">
-                            <NavLink
-                                to="/notifications"
-                                className="nav-link"
-                                activeClassName={"active"}
-                            >
-                                <div className="d-inline-block item-icon-wrapper">
-                                    <i className="material-icons">
-                                        vertical_split
-                                    </i>
-                                </div>
-                                <span>Notificaciones</span>
-                            </NavLink>
-                        </li>
-                        <li className="nav-item">
-                            <NavLink
-                                to="/tabs"
-                                className="nav-link"
-                                activeClassName={"active"}
-                            >
-                                <div className="d-inline-block item-icon-wrapper">
-                                    <i className="material-icons">
-                                        vertical_split
-                                    </i>
-                                </div>
-                                <span>Tabs</span>
-                            </NavLink>
-                        </li>
                         <li className="nav-item">
                             <Link
                                 to="/login"

@@ -84,7 +84,7 @@ class AsignacionForm extends Component {
                             <div className="row justify-content-end mt-4">
                                 <div className="col-3">
                                     <Link
-                                        to="/maestros"
+                                        to="/asignacion/listar"
                                         className="btn btn-secondary mr-2"
                                     >
                                         Cancelar
