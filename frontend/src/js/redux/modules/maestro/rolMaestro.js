@@ -10,7 +10,10 @@ const DASHBOARD_TAREAS = "DASHBOARD_TAREAS";
 const cursosAsignados = ()=>(dispach) => {
     api.get("/maestro/cursos_maestro")
         .then((response) => {
-            dispach({ type: DASHBOARD_CURSOS_ASIGNADOS, cursosMaestro: response });
+            const data = {
+                results: response.maestro,
+            };
+            dispach({ type: DASHBOARD_CURSOS_ASIGNADOS, cursosMaestro: data });
         })
         .catch((error) => {
             NotificationManager.error(

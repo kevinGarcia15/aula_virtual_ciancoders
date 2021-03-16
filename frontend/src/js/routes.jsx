@@ -42,6 +42,7 @@ import CursoCrearContainer from './common/components/curso/CursoCrearContainer'
 
 import AsignacionCrearContainer from './common/components/asignacionMaestro/AsignacionCrearContainer'
 import AsigEstudianteContainer from './common/components/gestionAsignaturaMaestro/GestionAsignaturaContainer'
+import AsignaturaListarContainer from './common/components/gestionAsignaturaMaestro/AsignaturaListarContainer'
 
 import TareaCrearContainer from './common/components/tarea/TareaCrearContainer'
 import MaterialCrearContainer from './common/components/materialApollo/MaterialCrearContainer'
@@ -99,8 +100,9 @@ module.exports = (
                 <ProtectedRoute exact path="/curso/:id/editar" component={CursoCrearContainer} />
 
                 <ProtectedRoute exact path="/asignacion/crear" component={AsignacionCrearContainer} />
-                <ProtectedRoute exact path="/asignacion/:id/estudiantes" component={AsigEstudianteContainer} />
-
+                <ProtectedRoute exact path="/asignacion/gestion/:id" component={AsigEstudianteContainer} />
+                <ProtectedRoute exact path="/cursosasignados/" component={AsignaturaListarContainer} />
+                
                 <ProtectedRoute exact path="/tarea/:asignacion/crear" component={TareaCrearContainer} />
                 <ProtectedRoute exact path="/tarea/:asignacion/:id/editar/" component={TareaCrearContainer} />
                 <ProtectedRoute exact path="/tarea/:asignacion/:id" component={TareaCrearContainer} />

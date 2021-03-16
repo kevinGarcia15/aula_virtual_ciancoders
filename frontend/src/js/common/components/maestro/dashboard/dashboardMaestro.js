@@ -21,7 +21,7 @@ export class DashboardMaestro extends Component {
                     <div className="card col-12 col-lg-8 p-2 m-3 justify-content-center overflow-auto">
                         <EventoListarContainer/>
                     </div>
-                    <CursosAsignados cursos={cursosMaestro.maestro} tareas={tareasPendientes}/>
+                    <CursosAsignados cursos={cursosMaestro.results} tareas={tareasPendientes}/>
                 </div>
             </div>
         );
