@@ -15,8 +15,7 @@ class Navbar extends Component {
         this.setState({dropdownOpen: !this.state.dropdownOpen});
     };
     render() {
-        const { navToggle, logOut, user } = this.props;
-
+        const { navToggle, logOut, user, perfil } = this.props;
         return (
             <nav className="align-items-stretch flex-md-nowrap p-0 navbar navbar-light">
                 <div className="main-navbar__search w-100 d-none d-md-flex d-lg-flex">
@@ -26,12 +25,12 @@ class Navbar extends Component {
                     <Dropdown isOpen={this.state.dropdownOpen} toggle={this.toggle}>
                         <DropdownToggle color="light" caret className="nav-item-dropdown border-0">
                             <img className="user-avatar rounded-circle mr-3"
-                                 src={(user.profile && user.profile.avatar) ? user.profile.avatar : defaultAvatar}
+                                 src={(perfil && perfil.avatar) ? perfil.avatar : defaultAvatar}
                                  alt="User Avatar" />
                             <span className="d-none d-md-inline-block">{user.first_name}</span>
                         </DropdownToggle>
                         <DropdownMenu>
-                            <DropdownItem header>Header</DropdownItem>
+                            <DropdownItem header>Usuario</DropdownItem>
                             <DropdownItem>
                                 <Link tabIndex="0"
                                    to="/user-profile">
@@ -44,27 +43,6 @@ class Navbar extends Component {
                                    to="/cambiocontrasenia">
                                     <i className="material-icons">vpn_key</i>
                                     Contraseña
-                                </Link>
-                            </DropdownItem>
-                            <DropdownItem>
-                                <Link tabIndex="0"
-                                   to="/edit-user-profile">
-                                    <i className="material-icons"></i>
-                                    Edit Profile
-                                </Link>
-                            </DropdownItem>
-                            <DropdownItem>
-                                <Link tabIndex="0"
-                                   to="/file-manager-list">
-                                    <i className="material-icons"></i>
-                                    Files
-                                </Link>
-                            </DropdownItem>
-                            <DropdownItem>
-                                <Link tabIndex="0"
-                                   to="/transaction-history">
-                                    <i className="material-icons"></i>
-                                    Transactions
                                 </Link>
                             </DropdownItem>
                             <DropdownItem divider />

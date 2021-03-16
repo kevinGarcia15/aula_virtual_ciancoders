@@ -38,7 +38,7 @@ class PrivateRouteBase extends Component {
     };
 
     render() {
-        const { component: Component, logOut, login: { me }, ...rest } = this.props;
+        const { component: Component, logOut, login: { me,userPermission }, ...rest } = this.props;
         const isAuthenticated = this.isAuthenticated();
         return (
             <Route
@@ -50,7 +50,7 @@ class PrivateRouteBase extends Component {
                             <main className="main-content p-0 col-sm-12 col-md-9 offset-md-3 col-lg-10 offset-lg-2">
                                 <div className="main-navbar bg-white sticky-top">
                                     <div className="p-0 container">
-                                        <Navbar navToggle={this.navToggle} logOut={logOut} user={me} />
+                                        <Navbar navToggle={this.navToggle} logOut={logOut} user={me} perfil={userPermission}/>
                                     </div>
                                 </div>
                                 <div className="main-content-container px-4 container-fluid">
