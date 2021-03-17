@@ -29,7 +29,7 @@ export const update = (data = {}, attachments = []) => (dispatch, getStore) => {
             dispatch(refreshUser());
             NotificationManager.success(
                 "Datos actualizados exitosamente",
-                "ERROR",
+                "EXITO",
                 1000
             );
         })
@@ -52,15 +52,15 @@ export const updatePassword = (data = {}) => (dispatch, getStore) => {
             localStorage.setItem("isFirstLogin", false);
             const rol = toLower(localStorage.getItem("rol"));
             NotificationManager.success(
-                "Datos actualizados exitosamente",
+                "Contraseña cambiada exitosamente",
                 "SUCCESS",
                 3000
             );
             dispatch(push(`/${rol}`));
         })
-        .catch(() => {
+        .catch((error) => {
             NotificationManager.error(
-                "Credenciales incorrectas, vuelva a intentar",
+                error.password,
                 "ERROR",
                 0
             );
