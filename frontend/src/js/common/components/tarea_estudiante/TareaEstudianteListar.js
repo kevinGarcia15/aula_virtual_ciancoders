@@ -136,7 +136,7 @@ class TareaEstudianteListar extends Component {
                         </TableHeaderColumn>
                     </Grid>
                 </div>
-                <Link to={`/asignacion/${infoTarea.asignacion}/estudiantes`}>Atras</Link>
+                <Link to={`/asignacion/gestion/${infoTarea.asignacion}`}>Atras</Link>
             </div>
         );
     }

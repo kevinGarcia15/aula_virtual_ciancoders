@@ -108,7 +108,7 @@ class EstudianteViewset(viewsets.ModelViewSet):
         asignaciones = Asignacion.objects.filter(estudiante_asignaciones=estudiante, asignacion_ciclo__anio=anio)
         tareas_enregar = []
         for asignacion in asignaciones:
-            tareas = Tarea.objects.filter(asignacion=asignacion, fecha_entrega__gte=fechaActual).order_by("fecha_entrega")
+            tareas = Tarea.objects.filter(asignacion=asignacion, fecha_entrega__gt=now).order_by("fecha_entrega")
             for tarea in tareas:
                 tareas_asignacion={}
                 tareas_asignacion["id"]=tarea.id

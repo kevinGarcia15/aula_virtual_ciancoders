@@ -18,6 +18,7 @@ class TareaListar extends Component {
         const { data, loader, id_asignacion } = this.props;
         const rolUsuario = localStorage.getItem("rol");
         const rol = "Maestro";
+        let fechaActual = new Date();
         return (
             <div className="d-flex flex-column align-items-center">
                 <h4>Tareas</h4>
@@ -47,7 +48,7 @@ class TareaListar extends Component {
                         dataFormat={(cell, row) => {
                             return (
                                 <Moment locale="es-GB" fromNow>
-                                    {cell}
+                                    {`${cell} ${row.hora_entrega}`}
                                 </Moment>
                             );
                         }}
@@ -78,15 +79,29 @@ class TareaListar extends Component {
                             dataField="fecha_entrega"
                             dataSort
                             dataFormat={(cell, row) => {
+                                //Convierte la fecha a un objeto date para ser comparado
+                                let fechaConvertida = new Date(
+                                    `${cell} ${row.hora_entrega}`
+                                );
                                 return (
-                                    <Link
-                                        to={`/tareaestudiante/${row.id}/entregar/${id_asignacion}`}
-                                        className="d-flex justify-content-center text-success "
-                                    >
-                                        <span className="material-icons">
-                                            assignment_turned_in
-                                        </span>
-                                    </Link>
+                                    <div>
+                                        {fechaActual >= fechaConvertida ? (
+                                            <div className="d-flex justify-content-center text-danger">
+                                                <span className="material-icons">
+                                                    alarm_off
+                                                </span>
+                                            </div>
+                                        ) : (
+                                            <Link
+                                                to={`/tarea/${id_asignacion}/${row.id}/`}
+                                                className="d-flex justify-content-center text-success "
+                                            >
+                                                <span className="material-icons">
+                                                    query_builder
+                                                </span>
+                                            </Link>
+                                        )}
+                                    </div>
                                 );
                             }}
                         >
@@ -106,18 +121,7 @@ class TareaListar extends Component {
                         >
                             Acciones
                         </TableHeaderColumn>
-                    ) : (
-                        <TableHeaderColumn
-                            dataField="id"
-                            dataAlign="center"
-                            dataSort
-                            dataFormat={standardActions({
-                                ver: `/tarea/${id_asignacion}`,
-                            })}
-                        >
-                            Detalles
-                        </TableHeaderColumn>
-                    )}
+                    ) : null}
                 </Grid>
             </div>
         );
