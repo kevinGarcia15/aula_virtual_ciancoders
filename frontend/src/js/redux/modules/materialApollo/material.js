@@ -96,12 +96,22 @@ const eliminar = (id,asignacion) => (dispatch) => {
         dispatch(setLoader(false));
     });
 };
+
+const resetStoreMaterial = () => (dispatch)=>{
+    dispatch(initializeForm("materialForm", {}));
+    dispatch({
+        type: GUARDAR_MATERIAL_APOLLO,
+        leerMaterial: {},
+    });
+}
+
 export const actions = {
     listarMaterial,
     crear,
     leer,
     actualizar,
-    eliminar
+    eliminar,
+    resetStoreMaterial
 };
 
 export const reducers = {

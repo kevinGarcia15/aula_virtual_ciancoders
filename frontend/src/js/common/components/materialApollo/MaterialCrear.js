@@ -23,6 +23,10 @@ class MaterialCrear extends Component {
             });
         }
     }
+    componentWillUnmount(){
+        const {resetStoreMaterial} = this.props
+        resetStoreMaterial()
+    }
     setArchivo = (archivo) => {
         this.setState({ archivo: archivo });
     };
