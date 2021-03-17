@@ -35,7 +35,7 @@ export default class Grid extends Component {
             ...other
         } = this.props;
         const options = {
-            sizePerPage: 10,
+            sizePerPage: 2,
             hideSizePerPage: true,
             paginationSize: 5,
             alwaysShowAllBtns: true,

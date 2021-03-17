@@ -127,7 +127,7 @@ class TareaForm extends Component {
                                 <div className="row justify-content-end">
                                     <div className="col-3">
                                         <Link
-                                            to={`/asignacion/${id_asignacion}/estudiantes`}
+                                            to={`/asignacion/gestion/${id_asignacion}`}
                                             className="btn btn-secondary mr-2"
                                         >
                                             Cancelar
@@ -149,7 +149,7 @@ class TareaForm extends Component {
                             <div className="card-body">
                                 <div className="row justify-content-end">
                                     <Link
-                                        to={`/asignacion/${id_asignacion}/estudiantes`}
+                                        to={`/asignacion/gestion/${id_asignacion}`}
                                         className="btn btn-secondary mr-2"
                                     >
                                         Aceptar

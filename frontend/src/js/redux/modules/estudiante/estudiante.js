@@ -6,11 +6,15 @@ import { api } from "api";
 
 const GUARDAR_LISTADO_ESTUDIANTE = "GUARDAR_LISTADO_ESTUDIANTE";
 const GUARDAR_REGISTRO_ESTUDIANTE = "GUARDAR_REGISTRO_ESTUDIANTE"
+const GUARDAR_PAGINA = "GUARDAR_PAGINA"
 
-export const listar = () => (dispach) => {
-    api.get("/estudiante")
+export const listar = (page=1) => (dispach, getStore) => {
+    const estado = getStore().estudiante
+    const params = {page}
+    api.get("/estudiante", params)
         .then((response) => {
             dispach({ type: GUARDAR_LISTADO_ESTUDIANTE, data: response });
+            dispach({type:GUARDAR_PAGINA, page: page})
         })
         .catch((error) => {
             NotificationManager.error(
@@ -123,11 +127,18 @@ export const reducers = {
             registro,
         };
     },
+    [GUARDAR_PAGINA]:(state, {page})=>{
+       return{
+        ...state,
+        page     
+    } 
+    }
 };
 
 export const intialState = {
     loader: false,
     data: {},
+    page: 1
 };
 
 export default handleActions(reducers, intialState);

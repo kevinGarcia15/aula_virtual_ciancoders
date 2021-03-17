@@ -16,7 +16,8 @@ export const setLoader = (loader) => ({
 });
 
 const listarTareas = (id) => (dispatch) => {
-    api.get("tareas/asignacion", { id })
+    const rol = localStorage.getItem("rol")
+    api.get("tareas/asignacion", { id,rol })
         .then((response) => {
             const data = {
                 results: response.tareas,
@@ -43,7 +44,7 @@ export const crear = (data = {}, attachments = []) => (dispatch, getStore) => {
                 "Exito",
                 2000
             );
-            dispatch(push(`/asignacion/${data.asignacion}/estudiantes`));
+            dispatch(push(`/asignacion/gestion/${data.asignacion}`));
         })
         .catch((error) => {
             NotificationManager.error(error.detail, "ERROR", 0);
@@ -81,7 +82,7 @@ export const actualizar = (data = {}, attachments = []) => (
                 "Exito",
                 1000
             );
-            dispatch(push(`/asignacion/${data.asignacion}/estudiantes`));
+            dispatch(push(`/asignacion/gestion/${data.asignacion}`));
         })
         .catch(() => {
             NotificationManager.error(
