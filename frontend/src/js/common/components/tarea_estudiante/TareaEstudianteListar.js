@@ -3,11 +3,15 @@ import { Link } from "react-router-dom";
 import Grid from "../Utils/Grid";
 import { standardActions } from "../Utils/Grid/StandardActions";
 import Moment from "react-moment";
+import ModalTexto from "./ModalTexto";
 
 class TareaEstudianteListar extends Component {
     state = {
         id_tarea_estudiante: null,
         form: {},
+        modalIsOpen: false,
+        texto: null,
+        nombreEstudianteModal: null,
     };
     componentDidMount() {
         const { listar, match } = this.props;
@@ -27,6 +31,17 @@ class TareaEstudianteListar extends Component {
         e.preventDefault();
     };
 
+    handleOpenModal = (texto, estudiante) => {
+        this.setState({
+            modalIsOpen: true,
+            texto: texto,
+            nombreEstudianteModal: estudiante,
+        });
+    };
+
+    handleCloseModal = (e) => {
+        this.setState({ modalIsOpen: false });
+    };
     envio = (id) => {
         const { actualizarPunteo, match } = this.props;
         let inputPunteo = `punteo${id}`;
@@ -42,16 +57,27 @@ class TareaEstudianteListar extends Component {
         }
     };
 
+    verTexto = (texto) => {
+        console.log(texto);
+    };
     render() {
         const { data, loader, infoTarea } = this.props;
         return (
             <div>
+                <ModalTexto
+                    onCloseModal={this.handleCloseModal}
+                    modalStatus={this.state.modalIsOpen}
+                    texto={this.state.texto}
+                    estudiante={this.state.nombreEstudianteModal}
+                />
                 <div className="mt-3">
                     <h5>{infoTarea.titulo}</h5>
                     <p className="m-0">{infoTarea.descripcion}</p>
                     <p className="m-0">
                         Fecha de entrega:{" "}
-                        <Moment locale="es-GB" format="DD/MM/YYYY">{infoTarea.fecha_entrega}</Moment>
+                        <Moment locale="es-GB" format="DD/MM/YYYY">
+                            {infoTarea.fecha_entrega}
+                        </Moment>
                     </p>
                     <p>Nota: {infoTarea.nota} puntos</p>
                 </div>
@@ -75,14 +101,37 @@ class TareaEstudianteListar extends Component {
                         >
                             Alumno
                         </TableHeaderColumn>
+                        {}
                         <TableHeaderColumn
                             dataField="archivo"
                             dataSort
                             dataFormat={(cell, row) => {
-                                return `<a href=${cell} target="_blanck">${cell}</a>`;
+                                return (
+                                    <div>
+                                        {cell == null ? (
+                                            <button
+                                                className="btn btn-secondary"
+                                                onClick={() =>
+                                                    this.handleOpenModal(
+                                                        row.texto,
+                                                        row.estudiante
+                                                            .estudiante_profile
+                                                            .user.first_name
+                                                    )
+                                                }
+                                            >
+                                                Ver texto
+                                            </button>
+                                        ) : (
+                                            <a href={cell} target="_blanck">
+                                                {cell}
+                                            </a>
+                                        )}
+                                    </div>
+                                );
                             }}
                         >
-                            Documento
+                            Entregable
                         </TableHeaderColumn>
                         <TableHeaderColumn
                             dataField="punteo"
@@ -136,7 +185,9 @@ class TareaEstudianteListar extends Component {
                         </TableHeaderColumn>
                     </Grid>
                 </div>
-                <Link to={`/asignacion/gestion/${infoTarea.asignacion}`}>Atras</Link>
+                <Link to={`/asignacion/gestion/${infoTarea.asignacion}`}>
+                    Atras
+                </Link>
             </div>
         );
     }
