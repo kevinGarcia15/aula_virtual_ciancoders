@@ -40,7 +40,7 @@ export const actualizarAsignacion = (data = {}, attachments = []) => (
             dispatch(initializeForm("asignacionPortadaForm", {}));
             NotificationManager.success(
                 "Datos actualizados exitosamente",
-                "ERROR",
+                "EXITO",
                 1000
             );
         })
