@@ -39,7 +39,8 @@ export const registroEstudiante = () => (dispatch, getStore) => {
             "last_name":data.last_name,
             "profile":{
                 "phone": data.phone,
-                "address":data.address                }
+                "address":data.address                
+            }
         }
     }
     api.post("/estudiante", formData)
@@ -79,7 +80,6 @@ export const leer = (id) => (dispatch) => {
             dispatch(initializeForm("maestroForm", datosForm));
         })
         .catch((error) => {
-            console.log(error);
             NotificationManager.error(
                 "Ocurrio un error al obtener los datos",
                 "ERROR",

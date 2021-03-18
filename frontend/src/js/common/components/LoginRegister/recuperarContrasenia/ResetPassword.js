@@ -10,7 +10,6 @@ class ResetPassword extends Component {
     componentWillMount(){
         const {match, verifiacarTokenResetPass} = this.props
         const token = match.params.token
-        console.log(verifiacarTokenResetPass(token))
 
     }
     update = (data) => {
@@ -20,7 +19,6 @@ class ResetPassword extends Component {
     };
 
     render() {
-        console.log("render") 
         return (
             <ResetPasswordForm onSubmit={this.update} />
         );

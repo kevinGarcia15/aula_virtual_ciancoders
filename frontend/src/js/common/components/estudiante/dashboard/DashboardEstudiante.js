@@ -11,7 +11,6 @@ export class DashboardEstudiante extends Component {
     }
     render() {
         const { cursosAsignados, tareasEntregar } = this.props;
-        console.log(this.props);
         return (
             <div className="container">
                 <div className="row justify-content-md-center">

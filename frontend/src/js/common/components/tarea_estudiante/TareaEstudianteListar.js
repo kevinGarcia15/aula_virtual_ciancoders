@@ -57,9 +57,6 @@ class TareaEstudianteListar extends Component {
         }
     };
 
-    verTexto = (texto) => {
-        console.log(texto);
-    };
     render() {
         const { data, loader, infoTarea } = this.props;
         return (

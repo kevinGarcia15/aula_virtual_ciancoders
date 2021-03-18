@@ -11,7 +11,6 @@ class SeccionCrear extends Component {
         const {leer, match} = this.props;
         const id = match.params.id;
         if (id) {
-            console.log("editar")
             this.setState({crearFlag:false})
             this.setState({titulo:"Actualizar Seccion"})
             leer(id)

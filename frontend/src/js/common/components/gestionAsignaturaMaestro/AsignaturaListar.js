@@ -10,7 +10,6 @@ class AsignaturaListar extends Component {
 
     render() {
         const { cursosMaestro, loader } = this.props;
-        console.log(cursosMaestro);
         return (
             <React.Fragment>
                 <div className="d-flex justify-content-center mt-3">

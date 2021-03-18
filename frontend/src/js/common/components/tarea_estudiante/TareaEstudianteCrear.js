@@ -30,8 +30,7 @@ class TareaEstudianteCrear extends Component{
         crear({ ...data, archivo: null, tarea: id_tarea, id_asignacion:id_asignacion }, [
             { file: this.state.archivo, name: "archivo" },
         ]);
-  //      console.log(data)
-  //      console.log(this.state.archivo)
+
     };
     render(){
         const {infoTarea, loader} = this.props

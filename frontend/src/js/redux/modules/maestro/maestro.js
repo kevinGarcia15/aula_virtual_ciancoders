@@ -50,7 +50,6 @@ export const listar = () => (dispach) => {
 
 export const registroMaestro = () => (dispatch, getStore) => {
     const data = getStore().form.maestroForm.values;
-    console.log(data)
     const formData={
         "profesion": data.profesion.value,
         "user":{
@@ -119,7 +118,6 @@ export const actualizarMaestro = () => (dispatch, getStore) => {
 export const leer = (id) => (dispatch) => {
     api.get(`/maestro/${id}`)
         .then((response) => {
-            console.log(response)
             dispatch({type:GUARDAR_REGISTRO_MAESTRO, registro:response})
             const maestro = response.maestro_profile
             const profesion = response.profesion
@@ -137,7 +135,6 @@ export const leer = (id) => (dispatch) => {
             dispatch(initializeForm("maestroForm", datosForm));
         })
         .catch((error) => {
-            console.log(error);
             NotificationManager.error(
                 "Ocurrio un error al obtener los datos",
                 "ERROR",

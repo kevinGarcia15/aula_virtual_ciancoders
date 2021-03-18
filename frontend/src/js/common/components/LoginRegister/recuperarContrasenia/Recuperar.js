@@ -15,7 +15,6 @@ class Recuperar extends Component {
 
     render() {
         const { verifyEmail, loader } = this.props;
-        console.log(this.props)
         return (
             <div className="blue-gradient-bg">
                 <div className="d-flex flex-column align-items-center pt-3 bienvenida">

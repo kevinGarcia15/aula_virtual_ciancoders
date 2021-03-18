@@ -9,7 +9,6 @@ export class EstudianteList extends Component {
         super(props);
     }
     componentWillMount() {
-        console.log("compnentWillMount");
         const { listar } = this.props;
         listar();
     }

@@ -25,7 +25,6 @@ const obtenerNiveles = (search) => {
             }
         })
         .catch((error) => {
-            console.log("error:", error);
             return [];
         });
 };
