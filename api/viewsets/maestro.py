@@ -10,6 +10,8 @@ from rest_framework.response import Response
 from rest_framework.settings import api_settings
 from django.db import transaction
 from datetime import datetime
+from django.db.models import Count, F,  Q, Sum
+
 
 
 #permission
@@ -141,29 +143,39 @@ class MaestroViewset(viewsets.ModelViewSet):
         user = request.user
         profile = Profile.objects.get(user=user)
         maestro = Maestro.objects.get(maestro_profile=profile)
-        asignacion_maestro = Asignacion.objects.filter(maestro=maestro, asignacion_ciclo__anio=anio)
         #codigo para mostrar las tareas totales que el maestro tiene pendientes tanto
         #por curso como el total
-        tareas_sin_calificar = 0
+        tareas_sin_puntuar = Count('asignaciones__tareas__id', 
+            filter=Q(asignaciones__tareas__punteo=0)
+        )
+        tareas_sin_calificar = maestro.asignacion_maestros.filter(
+            asignacion_ciclo__anio=anio
+        ).aggregate(
+            tareasSinCalificar=tareas_sin_puntuar
+        )
+
+        asignacionPorCurso = maestro.asignacion_maestros.filter(
+            asignacion_ciclo__anio=anio
+        ).prefetch_related('asignaciones'
+        ).annotate(
+            total_tareas=Count('asignaciones'), 
+            total_pendientes = Count('asignaciones__tareas', 
+            filter=Q(
+                asignaciones__tareas__punteo=0, 
+                asignaciones__tareas__activo=True
+                )
+            )
+        )
         tareas_por_curso = []
-        for asignacion in asignacion_maestro:
-            tarea = Tarea.objects.filter(asignacion=asignacion)
-            for item in tarea:
-                tarea_estudiante = Tarea_Estudiante.objects.filter(tarea=item, punteo=0)
-                count_items = tarea_estudiante.count()
-                count_flag = 0
-                for item2 in tarea_estudiante:
-                    tareas_sin_calificar+=1
-                    count_flag +=1
-                    if count_items == count_flag:
-                        tareas={}
-                        tareas["pendiente"] = count_flag
-                        tareas["curso"] = asignacion.curso.nombre
-                        tareas_por_curso.append(tareas)
+        for asignacion in asignacionPorCurso:
+            tareas={}
+            tareas['pendiente'] = asignacion.total_pendientes
+            tareas['curso'] = asignacion.curso.nombre
+            tareas['id_asignacion'] = asignacion.id
+            tareas_por_curso.append(tareas)
 
         data = {
-            "tareasSinCalificar":tareas_sin_calificar,
+            "tareasSinCalificar":tareas_sin_calificar.get("tareasSinCalificar"),
             "tareasPorCurso":tareas_por_curso
         }
-        #cursos_asignados = AsignacionSerializer(cursos, many=True)
         return Response(data, status=status.HTTP_200_OK)

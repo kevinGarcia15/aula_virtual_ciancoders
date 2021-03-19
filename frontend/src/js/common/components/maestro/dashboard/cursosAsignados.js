@@ -37,12 +37,13 @@ export class CursosAsignados extends Component {
                         </h1>
                         {tareas.tareasPorCurso
                             ? tareas.tareasPorCurso.map((item) => (
+                                <Link key={item.id_asignacion} to={`/asignacion/gestion/${item.id_asignacion}`}>
                                   <p
                                       className="m-0 text-sm-left"
-                                      key={item.curso}
                                   >
                                       {`${item.curso}: ${item.pendiente}`}
-                                  </p>
+                                  </p>                                
+                                </Link>
                               ))
                             : null}
                     </div>
