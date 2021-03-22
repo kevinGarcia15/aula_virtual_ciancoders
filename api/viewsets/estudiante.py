@@ -10,7 +10,7 @@ from rest_framework.response import Response
 from rest_framework.settings import api_settings
 from django.db import transaction
 from datetime import datetime
-
+from django.db.models import F, Q
 #permission
 from api.permission.admin import IsAdminUser
 
@@ -104,19 +104,27 @@ class EstudianteViewset(viewsets.ModelViewSet):
         user = request.user
         profile = Profile.objects.get(user=user)
         estudiante = Estudiante.objects.get(estudiante_profile=profile)
+        
+        #date_and_time = datetime.combine(tarea.fecha_entrega,tarea.hora_entrega)
 
-        asignaciones = Asignacion.objects.filter(estudiante_asignaciones=estudiante, asignacion_ciclo__anio=anio)
+        tareas = estudiante.asignacion_estudiante.prefetch_related('asignaciones'
+        ).filter(asignacion_ciclo__anio=anio)
+
         tareas_enregar = []
-        for asignacion in asignaciones:
-            tareas = Tarea.objects.filter(asignacion=asignacion, fecha_entrega__gt=now).order_by("fecha_entrega")
-            for tarea in tareas:
-                tareas_asignacion={}
-                tareas_asignacion["id"]=tarea.id
-                tareas_asignacion["curso"] = asignacion.curso.nombre
-                tareas_asignacion["titulo"] = tarea.titulo
-                tareas_asignacion["fecha_entrega"]=tarea.fecha_entrega
-                tareas_asignacion["hora_entrega"]=tarea.hora_entrega
-                tareas_enregar.append(tareas_asignacion)
+        for tarea in tareas:
+            subquery = tarea.asignaciones.filter(activo=True)
+            #import pdb; pdb.set_trace()
+            for item in subquery:
+                date_and_time = datetime.combine(item.fecha_entrega,item.hora_entrega)
+                if now <= date_and_time:   
+                    tareas_asignacion={}
+                    tareas_asignacion["id_tarea"]=item.id
+                    tareas_asignacion["id_asignacion"]=tarea.id
+                    tareas_asignacion["curso"] = tarea.curso.nombre
+                    tareas_asignacion["titulo"] = item.titulo
+                    tareas_asignacion["fecha_entrega"]=item.fecha_entrega
+                    tareas_asignacion["hora_entrega"]=item.hora_entrega
+                    tareas_enregar.append(tareas_asignacion)
 
         return Response({"tareas_entregar":tareas_enregar}, status=status.HTTP_200_OK)
 
