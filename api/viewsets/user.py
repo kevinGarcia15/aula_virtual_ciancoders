@@ -97,6 +97,10 @@ class UserViewset(viewsets.ModelViewSet):
         """
         data =  request.data
         try:
+            profile = Profile.objects.get(user__email=data.get("correo"))
+            if profile.activo is False:
+                return Response({"info": "Usuario inactivo"}, status=status.HTTP_400_BAD_REQUEST)
+
             if User.objects.get(email = data.get("correo")):
                 #generacion de token
                 exp_date =  timezone.now() + timedelta(minutes=15)
