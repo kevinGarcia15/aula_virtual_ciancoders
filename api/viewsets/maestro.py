@@ -12,9 +12,8 @@ from django.db import transaction
 from datetime import datetime
 from django.db.models import Count, F,  Q, Sum
 
-
-
 #permission
+from api.permission.maestro import IsMaestroUser
 from api.permission.admin import IsAdminUser
 
 from api.models import (
@@ -44,8 +43,10 @@ class MaestroViewset(viewsets.ModelViewSet):
     def get_permissions(self):
         """" Define permisos para este recurso """
         permission_classes = [IsAuthenticated]
-        if self.action in ['create', 'list']:
+        if self.action in ['create', 'list', 'delete']:
             permission_classes.append(IsAdminUser)
+        if self.action in ['update', 'retrieve', 'cursos_maestro', 'total_tareas']:
+            permission_classes.append(IsMaestroUser)
         return [permission() for permission in permission_classes]
 
     def create(self, request):

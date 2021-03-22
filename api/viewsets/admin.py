@@ -9,6 +9,7 @@ from rest_framework.permissions import AllowAny, IsAuthenticated
 from rest_framework.response import Response
 from rest_framework.settings import api_settings
 from django.db import transaction
+from datetime import datetime
 
 #permission
 from api.permission.admin import IsAdminUser
@@ -49,7 +50,8 @@ class AdminViewset(viewsets.ModelViewSet):
     
     @action(methods=["get"], detail=False)
     def ciclo(self, request):
-        anio = "2021"
+        now = datetime.now()
+        anio = now.strftime("%Y")
         maestros_asignados = Asignacion.objects.filter(
             asignacion_ciclo__anio=anio
             ).values('maestro'
