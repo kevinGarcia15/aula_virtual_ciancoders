@@ -11,6 +11,8 @@ from rest_framework.settings import api_settings
 from django.db import transaction
 from datetime import datetime
 from django.db.models import Count, F,  Q, Sum
+from rest_framework.pagination import PageNumberPagination
+
 
 #permission
 from api.permission.maestro import IsMaestroUser
@@ -29,9 +31,12 @@ from api.serializers import (
     ActualizarMaestroSerializer
 )
 
+class MaestroPageNumberPagination(PageNumberPagination):
+    page_size=10
 
 class MaestroViewset(viewsets.ModelViewSet):
     USUARIO = "Maestro"
+    pagination_class=MaestroPageNumberPagination
 
     queryset = Maestro.objects.filter(activo=True, maestro_profile__rol__nombre=USUARIO)
     serializer_class = MaestroSerializer
@@ -133,8 +138,15 @@ class MaestroViewset(viewsets.ModelViewSet):
         profile = Profile.objects.get(user=user)
         maestro = Maestro.objects.get(maestro_profile=profile)
         cursos = Asignacion.objects.filter(maestro=maestro, asignacion_ciclo__anio=anio)
-        cursos_asignados = AsignacionSerializer(cursos, many=True)
-        return Response({"maestro":cursos_asignados.data}, status=status.HTTP_200_OK)
+        
+        page = self.paginate_queryset(cursos)
+
+        if page is not None:
+            serializer = AsignacionSerializer(page, many=True)
+            return self.get_paginated_response(serializer.data)
+
+        serializer = AsignacionSerializer(cursos, many=True)
+        return Response(serializer.data, status=status.HTTP_200_OK)
 
 
     @action(methods=["get"], detail=False)

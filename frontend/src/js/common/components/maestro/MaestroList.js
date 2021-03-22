@@ -13,7 +13,7 @@ export class MaestroList extends Component {
         listar();
     }
     render() {
-        const { data, loader, eliminar } = this.props;
+        const { data, loader, eliminar, listar } = this.props;
         return (
             <React.Fragment>
                 <Link to="/maestros/crear" className="btn btn-primary btn-lg mt-4 mb-4">
@@ -27,7 +27,7 @@ export class MaestroList extends Component {
                     striped
                     data={data}
                     loading={loader}
-                    //onPageChange={onPageChange}
+                    onPageChange={listar}
                     //onSortChange={onSortChange}
                 >
                     <TableHeaderColumn 

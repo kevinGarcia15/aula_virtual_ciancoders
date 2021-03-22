@@ -1,5 +1,4 @@
 import AsignacionesMaestrosListar from './AsignacionesMaestrosListar'
-//import CustomPaginationTable from './CustomPaginationTable'
 import { connect } from 'react-redux';
 import { actions } from '../../../redux/modules/asignacionMaestro/asignacion';
 

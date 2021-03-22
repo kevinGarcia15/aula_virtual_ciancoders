@@ -11,7 +11,7 @@ class CursoListar extends Component {
     }
 
     render() {
-        const { data, loader, eliminar } = this.props;
+        const { data, loader, eliminar,listar } = this.props;
         return (
             <React.Fragment>
                 <Link
@@ -25,8 +25,7 @@ class CursoListar extends Component {
                     striped
                     data={data}
                     loading={loader}
-                    //onPageChange={onPageChange}
-                    //onSortChange={onSortChange}
+                    onPageChange={listar}
                 >
                     <TableHeaderColumn
                         isKey

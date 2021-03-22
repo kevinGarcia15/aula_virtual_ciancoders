@@ -6,14 +6,17 @@ import { api } from "api";
 
 const DASHBOARD_CURSOS_ASIGNADOS = "DASHBOARD_CURSOS_ASIGNADOS";
 const DASHBOARD_TAREAS = "DASHBOARD_TAREAS";
+const GUARDAR_PAGINA = "GUARDAR_PAGINA"
 
-const cursosAsignados = ()=>(dispach) => {
-    api.get("/maestro/cursos_maestro")
+const cursosAsignados = (page=1)=>(dispach) => {
+    const params = {page}
+    api.get("/maestro/cursos_maestro", params)
         .then((response) => {
             const data = {
                 results: response.maestro,
             };
-            dispach({ type: DASHBOARD_CURSOS_ASIGNADOS, cursosMaestro: data });
+            dispach({ type: DASHBOARD_CURSOS_ASIGNADOS, cursosMaestro: response });
+            dispach({type:GUARDAR_PAGINA, pagina:page})
         })
         .catch((error) => {
             NotificationManager.error(
@@ -56,6 +59,12 @@ export const reducers = {
             ...state,
             tareasPendientes,
         };
+    },
+    [GUARDAR_PAGINA]:(state, {pagina})=>{
+        return{
+            ...state,
+            pagina
+        }   
     },
 };
 

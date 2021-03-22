@@ -23,7 +23,7 @@ export class EventoListar extends Component {
     }
 
     render() {
-        const { data, crear, eliminar, loader} = this.props;
+        const { data, crear, eliminar, loader, listar } = this.props;
         let hoy = new Date();
         const rol = localStorage.getItem("rol");
         return (
@@ -52,7 +52,13 @@ export class EventoListar extends Component {
                         >
                             Crear Evento
                         </button>
-                        <Grid hover striped data={data} loading={loader}>
+                        <Grid
+                            hover
+                            striped
+                            data={data}
+                            loading={loader}
+                            onPageChange={listar}
+                        >
                             <TableHeaderColumn
                                 dataField="titulo"
                                 dataSort
@@ -74,12 +80,11 @@ export class EventoListar extends Component {
                                     editar: "evento",
                                     eliminar: eliminar,
                                 })}
-                            >
-                            </TableHeaderColumn>
+                            ></TableHeaderColumn>
                         </Grid>
                     </div>
                 ) : (
-                    <div style={{maxHeight: "400px"}}>
+                    <div style={{ maxHeight: "400px" }}>
                         {data.results.length != 0 ? (
                             data.results.map((item) => (
                                 <div

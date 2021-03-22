@@ -7,7 +7,7 @@ import { api } from "api";
 const GUARDAR_LISTADO_MAESTRO = "GUARDAR_LISTADO_MAESTRO";
 const GUARDAR_REGISTRO_MAESTRO = "GUARDAR_REGISTRO_MAESTRO";
 const GUARDAR_LISTADO_PROFESION = "GUARDAR_LISTADO_PROFESION";
-
+const GUARDAR_PAGINA = "GUARDAR_PAGINA"
 /**Listar profesiones para usarlo en el select de nuestro formulario */
 const listarProfesion = (search) => () => {
     return api.get("/profesion", {search})
@@ -34,10 +34,12 @@ const listarProfesion = (search) => () => {
 };
 
 
-export const listar = () => (dispach) => {
-    api.get("/maestro")
+export const listar = (page=1) => (dispach) => {
+    const params = {page}
+    api.get("/maestro", params)
         .then((response) => {
             dispach({ type: GUARDAR_LISTADO_MAESTRO, data: response });
+            dispach({type:GUARDAR_PAGINA, pagina:page})
         })
         .catch((error) => {
             NotificationManager.error(
@@ -190,6 +192,12 @@ export const reducers = {
             registro,
         };
     },
+    [GUARDAR_PAGINA]:(state,{pagina})=>{
+        return{
+            ...state,
+            pagina
+        }
+    }
 };
 
 export const intialState = {

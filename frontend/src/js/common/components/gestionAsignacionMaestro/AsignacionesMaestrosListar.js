@@ -10,7 +10,7 @@ class AsignacionesMaestrosListar extends Component{
     }
 
     render(){
-        const {data, loader} = this.props
+        const {data, loader, listar} = this.props
         return(
             <React.Fragment>
             <div className="d-flex justify-content-center mt-3">
@@ -24,7 +24,7 @@ class AsignacionesMaestrosListar extends Component{
                 striped
                 data={data}
                 loading={loader}
-                //onPageChange={this.onPageChange}
+                onPageChange={listar}
                 //onSortChange={onSortChange}
             >
                 <TableHeaderColumn isKey dataField="curso" dataSort>

@@ -6,14 +6,20 @@ import { push } from "react-router-redux";
 // Constants
 // ------------------------------------
 const GUARDAR_LISTADO_ASIGNACIONES = "GUARDAR_LISTADO_ASIGNACIONES"
+const GUARDAR_PAGINA = "GUARDAR_PAGINA"
 
-const listar = ()=>(dispatch)=>{
-    api.get("/asignaciones")
+const listar = (page=1)=>(dispatch)=>{
+    const params = {page}
+    api.get("/asignaciones", params)
         .then((response)=>{
             dispatch({
                 type: GUARDAR_LISTADO_ASIGNACIONES,
                 data: response,
             });
+            dispatch({
+                type:GUARDAR_PAGINA,
+                pagina:page
+            })
         })
         .catch((error)=>{
             NotificationManager.error(
@@ -187,6 +193,12 @@ export const reducers = {
             data,
         };
     },
+    [GUARDAR_PAGINA]:(state,{pagina})=>{
+        return{
+            ...state,
+            pagina
+        }
+    }
 }
 
 export const initialState = {
