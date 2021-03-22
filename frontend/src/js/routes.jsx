@@ -54,6 +54,7 @@ import GestionContainer from './common/components/gestionAsignaturaEstudiante/Ge
 import CursosAsignacionListarContainer from './common/components/gestionAsignaturaEstudiante/CursosAsignacionListarContainer'
 
 import CicloListarContainer from './common/components/ciclo/CicloListarContainer'
+import CicloCrearContainer from './common/components/ciclo/CicloCrearContainer'
 
 import 'bootstrap/dist/css/bootstrap.min.css';
 import '../assets/fonts/fonts.css';
@@ -122,6 +123,8 @@ module.exports = (
                 <ProtectedRoute exact path="/misasignaciones/" component={CursosAsignacionListarContainer} />
 
                 <ProtectedRoute exact path="/ciclos/" component={CicloListarContainer} />
+                <ProtectedRoute exact path="/ciclos/crear" component={CicloCrearContainer} />
+                <ProtectedRoute exact path="/ciclos/:id/editar" component={CicloCrearContainer} />
 
                 <ProtectedRoute exact path="/tabs" component={ExampleTabs} />
                 <Route component={NotFound} />

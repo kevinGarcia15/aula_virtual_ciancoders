@@ -10,7 +10,7 @@ class CicloSerializer(serializers.ModelSerializer):
     class Meta:
         """Meta class"""
         model = Ciclo
-        fields = ("anio")
+        fields = ("anio",)
 
 
 class CicloReadSerializer(serializers.ModelSerializer):

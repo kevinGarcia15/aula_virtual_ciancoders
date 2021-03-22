@@ -12,7 +12,7 @@ export class CicloListar extends Component {
         const { data, loader, listar, eliminar } = this.props;
         return (
             <React.Fragment>
-                <Link to="/ciclo/crear" className="btn btn-primary mt-4 mb-4">
+                <Link to="/ciclos/crear" className="btn btn-primary mt-4 mb-4">
                     Nuevo ciclo escolar
                 </Link>
                 <Grid
@@ -31,8 +31,7 @@ export class CicloListar extends Component {
                         dataAlign="center"
                         dataSort
                         dataFormat={standardActions({
-                            editar: "ciclo",
-                            ver: "ciclo",
+                            editar: "ciclos",
                             eliminar: eliminar,
                         })}
                     >
