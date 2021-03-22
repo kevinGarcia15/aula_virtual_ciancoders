@@ -53,6 +53,8 @@ import TareaEstudianteCrearContainer from './common/components/tarea_estudiante/
 import GestionContainer from './common/components/gestionAsignaturaEstudiante/GestionContainer'
 import CursosAsignacionListarContainer from './common/components/gestionAsignaturaEstudiante/CursosAsignacionListarContainer'
 
+import CicloListarContainer from './common/components/ciclo/CicloListarContainer'
+
 import 'bootstrap/dist/css/bootstrap.min.css';
 import '../assets/fonts/fonts.css';
 require('../../node_modules/bootstrap/dist/css/bootstrap.css');
@@ -118,6 +120,8 @@ module.exports = (
 
                 <ProtectedRoute exact path="/asignacion/:id/" component={GestionContainer} />
                 <ProtectedRoute exact path="/misasignaciones/" component={CursosAsignacionListarContainer} />
+
+                <ProtectedRoute exact path="/ciclos/" component={CicloListarContainer} />
 
                 <ProtectedRoute exact path="/tabs" component={ExampleTabs} />
                 <Route component={NotFound} />

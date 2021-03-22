@@ -22,6 +22,7 @@ import asignacionEstudiante from './modules/asignacionEstudiante/asignacion'
 import tarea from './modules/tarea/tarea'
 import material from './modules/materialApollo/material'
 import tareaEstudiante from './modules/tarea_estudiante/tareaEstudiante'
+import ciclo from './modules/ciclo/ciclo'
 
 export default combineReducers({
     form: formReducer,
@@ -46,4 +47,5 @@ export default combineReducers({
     tarea,
     material,
     tareaEstudiante,
+    ciclo
 });

@@ -12,7 +12,7 @@ from api.serializers import CicloSerializer, CicloReadSerializer
 
 class CicloViewset(viewsets.ModelViewSet):
     """Ciclo viewSet"""
-    queryset = Ciclo.objects.all().order_by("-anio")
+    queryset = Ciclo.objects.filter(activo=True).order_by("-anio")
     filter_backends = (DjangoFilterBackend, filters.SearchFilter, filters.OrderingFilter)
     filter_fields = ("anio",)
     search_fields = ("anio",)
