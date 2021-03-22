@@ -88,6 +88,7 @@ module.exports = (
                 <ProtectedRoute exact path="/estudiantes" component={EstudianteListContainer} />
                 <ProtectedRoute exact path="/estudiantes/crear" component={EstudianteCrearContainer} />
                 <ProtectedRoute exact path="/estudiantes/:id" component={EstudianteCrearContainer} />
+                <ProtectedRoute exact path="/estudiantes/:id/editar" component={EstudianteCrearContainer} />
 
                 <ProtectedRoute exact path="/evento/:id/editar" component={EventoEditarContainer} />
 

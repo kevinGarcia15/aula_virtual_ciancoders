@@ -48,9 +48,9 @@ class MaestroViewset(viewsets.ModelViewSet):
     def get_permissions(self):
         """" Define permisos para este recurso """
         permission_classes = [IsAuthenticated]
-        if self.action in ['create', 'list', 'delete']:
+        if self.action in ['create', 'list', 'delete', 'update']:
             permission_classes.append(IsAdminUser)
-        if self.action in ['update', 'retrieve', 'cursos_maestro', 'total_tareas']:
+        if self.action in ['cursos_maestro', 'total_tareas']:
             permission_classes.append(IsMaestroUser)
         return [permission() for permission in permission_classes]
 
@@ -138,9 +138,8 @@ class MaestroViewset(viewsets.ModelViewSet):
         profile = Profile.objects.get(user=user)
         maestro = Maestro.objects.get(maestro_profile=profile)
         cursos = Asignacion.objects.filter(maestro=maestro, asignacion_ciclo__anio=anio)
-        
+        #generando custom pagination para este recurso        
         page = self.paginate_queryset(cursos)
-
         if page is not None:
             serializer = AsignacionSerializer(page, many=True)
             return self.get_paginated_response(serializer.data)

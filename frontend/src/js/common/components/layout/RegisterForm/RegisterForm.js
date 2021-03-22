@@ -136,14 +136,17 @@ export class RegisterForm extends Component {
                                             <label>Teléfono de contacto</label>
                                             <Field
                                                 name="telefono_contacto"
-                                                decimalScale={2}
-                                                numberFormat="#### #### #### ####"
+                                                numberFormat={"+(502) ####-####"}
                                                 component={renderNumber}
+                                                disabled={disabled}
+                                                className="form-control"
                                             />
                                             <label>Dirección de contacto</label>
                                             <Field
                                                 name="direccion_contacto"
                                                 component={renderField}
+                                                disabled={disabled}
+                                                className="form-control"
                                             />
                                         </div>
                                     ) : null}
