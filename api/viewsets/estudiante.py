@@ -15,7 +15,13 @@ from django.db.models import F, Q
 from api.permission.admin import IsAdminUser
 
 from api.models import Estudiante, Profile, User, Rol,Asignacion,Tarea
-from api.serializers import EstudianteSerializer,EstudianteCrearSerializer,AsignacionSerializer,AsignacionTareaSerializer
+from api.serializers import (
+    EstudianteSerializer,
+    EstudianteCrearSerializer,
+    AsignacionSerializer,
+    AsignacionTareaSerializer,
+    ActualizarEstudianteSerializer
+)
 
 
 class EstudianteViewset(viewsets.ModelViewSet):
@@ -69,6 +75,33 @@ class EstudianteViewset(viewsets.ModelViewSet):
                         direccion_contacto=data.get('direccion_contacto')
                     )        
                     return Response({"success":"data is success"}, status=status.HTTP_201_CREATED)
+                else:
+                    return Response({"detail": "something is wrong in transaction"}, status=status.HTTP_400_BAD_REQUEST)
+        except TypeError as e:
+            return Response(e, status=status.HTTP_400_BAD_REQUEST)
+
+    def update(self, request, pk):
+        try:
+            with transaction.atomic():
+                data = request.data
+                serializerEstudiante= ActualizarEstudianteSerializer(data=data)
+                if serializerEstudiante.is_valid(raise_exception=True):
+                    #import pdb; pdb.set_trace()
+                    estudiante = Estudiante.objects.get(pk=pk)
+                    estudiante.direccion_contacto = data.get('direccion_contacto')
+                    estudiante.numero_contacto = data.get('numero_contacto')
+                    estudiante.save()
+                    
+                    estudiante_profile = Profile.objects.get(pk=estudiante.estudiante_profile_id) 
+                    estudiante_profile.phone = data.get('user').get('profile').get('phone')
+                    estudiante_profile.address = data.get('user').get('profile').get('address')
+                    estudiante_profile.save()
+
+                    user = User.objects.get(pk=estudiante_profile.user_id)
+                    user.first_name = data.get('user').get('first_name')                        
+                    user.last_name = data.get('user').get('last_name')
+                    user.save()
+                    return Response({"success":"user update success"}, status=status.HTTP_201_CREATED)
                 else:
                     return Response({"detail": "something is wrong in transaction"}, status=status.HTTP_400_BAD_REQUEST)
         except TypeError as e:

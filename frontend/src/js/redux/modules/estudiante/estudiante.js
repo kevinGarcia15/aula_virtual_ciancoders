@@ -61,6 +61,40 @@ export const registroEstudiante = () => (dispatch, getStore) => {
         });
 };
 
+
+export const actualizarEstudiante = () => (dispatch, getStore) => {
+    const data = getStore().form.maestroForm.values;
+    const id = data.id
+    const formData={
+        "telefono_contacto": data.telefono_contacto,
+        "direccion_contacto": data.direccion_contacto,
+        "user":{
+            "first_name": data.first_name,
+            "last_name":data.last_name,
+            "profile":{
+                "phone": data.phone,
+                "address":data.address                
+            }
+        }
+    }
+    api.put(`/estudiante/${id}`, formData)
+        .then((response) => {
+            NotificationManager.success(
+                "Registro actualizado exitosamente",
+                "Exito",
+                3000
+            );
+            dispatch(push("/estudiantes"));
+        })
+        .catch((error) => {
+            NotificationManager.error(
+                "Ocurrio un error al actualizar al estudiante",
+                "ERROR",
+                3000
+            );
+        });
+};
+
 export const leer = (id) => (dispatch) => {
     api.get(`/estudiante/${id}`)
         .then((response) => {
@@ -111,7 +145,8 @@ export const actions = {
     listar,
     leer,
     registroEstudiante,
-    eliminar
+    eliminar,
+    actualizarEstudiante
 };
 
 export const reducers = {

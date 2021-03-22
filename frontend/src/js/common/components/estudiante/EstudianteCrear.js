@@ -16,8 +16,9 @@ export class EstudianteCrear extends Component {
         }
     }
     render() {
-        const { registroEstudiante } = this.props;
-        const funcionEnvio = registroEstudiante;
+        const { registroEstudiante , actualizarEstudiante} = this.props;
+        const funcionEnvio = this.state.crear ? registroEstudiante : actualizarEstudiante;
+
         return (
             <React.Fragment>
                 <div className="container mt-3">

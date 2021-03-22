@@ -4,7 +4,7 @@ from .user import (UserSerializer, UserReadSerializer,
         ActualizarProfileSerializer
 )
 from .maestro import MaestroSerializer, CrearMaestroSerializer, ActualizarMaestroSerializer
-from .estudiante import EstudianteSerializer,EstudianteCrearSerializer
+from .estudiante import EstudianteSerializer,EstudianteCrearSerializer, ActualizarEstudianteSerializer
 from .profesion import ProfesionSerializer
 from .nivel import NivelSerializer
 from .asignacion import AsignacionSerializer,AsignacionTareaSerializer, AsignacionCrearSerializer
