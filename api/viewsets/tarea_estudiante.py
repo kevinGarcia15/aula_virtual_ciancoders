@@ -77,7 +77,7 @@ class TareaEstudianteViewset(viewsets.ModelViewSet):
     def entregados(self, request):
         """obtiene todas las tareas que han enviados los estudiantes a un curso"""
         tarea_id = request.query_params.get("id")
-        tareas = Tarea_Estudiante.objects.filter(tarea_id=tarea_id)
+        tareas = Tarea_Estudiante.objects.filter(tarea_id=tarea_id).order_by('estudiante__estudiante_profile__user__first_name')
         serializer = TareaEstudianteReadSerializer(tareas, many=True)
 
         tarea = Tarea.objects.get(pk=tarea_id)
