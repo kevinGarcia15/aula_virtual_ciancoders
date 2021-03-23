@@ -9,21 +9,20 @@ import { push } from "react-router-redux";
 const GUARDAR_LISTADO_ESTUDIANTES_ASIGNADOS =
     "GUARDAR_LISTADO_ESTUDIANTES_ASIGNADOS";
 const INFORMACION_CURSO = "INFORMACION_CURSO";
+const GUARDAR_PAGINA = "GUARDAR_PAGINA";
 
-const listarEstudiantes = (id) => (dispatch) => {
-    api.get("asignaciones/estudiantes", { id })
+/**Modulo utilizado para listar a los estudiantes pertenecientes
+ * a una asignacion mostrado en la gestion de asignacion de maestros
+ */
+const listarEstudiantes = (id, page=1) => (dispatch) => {
+
+    api.get("asignaciones/estudiantes", { id, page })
         .then((response) => {
-            const data = {
-                results: response.estudiantes,
-            };
             dispatch({
                 type: GUARDAR_LISTADO_ESTUDIANTES_ASIGNADOS,
-                data: data,
+                data: response,
             });
-            dispatch({
-                type: INFORMACION_CURSO,
-                curso: response.infoCurso,
-            });
+            dispatch({type:GUARDAR_PAGINA, pagina:page})
         })
         .catch(() => {})
         .finally(() => {});
@@ -115,12 +114,19 @@ export const reducers = {
             curso,
         };
     },
+    [GUARDAR_PAGINA]:(state, {pagina})=>{
+        return{
+            ...state,
+            pagina,
+        }
+    }
 };
 
 export const intialState = {
     loader: false,
     data: {},
     curso: {},
+    pagina:1,
 };
 
 export default handleActions(reducers, intialState);

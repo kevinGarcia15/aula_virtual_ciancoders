@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import Grid from "../../Utils/Grid"
+import Grid from "../../Utils/Grid";
 import { standardActions } from "../../Utils/Grid/StandardActions";
 import AsignacionForm from "./AsignacionForm";
 
@@ -26,6 +26,11 @@ class AsigEstudianteListar extends Component {
         const id_asignacion = this.state.id_asignacion;
         eliminar(id, id_asignacion);
     };
+    handlePaginacion = (pagina) => {
+        const { listarEstudiantes } = this.props;
+        const id_asignacion = this.state.id_asignacion;
+        listarEstudiantes(id_asignacion, pagina);
+    };
     render() {
         const { data, loader, curso, obtenerEstudiantes } = this.props;
         const funcionAsignar = this.asignarEstudiante;
@@ -45,7 +50,7 @@ class AsigEstudianteListar extends Component {
                     striped
                     data={data}
                     loading={loader}
-                    //onPageChange={onPageChange}
+                    onPageChange={this.handlePaginacion}
                     //onSortChange={onSortChange}
                 >
                     <TableHeaderColumn

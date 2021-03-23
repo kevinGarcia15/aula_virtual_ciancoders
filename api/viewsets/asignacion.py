@@ -8,6 +8,8 @@ from rest_framework.permissions import AllowAny, IsAuthenticated
 from rest_framework.response import Response
 from rest_framework.settings import api_settings
 from datetime import datetime
+from rest_framework.pagination import PageNumberPagination
+
 
 #permission
 from api.permission.admin import IsAdminUser
@@ -20,12 +22,17 @@ from api.serializers import (
     AsignacionSerializer,
     EstudianteSerializer
 )
+class AsignacionPageNumberPagination(PageNumberPagination):
+    page_size=10
+
 
 class AsignacionViewset(viewsets.ModelViewSet):
     """Asignacion Viewset""" 
     now = datetime.now()
     anio = now.strftime("%Y")
     queryset = Asignacion.objects.filter(asignacion_ciclo__anio=anio)
+    pagination_class=AsignacionPageNumberPagination
+
     
     def get_serializer_class(self):
         """Define serializer for API"""
@@ -51,15 +58,15 @@ class AsignacionViewset(viewsets.ModelViewSet):
     def estudiantes(self, request):
         asignacion_id = request.query_params.get("id")
         asignacion = Asignacion.objects.get(pk=asignacion_id)
-        asignacionSerializer = AsignacionSerializer(asignacion)
-        estudiantes_asignados = asignacion.estudiante_asignaciones.all()
+        #asignacionSerializer = AsignacionSerializer(asignacion)
+        estudiantes_asignados = asignacion.estudiante_asignaciones.all().order_by('estudiante_profile__user__first_name')
+        
+        page = self.paginate_queryset(estudiantes_asignados)
+        if page is not None:
+            serializer = EstudianteSerializer(page, many=True)
+            return self.get_paginated_response(serializer.data)
         serializer = EstudianteSerializer(estudiantes_asignados, many=True)
-        return Response(
-            {"estudiantes" : serializer.data, 
-            "infoCurso":asignacionSerializer.data
-            }, 
-            status=status.HTTP_200_OK
-        )
+        return Response(serializer.data, status=status.HTTP_200_OK)
 
     @action(methods=["post"], detail=False)
     def estudiante_asignar(self, request):
