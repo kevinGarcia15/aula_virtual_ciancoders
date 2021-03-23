@@ -6,12 +6,12 @@ import { standardActions } from "../Utils/Grid/StandardActions";
 
 class SeccionListar extends Component {
     componentDidMount() {
-        const { listar } = this.props;
-        listar()
+        const { listarSecciones } = this.props;
+        listarSecciones()
     }
 
     render() {
-        const { data, loader, eliminar } = this.props;
+        const { dataSecciones, loader, eliminar, listarSecciones } = this.props;
         return (
             <React.Fragment>
                 <Link
@@ -23,9 +23,9 @@ class SeccionListar extends Component {
                 <Grid
                     hover
                     striped
-                    data={data}
+                    data={dataSecciones}
                     loading={loader}
-                    //onPageChange={onPageChange}
+                    onPageChange={listarSecciones}
                     //onSortChange={onSortChange}
                 >
                     <TableHeaderColumn

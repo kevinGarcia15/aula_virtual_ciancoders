@@ -1,15 +1,15 @@
 import React, { Component } from "react";
 import Grid from "../Utils/Grid";
 import { standardActions } from "../Utils/Grid/StandardActions";
-import {Link} from "react-router-dom"
+import { Link } from "react-router-dom";
 
-export class CicloListar extends Component {
+class CicloListar extends Component {
     componentDidMount() {
-        const { listar } = this.props;
-        listar();
+        const { listarCiclo } = this.props;
+        listarCiclo();
     }
     render() {
-        const { data, loader, listar, eliminar } = this.props;
+        const { dataCiclo, loader, listarCiclo, eliminar } = this.props;
         return (
             <React.Fragment>
                 <Link to="/ciclos/crear" className="btn btn-primary mt-4 mb-4">
@@ -18,14 +18,15 @@ export class CicloListar extends Component {
                 <Grid
                     hover
                     striped
-                    data={data}
+                    data={dataCiclo}
                     loading={loader}
-                    onPageChange={listar}
-                    //onSortChange={onSortChange}
+                    onPageChange={listarCiclo}
                 >
-                    <TableHeaderColumn isKey dataField="anio" dataSort>
-                        Anio del ciclo escolar
-                    </TableHeaderColumn>
+                    <TableHeaderColumn
+                        dataField="anio"
+                        dataSort
+                        isKey
+                    ></TableHeaderColumn>
                     <TableHeaderColumn
                         dataField="id"
                         dataAlign="center"
@@ -34,9 +35,7 @@ export class CicloListar extends Component {
                             editar: "ciclos",
                             eliminar: eliminar,
                         })}
-                    >
-                        Acciones
-                    </TableHeaderColumn>
+                    ></TableHeaderColumn>
                 </Grid>
             </React.Fragment>
         );

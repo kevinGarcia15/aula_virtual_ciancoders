@@ -6,12 +6,12 @@ import { standardActions } from "../Utils/Grid/StandardActions";
 
 class CursoListar extends Component {
     componentDidMount() {
-        const { listar } = this.props;
-        listar()
+        const { listarCursos } = this.props;
+        listarCursos()
     }
 
     render() {
-        const { data, loader, eliminar,listar } = this.props;
+        const { dataCurso, loader, eliminar,listarCursos } = this.props;
         return (
             <React.Fragment>
                 <Link
@@ -23,9 +23,9 @@ class CursoListar extends Component {
                 <Grid
                     hover
                     striped
-                    data={data}
+                    data={dataCurso}
                     loading={loader}
-                    onPageChange={listar}
+                    onPageChange={listarCursos}
                 >
                     <TableHeaderColumn
                         isKey
@@ -48,7 +48,7 @@ class CursoListar extends Component {
                     >
                         Acciones
                     </TableHeaderColumn>
-                </Grid>{" "}
+                </Grid>
             </React.Fragment>
         );
     }

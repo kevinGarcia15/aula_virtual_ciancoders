@@ -62,7 +62,7 @@ export const crear = (data={}, attachments=[]) =>(dispatch)=>{
         .then((response) => {
             if (response.detail){
                 NotificationManager.success(
-                    "La tarea fue actualizada exitosamente",
+                    "La tarea fue entregada exitosamente",
                     "Exito",
                     2000
                 );

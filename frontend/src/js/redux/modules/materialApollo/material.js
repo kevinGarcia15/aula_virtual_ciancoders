@@ -35,7 +35,7 @@ export const crear = (data = {}, attachments = []) => (dispatch, getStore) => {
                 "SUCCESS",
                 2000
             );
-            dispatch(push(`/asignacion/${data.asignacion}/estudiantes`));
+            dispatch(push(`/asignacion/gestion/${data.asignacion}/`));
         })
         .catch((error) => {
             NotificationManager.error(error.detail, "ERROR", 0);
@@ -70,7 +70,7 @@ export const actualizar = (data = {}, attachments = []) => (dispatch, getStore) 
                 "ERROR",
                 1000
             );
-            dispatch(push(`/asignacion/${data.asignacion}/estudiantes`));
+            dispatch(push(`/asignacion/gestion/${data.asignacion}/`));
         })
         .catch(() => {
             NotificationManager.error(

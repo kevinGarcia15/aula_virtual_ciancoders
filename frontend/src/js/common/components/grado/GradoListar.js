@@ -6,12 +6,12 @@ import { standardActions } from "../Utils/Grid/StandardActions";
 
 class GradoListar extends Component {
     componentDidMount() {
-        const { listar } = this.props;
-        listar()
+        const { listarGrados } = this.props;
+        listarGrados()
     }
 
     render() {
-        const { data, loader, eliminar } = this.props;
+        const { dataGrado, loader, eliminar, listarGrados } = this.props;
         return (
             <React.Fragment>
                 <Link
@@ -23,9 +23,9 @@ class GradoListar extends Component {
                 <Grid
                     hover
                     striped
-                    data={data}
+                    data={dataGrado}
                     loading={loader}
-                    //onPageChange={onPageChange}
+                    onPageChange={listarGrados}
                     //onSortChange={onSortChange}
                 >
                     <TableHeaderColumn

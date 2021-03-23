@@ -8,13 +8,30 @@ import { initialize as initializeForm } from 'redux-form';
 // ------------------------------------
 // Constants
 // ------------------------------------
-
-export const { reducers, initialState, actions } = createReducer(
+const GUARDAR_PAGINA="GUARDAR_PAGINA"
+const GUARDAR_LISTADO_GRADOS = "GUARDAR_LISTADO_GRADOS"
+const baseReducer = createReducer(
     "grado",
     "grados",
     "gradoForm",
     "/grado",
 );
+
+export const listarGrados = (page=1) => (dispach) => {
+    const params = {page}
+    api.get("/grados", params)
+        .then((response) => {
+            dispach({ type: GUARDAR_LISTADO_GRADOS, dataGrado: response });
+            dispach({type:GUARDAR_PAGINA, pagina:page})
+        })
+        .catch((error) => {
+            NotificationManager.error(
+                "Ocurrio un error listar el registro de grados",
+                "ERROR",
+                3000
+            );
+        });
+};
 
 const leerGrado = id => (dispatch) => {
     api.get(`grados/${id}`).then((response) => {
@@ -59,14 +76,38 @@ const crearGrado = (data) => (dispatch) => {
         })
         .catch((error) => {
             NotificationManager.error(
-                "Ocurrio un error al registrar al maestro",
+                "Ocurrio un error al registrar un grado",
                 "ERROR",
                 3000
             );
         });
 };
+export const actions = {
+    ...baseReducer.actions,
+    crearGrado,
+    leerGrado,
+    editarGrado,
+    listarGrados
+}
+export const reducers = {
+    ...baseReducer.reducers,
+    [GUARDAR_PAGINA]:(state, {pagina})=>{
+        return{
+            ...state,
+            pagina
+        }
+    },
+    [GUARDAR_LISTADO_GRADOS]:(state, {dataGrado})=>{
+        return{
+            ...state,
+            dataGrado
+        }
+    }
+}
 
-actions["crearGrado"] = crearGrado
-actions["editarGrado"] = editarGrado
-actions["leerGrado"] = leerGrado
+export const initialState = {
+    ...baseReducer.initialState,
+    dataGrado:{},
+    pagina:1
+}
 export default handleActions(reducers, initialState);
