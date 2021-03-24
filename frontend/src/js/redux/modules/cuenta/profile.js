@@ -118,7 +118,7 @@ export const resetPassword = (data) => (dispatch, getStore) => {
         })
         .catch(() => {
             NotificationManager.error(
-                "No se pudo actualizar su contrasenia, es probable que el enlace haya vencido",
+                "No se pudo actualizar su contrasenia, es probable que el enlace ya vencio",
                 "ERROR",
                 0
             );

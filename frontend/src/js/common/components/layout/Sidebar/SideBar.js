@@ -18,7 +18,7 @@ class SideBar extends Component {
             >
                 <div className="main-navbar">
                     <nav className="align-items-stretch bg-white flex-md-nowrap border-bottom p-0 navbar navbar-light">
-                        <a href="#" className="w-100 mr-0 navbar-brand">
+                        <a href={`/#/${rol}`} className="w-100 mr-0 navbar-brand">
                             <div className="d-table m-auto">
                                 <img
                                     id="main-logo"
@@ -41,7 +41,6 @@ class SideBar extends Component {
                         <li className="nav-item">
                             <NavLink
                                 to={`/${rol}`}
-                                exact
                                 className="nav-link "
                                 activeClassName={"active"}
                             >
@@ -56,6 +55,7 @@ class SideBar extends Component {
                                 <li className="nav-item">
                                     <NavLink
                                         to="/maestros"
+                                        exact
                                         className="nav-link"
                                         activeClassName={"active"}
                                     >
@@ -69,6 +69,7 @@ class SideBar extends Component {
                                 </li>
                                 <li className="nav-item">
                                     <NavLink
+                                        exact
                                         to="/ciclos"
                                         className="nav-link"
                                         activeClassName={"active"}
@@ -84,6 +85,7 @@ class SideBar extends Component {
                                 <li className="nav-item">
                                     <NavLink
                                         to="/estudiantes"
+                                        exact
                                         className="nav-link"
                                         activeClassName={"active"}
                                     >
@@ -98,6 +100,7 @@ class SideBar extends Component {
                                 <li className="nav-item">
                                     <NavLink
                                         to="/asignacion/listar"
+                                        exact
                                         className="nav-link"
                                         activeClassName={"active"}
                                     >
@@ -112,6 +115,7 @@ class SideBar extends Component {
                                 <li className="nav-item">
                                     <NavLink
                                         to="/grado"
+                                        exact
                                         className="nav-link"
                                         activeClassName={"active"}
                                     >
@@ -126,6 +130,7 @@ class SideBar extends Component {
                                 <li className="nav-item">
                                     <NavLink
                                         to="/seccion"
+                                        exact
                                         className="nav-link"
                                         activeClassName={"active"}
                                     >
@@ -140,6 +145,7 @@ class SideBar extends Component {
                                 <li className="nav-item">
                                     <NavLink
                                         to="/curso"
+                                        exact
                                         className="nav-link"
                                         activeClassName={"active"}
                                     >
