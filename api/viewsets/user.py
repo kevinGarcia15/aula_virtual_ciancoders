@@ -109,8 +109,9 @@ class UserViewset(viewsets.ModelViewSet):
                     "type":"reset_password"
                 }
                 token =  jwt.encode(payload, settings.SECRET_KEY, algorithm='HS256')
-
+                #correo de prueba gkevin@gmail.com
                 subject, from_email, to = 'Recupera Contrasenia', 'team@aulavirtual.com', 'gkevin@gmail.com'
+  
                 content = render_to_string(
                     'emails/users/reset_password.html',
                     {'token': token, 'host':'http://0.0.0.0:8080/#', 'email':data.get("correo") }
