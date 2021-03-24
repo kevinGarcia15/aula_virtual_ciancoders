@@ -56,7 +56,6 @@ class MaterialViewset(viewsets.ModelViewSet):
                 archivo = data.get("archivo")
                 data = json.loads(data["data"])
                 serializer =  MaterialSerializer(data=data)
-                #import pdb; pdb.set_trace()
                 if serializer.is_valid(raise_exception=True):
                     Material.objects.create(
                     titulo=data.get("titulo"),
@@ -74,7 +73,6 @@ class MaterialViewset(viewsets.ModelViewSet):
             data =  request.data
             archivo = data.get("archivo")
             data = json.loads(data["data"])
-            #import pdb; pdb.set_trace()
 
             serializer =  MaterialSerializer(data=data)
             if serializer.is_valid(raise_exception=True):

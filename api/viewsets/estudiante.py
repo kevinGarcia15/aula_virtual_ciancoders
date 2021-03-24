@@ -48,7 +48,7 @@ class EstudianteViewset(viewsets.ModelViewSet):
                 data = request.data
                 serializerEstudiante = EstudianteCrearSerializer(data=data)
                 if serializerEstudiante.is_valid(raise_exception=True):
-                    #import pdb; pdb.set_trace()
+                    
                     user = User.objects.create(
                         username = data.get('user').get('username'),
                         password = data.get('user').get('password'),                        
@@ -61,14 +61,14 @@ class EstudianteViewset(viewsets.ModelViewSet):
                     user.save()
                     rol = Rol.objects.get(nombre=self.USUARIO)
 
-                    #import pdb; pdb.set_trace()
+                    
                     estudiante_profile = Profile.objects.create(
                         phone = data.get('user').get('profile').get('phone'),
                         address = data.get('user').get('profile').get('address'),
                         rol = rol,
                         user = user
                     )
-                    #import pdb; pdb.set_trace()
+                    
                     Estudiante.objects.create(
                         estudiante_profile=estudiante_profile,
                         telefono_contacto=data.get('telefono_contacto'),
@@ -86,7 +86,7 @@ class EstudianteViewset(viewsets.ModelViewSet):
                 data = request.data
                 serializerEstudiante= ActualizarEstudianteSerializer(data=data)
                 if serializerEstudiante.is_valid(raise_exception=True):
-                    #import pdb; pdb.set_trace()
+                    
                     estudiante = Estudiante.objects.get(pk=pk)
                     estudiante.direccion_contacto = data.get('direccion_contacto')
                     estudiante.numero_contacto = data.get('numero_contacto')
@@ -146,7 +146,7 @@ class EstudianteViewset(viewsets.ModelViewSet):
         tareas_enregar = []
         for tarea in tareas:
             subquery = tarea.asignaciones.filter(activo=True)
-            #import pdb; pdb.set_trace()
+            
             for item in subquery:
                 date_and_time = datetime.combine(item.fecha_entrega,item.hora_entrega)
                 if now <= date_and_time:   

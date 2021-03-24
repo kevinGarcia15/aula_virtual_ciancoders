@@ -44,7 +44,6 @@ class AsignacionViewset(viewsets.ModelViewSet):
     def get_permissions(self):
         """" Define permisos para este recurso """
         permission_classes = [IsAuthenticated]
-        #import pdb; pdb.set_trace()
 
         if self.action in ['estudiantes', 'estudiante_asignar','elimiar_alumno','actualizar_portada']:
             permission_classes.append(IsMaestroUser)

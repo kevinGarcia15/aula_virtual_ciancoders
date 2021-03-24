@@ -38,7 +38,6 @@ class TareaEstudianteViewset(viewsets.ModelViewSet):
 
     def create(self, request):
         try:
-            #import pdb; pdb.set_trace()
 
             data = request.data
             archivo = data.get('archivo')
@@ -103,7 +102,6 @@ class TareaEstudianteViewset(viewsets.ModelViewSet):
 
     def update(self, request, pk):
         try:
-            #import pdb; pdb.set_trace()
             data = request.data
             tarea = Tarea.objects.get(pk=data.get("id_tarea"))
             nota_maxima = tarea.nota

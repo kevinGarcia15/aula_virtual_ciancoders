@@ -60,7 +60,7 @@ class MaestroViewset(viewsets.ModelViewSet):
                 data = request.data
                 serializerMaestro = CrearMaestroSerializer(data=data)
                 if serializerMaestro.is_valid(raise_exception=True):
-                    #import pdb; pdb.set_trace()
+                    
                     user = User.objects.create(
                         username = data.get('user').get('username'),
                         password = data.get('user').get('password'),                        
@@ -73,14 +73,14 @@ class MaestroViewset(viewsets.ModelViewSet):
                     user.save()
                     rol = Rol.objects.get(nombre=self.USUARIO)
 
-                    #import pdb; pdb.set_trace()
+                    
                     maestro_profile = Profile.objects.create(
                         phone = data.get('user').get('profile').get('phone'),
                         address = data.get('user').get('profile').get('address'),
                         rol = rol,
                         user = user
                     )
-                   #import pdb; pdb.set_trace()
+                   
                     profesion = Profesion.objects.get(pk=data.get('profesion'))
                     maestro = Maestro.objects.create(
                         maestro_profile=maestro_profile,
@@ -99,7 +99,7 @@ class MaestroViewset(viewsets.ModelViewSet):
                 data = request.data
                 serializerMaestro = ActualizarMaestroSerializer(data=data)
                 if serializerMaestro.is_valid(raise_exception=True):
-                    #import pdb; pdb.set_trace()
+                    
                     profesion = Profesion.objects.get(pk=data.get('profesion'))
                     maestro = Maestro.objects.get(pk=pk)
                     maestro.profesion = profesion

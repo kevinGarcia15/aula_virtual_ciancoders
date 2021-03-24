@@ -72,7 +72,6 @@ class UserViewset(viewsets.ModelViewSet):
 
     @action(methods=["put"], detail=False)
     def update_password(self, request):
-        #import pdb; pdb.set_trace()
         try:
             with transaction.atomic():
                 usuario = request.user
@@ -128,7 +127,6 @@ class UserViewset(viewsets.ModelViewSet):
     @action(methods=["post"], detail=False)
     def verificar_token_reset_pass(self, request):
         """Verifica si el token es valido y no ha caducado"""
-        #import pdb; pdb.set_trace()
         try:
             token = request.data.get("token")
             secret_key = settings.SECRET_KEY
@@ -141,7 +139,6 @@ class UserViewset(viewsets.ModelViewSet):
     @action(methods=["put"], detail=False)
     def reset_password(self, request):
         """Resetea el password"""
-        #import pdb; pdb.set_trace()
         try:
             data = request.data
             token = data.get("token")
@@ -159,7 +156,6 @@ class UserViewset(viewsets.ModelViewSet):
     @action(methods=["put"], detail=False)
     def update_me(self, request, *args, **kwargs):
         data = request.data
-        #import pdb; pdb.set_trace()
         try:
             avatar = data.get("avatar")
             data = json.loads(data["data"])

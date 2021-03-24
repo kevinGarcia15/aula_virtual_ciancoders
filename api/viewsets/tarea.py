@@ -45,7 +45,6 @@ class TareaViewset(viewsets.ModelViewSet):
             archivo = data.get("archivo")
             data = json.loads(data["data"])
             serializer =  TareaSerializer(data=data)
-            #import pdb; pdb.set_trace()
             if serializer.is_valid(raise_exception=True):
                 #verifica que el punteo total de nota no exceda de 100pts
                 max_nota = 100
@@ -87,7 +86,6 @@ class TareaViewset(viewsets.ModelViewSet):
             data =  request.data
             archivo = data.get("archivo")
             data = json.loads(data["data"])
-            #import pdb; pdb.set_trace()
 
             serializer =  TareaSerializer(data=data)
             if serializer.is_valid(raise_exception=True):

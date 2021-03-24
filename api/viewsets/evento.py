@@ -38,7 +38,6 @@ class EventoViewset(viewsets.ModelViewSet):
 
     def create(self, request):
         try:
-            #import pdb; pdb.set_trace()
             data = request.data
             serializer = EventoSerializer(data=data)
             if serializer.is_valid(raise_exception=True):
